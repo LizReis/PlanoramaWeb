@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/criarPlanoStyle.css">
+    <link rel="stylesheet" href="../static/css/homeStyle.css">
+    <title>Planorama - Criar Plano</title>
+</head>
+
+<body>
+    <header class="conteudoPrincipal">
+        <section>
+            <div id="divMenuHamburguer">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="divNomeSite">
+                <a href="index.html"><span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span></a>
+            </div>
+
+            <div class="divFotoUsuario">
+                <img src="../static/img/gatinho.jpg">
+            </div>
+        </section>
+    </header>
+
+    <section class="sectionCriarPlano">
+        <div class="titulo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
+                <path fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                    d="M24 32V16m18 11v-6M6 27v-6m8-15H8a2 2 0 0 0-2 2v6m28-8h6a2 2 0 0 1 2 2v6m-8 28h6a2 2 0 0 0 2-2v-6m-28 8H8a2 2 0 0 1-2-2v-6M27 6h-6m11 18H16m11 18h-6" />
+            </svg>
+            <span>Criar Plano</span>
+        </div>
+
+        <form>
+            <label for="nomePlano">Nome do Plano:</label>
+            <input type="text" id="nomePlano" name="nomePlano">
+
+            <label for="areaAtuacao">Área de Atuação:</label>
+            <input type="text" id="areaAtuacao" name="areaAtuacao">
+
+            <label for="anoAplicacao">Ano de Aplicação:</label>
+            <input type="number" id="anoAplicacao" name="anoAplicacao" min="2025">
+
+            <span>Disponibilidade:</span>
+            <div class="inputDiasSemana">
+                <div class="dia" data-dia="domingo">D</div>
+                <div class="dia" data-dia="segunda">S</div>
+                <div class="dia" data-dia="terca">T</div>
+                <div class="dia" data-dia="quarta">Q</div>
+                <div class="dia" data-dia="quinta">Q</div>
+                <div class="dia" data-dia="sexta">S</div>
+                <div class="dia" data-dia="sabado">S</div>
+            </div>
+
+            <div class="divBotoes">
+                <button id="botaoCancelar" class="botaoAncora">Cancelar</button>
+                <button id="botaoCriar" class="botaoAncora">Criar</button>
+            </div>
+        </form>
+    </section>
+
+    <section id="sectionAparecerMenu"></section>
+
+    <footer></footer>
+
+    <script src="../static/js/criarPlanoScripts.js"></script>
+    <script src="../static/js/menuScripts.js"></script>
+</body>
+
+</html>

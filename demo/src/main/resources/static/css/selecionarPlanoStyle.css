@@ -1,0 +1,28 @@
+:root{
+    --corFundoPrincipal: #FFFFFF;
+    --corPrincipalFonte: #0D0D0D;
+    --corCinzaFonte: #808080;
+    --corDestaqueVerde: #7A7453;
+    --corDestaqueVermelho: #7C2A2A;
+    --corDestaqueBege: #C29A6E;
+
+    --fonteDestaque: "Merriweather", serif;
+    --fonteParaTexto: "Roboto", sans-serif;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+
+.divTitulo{
+    display: flex;
+    font-family: var(--fonteDestaque);
+    color: var(--corDestaqueVerde);
+    margin: 30px 20px 10px 20px;
+    gap: 5px;
+    border-bottom: 0.1rem solid var(--corDestaqueVerde);
+}
