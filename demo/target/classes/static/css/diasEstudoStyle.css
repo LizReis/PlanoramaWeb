@@ -1,0 +1,154 @@
+:root{
+    --corFundoPrincipal: #FFFFFF;
+    --corPrincipalFonte: #0D0D0D;
+    --corCinzaFonte: #808080;
+    --corDestaqueVerde: #7A7453;
+    --corDestaqueVermelho: #7C2A2A;
+    --corDestaqueBege: #C29A6E;
+
+    --fonteDestaque: "Merriweather", serif;
+    --fonteParaTexto: "Roboto", sans-serif;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.sectionDiasEstudo {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 30px 0px 30px;
+    border-radius: 10px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+}
+
+.sectionDiasEstudo .tituloDiasEstudo{
+    display: flex;
+    font-family: var(--fonteDestaque);
+    gap: 5px;
+    justify-content: center;
+    color: var(--corDestaqueVerde);
+    margin-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 0.1rem solid var(--corDestaqueVerde);
+}
+
+.sectionDiasEstudo .tituloDiasEstudo h1{
+    font-size: 20px;
+}
+
+.sectionDiasEstudo .divFogoContagem{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sectionDiasEstudo .divFogoContagem .iconeFogo{
+    font-size: 100px;
+}
+
+.sectionDiasEstudo .divFogoContagem p{
+    margin-top: 10px;
+    font-family: var(--fonteParaTexto);
+    font-size: 18px;
+}
+
+/* Contêiner do Calendário */
+.containerCalendario h2 {
+    font-family: var(--fonteParaTexto);
+    font-size: 14px;
+    font-weight: normal;
+    color: var(--corFundoPrincipal);
+    background-color: var(--corDestaqueVermelho);
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px 5px 0 0;
+    margin-left: 10px;
+    margin-bottom: -1px; /* Para conectar com a grade */
+}
+
+/* A grade do calendário */
+.gridCalendario {
+    display: grid;
+    /* 7 colunas de tamanho igual */
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    background-color: rgba(122,116,83,0.7);
+    padding: 10px;
+}
+
+/* Célula de um dia no calendário */
+.diaCalendario {
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--corFundoPrincipal);
+    cursor: pointer;
+    transition: transform 0.2s;
+    color: var(--corPrincipalFonte);
+    font-family: var(--fonteDestaque);
+    font-size: 0.8rem;
+}
+
+.diaCalendario:hover {
+    transform: scale(1.1);
+}
+
+/* Célula vazia (para dias antes do início do mês) */
+.diaVazio {
+    background-color: transparent;
+    cursor: default;
+}
+
+/* Estilo para dia ESTUDADO */
+.diaCalendario.studied {
+    background-color: var(--corDestaqueVerde);
+    color: white;
+    border-radius: 100px;
+}
+
+/* Estilo para dia NÃO ESTUDADO */
+.diaCalendario.not-studied {
+    background-color: var(--corDestaqueVermelho);
+    color: white;
+    border-radius: 100px;
+}
+
+
+/* Legenda */
+.legend {
+    margin-top: 20px;
+    padding-left: 10px;
+    font-family: var(--fonteParaTexto);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.legend-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.legend-dot.studied {
+    background-color: var(--corDestaqueVerde);
+}
+
+.legend-dot.not-studied {
+    background-color: var(--corDestaqueVermelho);
+}
+
+.legend p {
+    margin: 0;
+    font-size: 0.9rem;
+}
