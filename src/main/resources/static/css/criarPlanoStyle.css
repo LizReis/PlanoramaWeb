@@ -1,0 +1,285 @@
+:root {
+    --corFundoPrincipal: #FFFFFF;
+    --corPrincipalFonte: #0D0D0D;
+    --corCinzaFonte: #808080;
+    --corDestaqueVerde: #7A7453;
+    --corDestaqueVermelho: #7C2A2A;
+    --corDestaqueBege: #C29A6E;
+
+    --fonteDestaque: "Merriweather", serif;
+    --fonteParaTexto: "Roboto", sans-serif;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+
+.sectionCriarPlano{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    
+    margin: 7% 5% 5% 5%;
+}
+
+.titulo{
+    display: flex;
+    gap: 5px;
+    margin: 1rem 0rem 2rem 0rem;
+    padding: 0% 0% 3% 2%;
+    font-family: var(--fonteDestaque);
+    font-weight: 700;
+    color: var(--corDestaqueVermelho);
+    border-bottom: 0.1rem solid var(--corDestaqueVermelho);
+}
+
+.sectionCriarPlano form{
+    display: flex;
+    flex-direction: column;
+    margin: 0rem 1rem 0rem 1rem;
+}
+
+.sectionCriarPlano form label{
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.sectionCriarPlano form input{
+    margin-top: 2%;
+    padding-left: 2%;
+    font-size: 15px;
+    margin-bottom: 7%;
+    border: none;
+    border-bottom: 0.1rem solid var(--corDestaqueVermelho);
+}
+.sectionCriarPlano form input:focus{
+    outline: none;
+}
+
+.sectionCriarPlano form #anoAplicacao{
+    width: 120px;
+}
+
+.sectionCriarPlano form span{
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 2%;
+}
+
+.sectionCriarPlano form #botaoCriar{
+    align-self: center;
+    background-color: var(--corDestaqueVermelho);
+    margin-top: 10%;
+}
+.sectionCriarPlano form #botaoCriar:hover{
+    color: var(--corDestaqueVermelho);
+    background-color: var(--corFundoPrincipal);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+}
+
+.sectionCriarPlano form #botaoCancelar{
+    align-self: center;
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVermelho);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+    margin-top: 10%;
+}
+.sectionCriarPlano form #botaoCancelar:hover{
+    color: var(--corFundoPrincipal);
+    background-color: var(--corDestaqueVermelho);
+}
+
+.sectionCriarPlano .divBotoes{
+    display: flex;
+    justify-content: space-between;
+    padding: 5% 10% 0% 10%;
+    margin-bottom: 7%;
+}
+
+
+.sectionCriarPlano .inputDiasSemana{
+    height: 30px;
+    display: flex;
+    overflow: hidden;
+    justify-content: space-around;
+    border: 0.1rem solid var(--corDestaqueVermelho);
+    border-radius: 50px;
+}
+
+.sectionCriarPlano .inputDiasSemana .dia{
+    width: 15%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 0.1rem solid var(--corDestaqueVermelho);
+    font-family: var(--fonteParaTexto);
+    font-weight: 500;
+    transition: 0.3s linear;
+}
+.sectionCriarPlano .inputDiasSemana .dia:hover{
+    background-color: rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+.sectionCriarPlano .dia.selecionado{
+    background-color: var(--corDestaqueVerde);
+    color: var(--corFundoPrincipal);
+}
+
+
+/* AQUI COMEÇA O ESTILO DA SEGUNDA TELA PARA CRIAR PLANO*/
+/*====================================================*/
+
+.sectionCriarPlano-segundo{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+
+    margin: 7% 5% 5% 5%;
+}
+
+.sectionCriarPlano-segundo .titulo{
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionCriarPlano-segundo .titulo p{
+    margin: 0rem 0rem 0rem 0rem;
+    padding: 0% 0% 0% 2%;
+    font-size: 13px;
+    font-family: var(--fonteParaTexto);
+    font-weight: 400;
+    color: var(--corPrincipalFonte);
+}
+
+.sectionCriarPlano-segundo .divMaterias{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.sectionCriarPlano-segundo .divMaterias .materia{
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--corFundoPrincipal);
+    border: 0.1rem dashed var(--corDestaqueBege);
+
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    font-family: var(--fonteDestaque);
+    font-size: 13px;
+    font-weight: 600;
+}
+.sectionCriarPlano-segundo .divMaterias .materia:hover{
+    background-color: rgba(194,154,110,0.5);
+    cursor: pointer;
+}
+
+.sectionCriarPlano-segundo .materia.selecionado{
+    background-color: var(--corDestaqueBege);
+    color: var(--corFundoPrincipal);
+}
+
+.sectionCriarPlano-segundo .divBotoes{
+    display: flex;
+    justify-content: space-between;
+    padding: 5% 10% 0% 10%;
+    margin-bottom: 7%;
+}
+
+.sectionCriarPlano-segundo #botaoConfirmar{
+    align-self: center;
+    background-color: var(--corDestaqueVermelho);
+    margin-top: 10%;
+}
+.sectionCriarPlano-segundo #botaoConfirmar:hover{
+    color: var(--corDestaqueVermelho);
+    background-color: var(--corFundoPrincipal);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+}
+
+.sectionCriarPlano-segundo #botaoVoltar{
+    align-self: center;
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVermelho);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+    margin-top: 10%;
+}
+.sectionCriarPlano-segundo #botaoVoltar:hover{
+    color: var(--corFundoPrincipal);
+    background-color: var(--corDestaqueVermelho);
+}
+
+
+/* AQUI COMEÇA O ESTILO DA TERCEIRA TELA PARA CRIAR PLANO*/
+/*====================================================*/
+
+.sectionCriarPlano-segundo .containerMaterias{
+    display: flex;
+    flex-direction: column;
+    margin: 0% 5% 5% 5%;
+    gap: 20px;
+}
+
+.sectionCriarPlano-segundo .containerMaterias .cardMaterias{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    padding: 4% 6% 4% 6%;
+}
+
+.sectionCriarPlano-segundo .containerMaterias .cardMaterias span{
+    padding-bottom: 1%;
+    font-weight: 600;
+    font-family: var(--fonteParaTexto);
+    color: var(--corDestaqueVerde);
+    border-bottom: 0.1rem solid var(--corDestaqueVerde);
+}
+
+.sectionCriarPlano-segundo .containerMaterias .cardMaterias div{
+    margin-top: 5%;
+    font-family: var(--fonteParaTexto);
+    font-size: 14px;
+}
+
+.sectionCriarPlano-segundo .containerMaterias .cardMaterias div input{
+    width: 50px;
+    border: 0.1rem solid var(--corDestaqueVerde);
+}
+.sectionCriarPlano-segundo .containerMaterias .cardMaterias div input:focus{
+    outline: none;
+}
+
+.sectionCriarPlano-segundo .containerMaterias .divBotoes #botaoConfirmarFinalizar{
+    background-color: var(--corDestaqueVermelho);
+}
+.sectionCriarPlano-segundo .containerMaterias .divBotoes #botaoConfirmarFinalizar:hover{
+    background-color: var(--corFundoPrincipal);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+    color: var(--corDestaqueVermelho);
+}
+
+
+.sectionCriarPlano-segundo .containerMaterias .divBotoes #botaoCancelarFinalizar{
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVermelho);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+}
+.sectionCriarPlano-segundo .containerMaterias .divBotoes #botaoCancelarFinalizar:hover{
+    background-color: var(--corDestaqueVermelho);
+    color: var(--corFundoPrincipal);
+}

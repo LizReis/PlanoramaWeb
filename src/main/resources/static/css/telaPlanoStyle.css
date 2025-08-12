@@ -1,0 +1,150 @@
+:root {
+    --corFundoPrincipal: #FFFFFF;
+    --corPrincipalFonte: #0D0D0D;
+    --corCinzaFonte: #808080;
+    --corDestaqueVerde: #7A7453;
+    --corDestaqueVermelho: #7C2A2A;
+    --corDestaqueBege: #C29A6E;
+
+    --fonteDestaque: "Merriweather", serif;
+    --fonteParaTexto: "Roboto", sans-serif;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+
+.sectionGrafico {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.sectionGrafico .divTituloGrafico{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 1rem;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.sectionGrafico .divTituloGrafico .divTitulo{
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    color: var(--corDestaqueVerde);
+}
+
+.sectionGrafico .divTituloGrafico .divTitulo .titulo {
+    display: flex;
+    border-bottom: 0.1rem solid var(--corDestaqueVerde);
+    
+
+}
+.sectionGrafico .divTituloGrafico .divTitulo .titulo h3{
+    font-family: var(--fonteDestaque);
+    font-weight: 500;
+}
+
+.sectionGrafico .graficoRosca {
+    margin-top: 5%;
+    margin-bottom: 7%;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--fonteParaTexto);
+
+}
+
+.sectionGrafico .graficoRosca::before {
+    content: "";
+    width: 60%;
+    height: 60%;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+}
+
+.sectionGrafico .graficoRosca .centroTexto {
+    position: relative;
+    z-index: 2;
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+}
+
+.sectionGrafico .containerDisciplinas{
+    display: flex;
+    margin: 1rem 1rem;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    flex-direction: column;
+}
+
+.sectionGrafico .containerDisciplinas .containerTitulo{
+    display: flex;
+    margin: 1rem 0.5rem 0rem 1rem;
+    gap: 5px;
+    color: var(--corDestaqueVermelho);
+}
+
+.sectionGrafico .containerDisciplinas h4{
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+}
+
+.sectionGrafico .containerDisciplinas .divDisciplina{
+    width: 100%;
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.sectionGrafico .containerDisciplinas .divDisciplina .cardDisciplina{
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+
+    color: var(--corDestaqueVermelho);
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s linear;
+}
+.sectionGrafico .containerDisciplinas .divDisciplina .cardDisciplina:hover{
+    background-color: rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.sectionGrafico .containerDisciplinas .divDisciplina .cardDisciplina path:hover{
+    color: var(--corFundoPrincipal);
+}
+
+.sectionGrafico .containerDisciplinas .divDisciplina .divDisciplinaNome{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sectionGrafico .divAbsolutBotao .botaoAncora{
+    width: 11rem;
+}
+
+.sectionGrafico .divAbsolutBotao .botaoAncora svg{
+    margin-right: 2%;
+}
