@@ -9,10 +9,10 @@ import web.planorama.demo.entity.PlanejamentoEntity;
 public class PlanejamentoMapper {
 
     public PlanejamentoEntity toPlanejamentoEntity(PlanejamentoDTO planejamentoDTO){
-        return new PlanejamentoEntity(planejamentoDTO.id(), planejamentoDTO.nomePlanejamento(), planejamentoDTO.cargo(), planejamentoDTO.anoAplicacao(), planejamentoDTO.disponibilidade(), planejamentoDTO.materias(), planejamentoDTO.usuario(), planejamentoDTO.planoArquivado(), planejamentoDTO.preDefinidoAdm());
+        return new PlanejamentoEntity(planejamentoDTO.id(), planejamentoDTO.nomePlanejamento(), planejamentoDTO.cargo(), planejamentoDTO.anoAplicacao(), planejamentoDTO.disponibilidade(), planejamentoDTO.horasDiarias(), planejamentoDTO.materias(), planejamentoDTO.criador(), planejamentoDTO.planoArquivado(), planejamentoDTO.preDefinidoAdm());
     }
 
     public PlanejamentoDTO toPlanejamentoDTO(PlanejamentoEntity planejamentoEntity){
-        return new PlanejamentoDTO(planejamentoEntity.getIdPlanejamento(), planejamentoEntity.getNomePlanejamento(), planejamentoEntity.getCargo(), planejamentoEntity.getAnoAplicacao(), planejamentoEntity.getDisponibilidade(), planejamentoEntity.getMaterias(), planejamentoEntity.getUsuario(), planejamentoEntity.isPlanoArquivado(), planejamentoEntity.isPreDefinidoAdm());
+        return new PlanejamentoDTO(planejamentoEntity.getIdPlanejamento(), planejamentoEntity.getNomePlanejamento(), planejamentoEntity.getCargo(), planejamentoEntity.getAnoAplicacao(), planejamentoEntity.getDisponibilidade(), planejamentoEntity.getHorasDiarias(), planejamentoEntity.getMaterias(), planejamentoEntity.getCriador(), planejamentoEntity.isPlanoArquivado(), planejamentoEntity.isPreDefinidoAdm());
     }
 }

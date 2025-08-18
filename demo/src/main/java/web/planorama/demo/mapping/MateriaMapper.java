@@ -9,10 +9,10 @@ import web.planorama.demo.entity.MateriaEntity;
 public class MateriaMapper {
 
     public MateriaEntity toMateriaEntity(MateriaDTO materiaDTO){
-        return new MateriaEntity(materiaDTO.id(), materiaDTO.nomeMateria());
+        return new MateriaEntity(materiaDTO.id(), materiaDTO.nomeMateria(), materiaDTO.criadoPor());
     }
 
     public MateriaDTO toMateriaDTO(MateriaEntity materiaEntity){
-        return new MateriaDTO(materiaEntity.getId(), materiaEntity.getNomeMateria());
+        return new MateriaDTO(materiaEntity.getId(), materiaEntity.getNomeMateria(), materiaEntity.getCriadoPor());
     }
 }

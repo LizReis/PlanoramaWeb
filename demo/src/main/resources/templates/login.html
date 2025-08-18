@@ -10,31 +10,34 @@
     <title>Planorama - Login</title>
 </head>
 <body>
-    <header>
-        <section>
-            <span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span>
+    <main>
+        <section class="sectionLogin">
+            <div class="descricao-container">
+                <div class="logo">
+                    <span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span>
+                </div>
+                <p>Já possui uma conta? Faça seu <span>Login</span> e entre agora mesmo no Planorama.</p>
+            </div>
+
+            <div class="containerLogin">
+                <h3>Login</h3>
+
+                <form>
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email">
+                    <br>
+
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha">
+
+                    <button>Entrar</button>
+                </form>
+
+                <p>Não possui uma conta?</p>
+                <a href="cadastro.html">Cadastre-se</a>
+            </div>
         </section>
-    </header>
-
-    <section class="sectionLogin">
-        <div class="containerLogin">
-            <h3>Login</h3>
-
-            <form>
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email">
-                <br>
-
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" name="senha">
-
-                <button>Entrar</button>
-            </form>
-
-            <p>Não possui uma conta?</p>
-            <a href="cadastro.html">Cadastre-se</a>
-        </div>
-    </section>
+    </main>
 
     <footer></footer>
 

@@ -1,0 +1,123 @@
+:root{
+    --corFundoPrincipal: #FFFFFF;
+    --corPrincipalFonte: #0D0D0D;
+    --corCinzaFonte: #808080;
+    --corDestaqueVerde: #7A7453;
+    --corDestaqueVermelho: #7C2A2A;
+    --corDestaqueBege: #C29A6E;
+
+    --fonteDestaque: "Merriweather", serif;
+    --fonteParaTexto: "Roboto", sans-serif;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+
+.sectionMenu{
+    width: 300px;
+    height: 100vh;
+    display: fixed;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1000;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: var(--corFundoPrincipal);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+
+    font-family: var(--fonteParaTexto);
+
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.sectionMenu .divPlanorama{
+    display: flex;
+    justify-content: space-between;
+    padding: 10% 5% 10% 5%;
+    font-family: var(--fonteDestaque);
+    font-weight: 500;
+    font-size: 27px;
+    border-bottom: 0.1rem solid var(--corDestaqueVermelho);
+}
+.primeiroSpan{
+    color: var(--corDestaqueVerde);
+}
+.segundoSpan{
+    color: var(--corDestaqueVermelho);
+}
+
+.sectionMenu .divPlanorama #fecharMenu{
+    font-family: var(--fonteParaTexto);
+    font-weight: 300;
+    font-size: 18px;
+}
+.sectionMenu .divPlanorama #fecharMenu:hover{
+    cursor: pointer;
+    color: var(--corDestaqueVermelho);
+    font-weight: 600;
+}
+
+.sectionMenu svg{
+    width: 20px;
+    height: auto;
+    margin-right: 1%;
+}
+
+.sectionMenu div{
+    font-size: 17px;
+    margin-bottom: 2rem;
+}
+
+.sectionMenu .divHome{
+    padding: 0% 0% 10% 10%;
+    display: flex;
+    border-bottom: 0.1rem solid var(--corDestaqueVermelho);
+}
+
+.sectionMenu .divContaPlanos{
+    padding: 10% 0% 10% 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-bottom: 0.1rem solid var(--corDestaqueVermelho);
+}
+
+.sectionMenu .divCriarSelecionarPlano{
+    padding: 2% 0% 10% 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border-bottom: 0.1rem solid var(--corDestaqueVermelho);
+}
+
+.sectionMenu .divAdministrarUsuarios{
+    padding-left: 10%;
+}
+
+
+.sectionMenu .ancoraPersonalizada:hover{
+    font-weight: 600;
+    color: var(--corDestaqueVermelho);
+    cursor: pointer;
+}
+
+
+.conteudoPrincipal {
+    transition: filter 0.3s ease-in-out; /* Transição suave para o efeito de blur */
+}
+
+.conteudoBlur {
+    filter: blur(5px);
+    pointer-events: none; /* Impede cliques no conteúdo atrás do menu */
+}
+
+.sectionMenu.menuAtivo {
+    transform: translateX(0); /*Traz o menu de volta para a tela*/
+}

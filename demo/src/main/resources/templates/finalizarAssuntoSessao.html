@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/iniciarSessoesStyle.css">
+    <title>Planorama - Finalizar Assunto</title>
+</head>
+
+<body>
+    <main style="width: 380px;">
+        <div class="tituloSelecionar">
+            <h3>Finalizar Assunto</h3>
+            <span>X</span>
+        </div>
+
+        <form class="formFinalizarAssunto">
+            <h3>Você finalizou o assunto?</h3>
+            <div class="formGroup">
+                <input type="radio" name="finalizarAssunto" value="finalizou"> <span>Sim</span>
+                <input type="radio" name="finalizarAssunto" value="naoFinalizou"> <span>Não</span>
+                <input type="radio" name="finalizarAssunto" value="parcialmente"> <span>Parcialmente</span>
+            </div>
+
+            <h4>Você fez questões sobre o assunto?</h4>
+            <div class="formGroup">
+                <input type="radio" name="fezQuestoes" value="fezQuestoes"> <span>Sim</span>
+                <input type="radio" name="fezQuestoes" value="naoFezQuestoes"> <span>Não</span>
+
+                <label for="quantidadeQuestoes">Quantidade de questões:</label>
+                <input type="number" id="quantidadeQuestoes" name="quantidadeQuestoes" min="0">
+            </div>
+        </form>
+
+        <div class="divBotoes">
+            <button id="botaoCancelarFinalizar">Cancelar</button>
+
+            <button id="botaoFinalizarSessao">Finalizar</button>
+        </div>
+    </main>
+
+    <footer></footer>
+
+    <script src="../js/scripts.js"></script>
+</body>
+
+</html>

@@ -49,11 +49,12 @@ public class PlanejamentoServiceImpl implements PlanejamentoService{
                 .toList();
     }
 
+    
     @Override
     public List<PlanejamentoDTO> findAllOfEstudante(EstudanteDTO estudanteDTO) {
        return repository.findAll()
                 .stream()
-                .filter(plano -> plano.getUsuario() != null && plano.getUsuario().getId().equals(estudanteDTO.id()))
+                .filter(plano -> plano.getCriador() != null && plano.getCriador().getId().equals(estudanteDTO.id()))
                 .map(mapper::toPlanejamentoDTO)
                 .toList();
     }

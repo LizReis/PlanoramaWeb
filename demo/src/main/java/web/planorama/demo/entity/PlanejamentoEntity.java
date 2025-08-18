@@ -32,12 +32,16 @@ public class PlanejamentoEntity {
     @Column(name = "DISPONILIBILIDADE", nullable = false)
     private ArrayList<String> disponibilidade;
 
+    @Column(name = "HORAS_DIARIAS", nullable = false)
+    private int horasDiarias;
+
     //Inicialmente materias como string porque ainda não criei a classe MateriaPlano
     @Column(name = "MATERIAS", nullable = false)
     private ArrayList<String> materias;
 
-    @Column(name = "USUARIO", nullable = false)
-    private UsuarioEntity usuario;
+    @ManyToOne
+    @JoinColumn(name = "Criador")
+    private UsuarioEntity criador;
 
     @Column(name = "PLANO_ARQUIVADO", nullable = false)
     private boolean planoArquivado;

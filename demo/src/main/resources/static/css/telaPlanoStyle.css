@@ -19,37 +19,41 @@
 
 
 .sectionGrafico {
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    
+    /* CORREÇÃO: Adicionado padding para conter os filhos e evitar overflow */
+    padding: 0 1rem;
 }
 
-.sectionGrafico .divTituloGrafico{
+.sectionGrafico .divTituloGrafico {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 1rem 1rem;
-    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    /* CORREÇÃO: Removido margin horizontal, trocado por vertical */
+    margin: 1rem 0;
+    box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
 }
 
-.sectionGrafico .divTituloGrafico .divTitulo{
-    width: 100vw;
+.sectionGrafico .divTituloGrafico .divTitulo {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 1rem 2rem;
+    align-items: center;
+    padding: 0.5rem 2rem;
     color: var(--corDestaqueVerde);
+    border-bottom: 0.1rem solid var(--corDestaqueVerde);
 }
 
 .sectionGrafico .divTituloGrafico .divTitulo .titulo {
     display: flex;
-    border-bottom: 0.1rem solid var(--corDestaqueVerde);
-    
-
+    align-items: center;
+    gap: 0.5rem;
 }
-.sectionGrafico .divTituloGrafico .divTitulo .titulo h3{
+
+.sectionGrafico .divTituloGrafico .divTitulo .titulo h3 {
     font-family: var(--fonteDestaque);
     font-weight: 500;
 }
@@ -60,13 +64,11 @@
     width: 250px;
     height: 250px;
     border-radius: 50%;
-
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--fonteParaTexto);
-
 }
 
 .sectionGrafico .graficoRosca::before {
@@ -87,27 +89,28 @@
     color: #444;
 }
 
-.sectionGrafico .containerDisciplinas{
+.sectionGrafico .containerDisciplinas {
     display: flex;
-    margin: 1rem 1rem;
-    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    /* CORREÇÃO: Removido margin horizontal, trocado por vertical */
+    margin: 1rem 0;
+    box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     flex-direction: column;
 }
 
-.sectionGrafico .containerDisciplinas .containerTitulo{
+.sectionGrafico .containerDisciplinas .containerTitulo {
     display: flex;
     margin: 1rem 0.5rem 0rem 1rem;
     gap: 5px;
     color: var(--corDestaqueVermelho);
 }
 
-.sectionGrafico .containerDisciplinas h4{
+.sectionGrafico .containerDisciplinas h4 {
     font-family: var(--fonteParaTexto);
     font-size: 15px;
 }
 
-.sectionGrafico .containerDisciplinas .divDisciplina{
+.sectionGrafico .containerDisciplinas .divDisciplina {
     width: 100%;
     padding: 1rem 1rem;
     display: flex;
@@ -116,35 +119,127 @@
     gap: 20px;
 }
 
-.sectionGrafico .containerDisciplinas .divDisciplina .cardDisciplina{
+.sectionGrafico .containerDisciplinas .divDisciplina .cardDisciplina {
     padding: 0.5rem 1rem;
     border-radius: 10px;
-    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
-
+    box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
     color: var(--corDestaqueVermelho);
     font-family: var(--fonteParaTexto);
     font-size: 15px;
     font-weight: 500;
     transition: 0.3s linear;
 }
-.sectionGrafico .containerDisciplinas .divDisciplina .cardDisciplina:hover{
-    background-color: rgba(0,0,0,0.1);
+
+.sectionGrafico .containerDisciplinas .divDisciplina .cardDisciplina:hover {
+    background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
-.sectionGrafico .containerDisciplinas .divDisciplina .cardDisciplina path:hover{
-    color: var(--corFundoPrincipal);
-}
-
-.sectionGrafico .containerDisciplinas .divDisciplina .divDisciplinaNome{
+.sectionGrafico .containerDisciplinas .divDisciplina .divDisciplinaNome {
     display: flex;
     justify-content: space-between;
 }
 
-.sectionGrafico .divAbsolutBotao .botaoAncora{
+.sectionGrafico .divAbsolutBotao .botaoAncora {
     width: 11rem;
 }
 
-.sectionGrafico .divAbsolutBotao .botaoAncora svg{
+.sectionGrafico .divAbsolutBotao .botaoAncora svg {
     margin-right: 2%;
+}
+
+
+/* ===================================== */
+/* ESTILOS PARA TELAS MÉDIAS (Tablets) */
+/* ===================================== */
+@media screen and (min-width: 768px) {
+    .sectionGrafico {
+        max-width: 720px;
+        margin: 2rem auto;
+        border-radius: 10px;
+        box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
+        padding: 2rem;
+        /* CORREÇÃO: Adicionado para ser o contexto do botão */
+        position: relative;
+    }
+
+    /* Em telas médias, os cards internos não precisam de sombra própria */
+    .sectionGrafico .divTituloGrafico,
+    .sectionGrafico .containerDisciplinas {
+        box-shadow: none;
+        margin: 0; /* Zera as margens que não são mais necessárias */
+    }
+
+    .sectionGrafico .graficoRosca {
+        width: 300px;
+        height: 300px;
+    }
+
+    .sectionGrafico .graficoRosca .centroTexto {
+        font-size: 22px;
+    }
+    
+    /* CORREÇÃO: Posicionamento do botão relativo ao card principal */
+    .sectionGrafico .divAbsolutBotao {
+        position: absolute;
+        bottom: -3rem;
+        right: 2rem;
+    }
+}
+
+
+/* ======================================= */
+/* ESTILOS PARA TELAS GRANDES (Desktops) */
+/* ======================================= */
+@media screen and (min-width: 1200px) {
+    .sectionGrafico {
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        grid-template-rows: 1fr auto;
+        gap: 1rem 2rem;
+        max-width: 1024px;
+        padding: 2rem;
+        /* position: relative já foi herdado da tela média, não precisa repetir */
+    }
+
+    .sectionGrafico .divTituloGrafico {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+        margin: 0;
+        align-content: flex-start;
+    }
+
+    .sectionGrafico .graficoRosca {
+        position: relative;
+        margin-top: 20%;
+    }
+
+    /* Adiciona o texto "Ciclo:" via CSS */
+    .sectionGrafico .graficoRosca::after {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        font-family: var(--fonteParaTexto);
+        font-size: 18px;
+        color: var(--corPrincipalFonte);
+        font-weight: 500;
+    }
+
+    .sectionGrafico .containerDisciplinas {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        margin: 0;
+        padding: 0;
+    }
+
+    .sectionGrafico .divAbsolutBotao {
+        position: static; /* No grid, ele volta ao fluxo normal */
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+        justify-self: end;
+        align-self: end;
+        padding: 0;
+        margin: 0;
+        margin-top: 1rem;
+    }
 }
