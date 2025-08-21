@@ -2,15 +2,15 @@ package web.planorama.demo.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "TB_USUARIO")
 public abstract class UsuarioEntity {
@@ -34,4 +34,18 @@ public abstract class UsuarioEntity {
     @Column(name = "DESCRICAO_USUARIO", nullable = true)
     private String descricaoUsuario;
 
+    @OneToMany(mappedBy = "criador")
+    private List<PlanejamentoEntity> planejamentos;
+
+
+    public UsuarioEntity(UUID id, String nome, String email, String senha, String fotoUsuario, String descricaoUsuario) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.fotoUsuario = fotoUsuario;
+        this.descricaoUsuario = descricaoUsuario;
+        
+        this.planejamentos = new ArrayList<>();
+    }
 }

@@ -11,7 +11,7 @@ import web.planorama.demo.entity.EstudanteEntity;
 public class UsuarioMapper {
 //-----------------------------MAPPER PARA O USUÁRIO ADMINISTRADOR----------------------------------------------
     public AdministradorEntity toAdministradorEntity(AdministradorDTO administradorDTO){
-        return new AdministradorEntity(administradorDTO.id(), administradorDTO.nome(), administradorDTO.email(), administradorDTO.senha(), administradorDTO.fotoUsuario(), administradorDTO.descricao());
+        return new AdministradorEntity(administradorDTO.id(), administradorDTO.nome(), administradorDTO.email(), administradorDTO.senha(), administradorDTO.fotoUsuario(), administradorDTO.descricaoUsuario());
     }
 
     public AdministradorDTO toAdministradorDTO(AdministradorEntity administradorEntity){
@@ -20,7 +20,7 @@ public class UsuarioMapper {
 
 //-----------------------------MAPPER PARA O USUÁRIO ESTUDANTE----------------------------------------------
     public EstudanteEntity toEstudanteEntity(EstudanteDTO estudanteDTO){
-        return new EstudanteEntity(estudanteDTO.id(), estudanteDTO.nome(), estudanteDTO.email(), estudanteDTO.senha(), estudanteDTO.fotoUsuario(), estudanteDTO.descricao());
+        return new EstudanteEntity(estudanteDTO.id(), estudanteDTO.nome(), estudanteDTO.email(), estudanteDTO.senha(), estudanteDTO.fotoUsuario(), estudanteDTO.descricaoUsuario());
     }
 
     public EstudanteDTO toEstudanteDTO(EstudanteEntity estudanteEntity){

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class AdministradorEntity extends UsuarioEntity{
 
-    public AdministradorEntity(UUID id, String nome, String email, String senha, String foto, String descricao){
-        super(id, nome, email, senha, foto, descricao);
+    public AdministradorEntity(UUID id, String nome, String email, String senha, String foto, String descricaoUsuario){
+        super(id, nome, email, senha, foto, descricaoUsuario);
     }
 }

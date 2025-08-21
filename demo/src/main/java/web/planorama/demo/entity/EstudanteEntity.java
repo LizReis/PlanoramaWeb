@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 @Entity
 public class EstudanteEntity extends UsuarioEntity{
     
-    public EstudanteEntity(UUID id, String nome, String email, String senha, String foto, String descricao){
-        super(id, nome, email, senha, foto, descricao);
+    public EstudanteEntity(UUID id, String nome, String email, String senha, String foto, String descricaoUsuario){
+        super(id, nome, email, senha, foto, descricaoUsuario);
+        
     }
 }
  

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/loginStyle.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/loginStyle.css">
     <title>Planorama - Cadastro</title>
 </head>
+
 <body>
     <main>
         <section class="sectionLogin">
@@ -22,7 +26,13 @@
             <div class="containerLogin">
                 <h3>Faça seu Cadastro</h3>
 
-                <form th:action="@{/cadastro/estudante}" method="post">
+                <form id="formCadastro" th:action="@{/cadastro/estudante}" method="post">
+                    <label for="tipoUsuario">Tipo de Conta:</label>
+                    <select id="tipoUsuario" name="tipoUsuario" required>
+                        <option value="estudante" selected>Estudante</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
+
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" required placeholder="Nome de Usuário">
                     <br>
@@ -48,9 +58,28 @@
             </div>
         </section>
     </main>
-    
+
     <footer></footer>
 
-    <script src="../static/js/scripts.js"></script>
+    <script th:inline = "javascript">
+        let formCadastro = document.getElementById("formCadastro");
+        let selectTipoUsuario = document.getElementById("tipoUsuario");
+
+        selectTipoUsuario.addEventListener("change", function(){
+            let tipoUsuarioSelecionado = this.value;
+
+            if(tipoUsuarioSelecionado === "estudante"){
+
+                ///*[[@{...}]]*/ é um truque do Thymeleaf para injetar a URL gerada pelo Spring de forma segura dentro do JavaScript
+                formCadastro.action = /*[[@{/cadastro/estudante}]]*/ '';
+
+            }else if(tipoUsuarioSelecionado === "administrador"){
+
+                formCadastro.action = /*[[@{/cadastro/adm}]]*/ '';
+
+            }
+        });
+    </script>
 </body>
+
 </html>

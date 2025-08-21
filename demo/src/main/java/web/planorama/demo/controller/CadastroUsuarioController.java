@@ -10,9 +10,7 @@ import web.planorama.demo.dto.EstudanteDTO;
 import web.planorama.demo.service.AdministradorService;
 import web.planorama.demo.service.EstudanteService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -21,9 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 @Slf4j
 public class CadastroUsuarioController {
-
-    private final AdministradorService admService;
     private final EstudanteService estudanteService;
+    private final AdministradorService admService;
 
     @GetMapping
     public String pagina(){
@@ -34,15 +31,13 @@ public class CadastroUsuarioController {
     public String create(EstudanteDTO estudanteDTO) {
         log.info("Request: {}", estudanteDTO);
         estudanteService.save(estudanteDTO);
-        return "login";
+        return "redirect:/login";
     }
-    
 
-    @PostMapping("/adms")
+    @PostMapping("/adm")
     public String create(AdministradorDTO administradorDTO){
         log.info("Request: {}", administradorDTO);
         admService.save(administradorDTO);
-        return "login";
+        return "redirect:/login";
     }
-
 }

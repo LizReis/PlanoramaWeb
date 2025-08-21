@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import web.planorama.demo.dto.EstudanteDTO;
 import web.planorama.demo.entity.EstudanteEntity;
 import web.planorama.demo.mapping.UsuarioMapper;
@@ -18,12 +19,19 @@ public class EstudanteServiceImpl implements EstudanteService{
 
     private final EstudanteRepository repository;
     private final UsuarioMapper mapper;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
     public EstudanteDTO save(EstudanteDTO estudanteDTO) {
-        var entity = repository.save(mapper.toEstudanteEntity(estudanteDTO));
-        return mapper.toEstudanteDTO(entity);
+        var entity = mapper.toEstudanteEntity(estudanteDTO);
+
+        String senhaCriptograda = passwordEncoder.encode(estudanteDTO.senha());
+        entity.setSenha(senhaCriptograda);
+
+        var savedEntity = repository.save(entity);
+
+        return mapper.toEstudanteDTO(savedEntity);
     }
 
     @Override

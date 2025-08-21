@@ -1,6 +1,8 @@
 package web.planorama.demo.service.impl;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import web.planorama.demo.dto.AdministradorDTO;
 import web.planorama.demo.entity.AdministradorEntity;
@@ -17,12 +19,19 @@ public class AdministradorServiceImpl implements AdministradorService {
 
     private final AdministradorRepository repository;
     private final UsuarioMapper mapper;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
     public AdministradorDTO save(AdministradorDTO administradorDTO) {
-        var entity = repository.save(mapper.toAdministradorEntity(administradorDTO));
-        return mapper.toAdministradorDTO(entity);
+        var entity = mapper.toAdministradorEntity(administradorDTO);
+
+        String senhaCriptografada = passwordEncoder.encode(administradorDTO.senha());
+        entity.setSenha(senhaCriptografada);
+
+        var savedEntity = repository.save(entity);
+
+        return mapper.toAdministradorDTO(savedEntity);
     }
 
     @Override
