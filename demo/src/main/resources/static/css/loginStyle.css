@@ -156,6 +156,11 @@ body{
     padding-bottom: 0.1rem;
 }
 
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
 
 /* ===================================== */
 /* ESTILOS PARA TELAS MÉDIAS (Tablets) */

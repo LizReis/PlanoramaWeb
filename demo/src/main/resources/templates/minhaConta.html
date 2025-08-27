@@ -9,29 +9,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/homeStyle.css">
-    <link rel="stylesheet" href="../static/css/minhaContaStyle.css">
+    <link rel="stylesheet" th:href="@{/css/minhaContaStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/menuStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/barraNavStyle.css}">
     <title>Planorama - Minha conta</title>
 </head>
 
 <body>
-    <header class="conteudoPrincipal">
-        <section>
-            <div id="divMenuHamburguer">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <div th:replace="~{barraNavegacao :: barraNav}"></div>
 
-            <div class="divNomeSite">
-                <a href="index.html"><span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span></a>
-            </div>
-
-            <div class="divFotoUsuario">
-                <img src="../static/img/gatinho.jpg">
-            </div>
-        </section>
-    </header>
+    <div th:replace="~{menu :: menuFragment}"></div>
 
     <section id="sectionAparecerMenu"></section>
 
@@ -45,10 +32,10 @@
         </div>
 
         <div class="divFotoNomeUsuario">
-            <div class="divFotoUsuario">
-                <img src="../static/img/gatinho.jpg">
+            <div class="divFotoUsuario" th:if="${usuarioLogado != null}">
+                <img th:src="@{${usuarioLogado.fotoUsuario != null ? usuarioLogado.fotoUsuario : '/img/gatinho.jpg'}}" alt="Foto do Perfil">
             </div>
-            <span id="spanNomeUsuario">Gatinho Zarolho</span>
+            <span id="spanNomeUsuario" th:text = "${usuarioLogado.nome}">Gatinho Zarolho</span>
 
 
             <div class="alterarFoto">
@@ -63,7 +50,7 @@
         <div class="divDescricaoUsuario">
             <span>Descrição:</span>
             <div>
-                <p>Meu objetivo é ajdhuasghdua dadbiuagdwiu afdIUFUBOUB DFASBDAJSBDASBDUOADOA
+                <p th:text = "${usuarioLogado.descricaoUsuario}">Meu objetivo é ajdhuasghdua dadbiuagdwiu afdIUFUBOUB DFASBDAJSBDASBDUOADOA
                     usbdoauihwoirbeiwbiuegbfwbsfbs sfsodifhsodifhsoidhfoisdhfodshofsdih</p>
             </div>
         </div>
@@ -78,7 +65,6 @@
 
     <footer></footer>
 
-    <script src="../static/js/homeScripts.js"></script>
     <script src="../static/js/menuScripts.js"></script>
 </body>
 

@@ -31,9 +31,9 @@ public class SecurityConfig {
                 // Libera o acesso para o H2 Console
                 .requestMatchers("/h2-console/**").permitAll()
                 // Libera o acesso a recursos estáticos (CSS, JS, imagens)
-                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/img/**", "/images/**").permitAll()
                 // Libera o acesso às páginas de login e cadastro
-                .requestMatchers("/login", "/cadastro/**").permitAll()
+                .requestMatchers("/login", "/cadastro", "/cadastro/**").permitAll()
                 // Exige autenticação para QUALQUER outra requisição
                 .anyRequest().authenticated()
             )
@@ -41,6 +41,7 @@ public class SecurityConfig {
             .formLogin(form -> form
                 .loginPage("/login")
                 .successHandler(customAuthenticationSuccessHandler)
+                .failureUrl("/login?error=true")
                 .permitAll()
             )
             // Configura o logout

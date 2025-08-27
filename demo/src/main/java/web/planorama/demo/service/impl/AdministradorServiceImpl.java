@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import web.planorama.demo.dto.AdministradorDTO;
 import web.planorama.demo.entity.AdministradorEntity;
 import web.planorama.demo.mapping.UsuarioMapper;
-import web.planorama.demo.repository.AdministradorRepository;
+import web.planorama.demo.repository.UsuarioRepository;
 import web.planorama.demo.service.AdministradorService;
 
 import java.util.List;
@@ -17,21 +17,24 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AdministradorServiceImpl implements AdministradorService {
 
-    private final AdministradorRepository repository;
+    private final UsuarioRepository repository;
     private final UsuarioMapper mapper;
     private final PasswordEncoder passwordEncoder;
 
-
     @Override
     public AdministradorDTO save(AdministradorDTO administradorDTO) {
-        var entity = mapper.toAdministradorEntity(administradorDTO);
+        if (repository.existsByEmail(administradorDTO.email())) {
+            throw new RuntimeException("Este e-mail já está cadastrado.");
+        } else {
+            var entity = mapper.toAdministradorEntity(administradorDTO);
 
-        String senhaCriptografada = passwordEncoder.encode(administradorDTO.senha());
-        entity.setSenha(senhaCriptografada);
+            String senhaCriptografada = passwordEncoder.encode(administradorDTO.senha());
+            entity.setSenha(senhaCriptografada);
 
-        var savedEntity = repository.save(entity);
+            var savedEntity = repository.save(entity);
 
-        return mapper.toAdministradorDTO(savedEntity);
+            return mapper.toAdministradorDTO(savedEntity);
+        }
     }
 
     @Override
@@ -52,7 +55,7 @@ public class AdministradorServiceImpl implements AdministradorService {
 
     @Override
     public void remove(UUID id) {
-        if (repository.existsById(id)){
+        if (repository.existsById(id)) {
             repository.deleteById(id);
         }
     }

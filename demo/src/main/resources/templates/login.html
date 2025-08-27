@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/loginStyle.css">
     <title>Planorama - Login</title>
 </head>
+
 <body>
     <main>
         <section class="sectionLogin">
@@ -21,6 +25,10 @@
 
             <div class="containerLogin">
                 <h3>Login</h3>
+
+                <div th:if="${param.error}" class="error">
+                    <span>E-mail ou senha inválidos.</span>
+                </div>
 
                 <form th:action="@{/login}" method="post">
                     <label for="username">E-mail:</label>
@@ -43,4 +51,5 @@
 
     <script src="../js/scripts.js"></script>
 </body>
+
 </html>

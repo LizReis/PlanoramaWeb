@@ -1,0 +1,78 @@
+:root{
+    --corFundoPrincipal: #FFFFFF;
+    --corPrincipalFonte: #0D0D0D;
+    --corCinzaFonte: #808080;
+    --corSecundariaCinzaFonte: #464545;
+    --corDestaqueVerde: #7A7453;
+    --corDestaqueVermelho: #7C2A2A;
+    --corDestaqueBege: #C29A6E;
+
+    --fonteDestaque: "Merriweather", serif;
+    --fonteParaTexto: "Roboto", sans-serif;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+
+header{
+    width: 100vw;
+    padding: 1% 0% 1% 0%;
+    border-bottom: 0.1rem solid var(--corDestaqueVerde);
+}
+
+header section{
+    width: 100vw;
+    height: 3rem;
+    display: flex;
+    z-index: 100;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 1rem;
+}
+
+header section #divMenuHamburguer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+}
+
+header section #divMenuHamburguer span{
+    display: block;
+    height: 2px;
+    background-color: var(--corDestaqueVerde);
+}
+
+header section .divNomeSite span{
+    font-family: var(--fonteDestaque);
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.primeiroSpan{
+    color: var(--corDestaqueVerde);
+}
+.segundoSpan{
+    color: var(--corDestaqueVermelho);
+}
+
+header section .divFotoUsuario{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+}
+
+header section .divFotoUsuario img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}

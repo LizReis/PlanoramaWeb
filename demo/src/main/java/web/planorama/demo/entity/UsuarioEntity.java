@@ -13,6 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "TB_USUARIO")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TIPO_USUARIO", discriminatorType = DiscriminatorType.STRING)
 public abstract class UsuarioEntity {
 
     @Id

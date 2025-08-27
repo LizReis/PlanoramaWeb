@@ -11,4 +11,6 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, UUID>{
 
     //JPA cria a consulta automaticamente pelo nome do método
     Optional<UsuarioEntity> findByEmail(String email);
+
+    boolean existsByEmail(String email);
 }

@@ -123,3 +123,47 @@
 .sectionMinhaConta .divBotoesAlteracao a:hover{
     background-color: rgba(124,42,42,0.3);
 }
+
+/* ===================================== */
+/* ESTILOS PARA TELAS MÉDIAS (Tablets) */
+/* ===================================== */
+@media screen and (min-width: 768px) {
+    .sectionMinhaConta {
+        /* Define uma largura máxima e centraliza o container na tela */
+        max-width: 600px;
+        margin: 2rem auto; /* O 'auto' nas laterais faz a centralização */
+    }
+}
+
+
+/* ======================================= */
+/* ESTILOS PARA TELAS GRANDES (Desktops) */
+/* ======================================= */
+@media screen and (min-width: 1200px) {
+    .sectionMinhaConta {
+        /* Aumenta um pouco a largura máxima para desktops */
+        max-width: 700px;
+    }
+
+    .sectionMinhaConta .divTituloMinhaConta span {
+        font-size: 18px;
+    }
+
+    .sectionMinhaConta .divFotoNomeUsuario .divFotoUsuario {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .sectionMinhaConta .divFotoNomeUsuario span {
+        font-size: 18px;
+    }
+
+    .sectionMinhaConta .divDescricaoUsuario span {
+        font-size: 18px;
+    }
+
+    .sectionMinhaConta .divBotoesAlteracao a {
+        width: 250px;
+        height: 35px;
+    }
+}

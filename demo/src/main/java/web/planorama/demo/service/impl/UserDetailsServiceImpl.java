@@ -1,5 +1,10 @@
 package web.planorama.demo.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,7 +13,6 @@ import org.springframework.stereotype.Service;
 import web.planorama.demo.entity.AdministradorEntity;
 import web.planorama.demo.entity.UsuarioEntity;
 import web.planorama.demo.repository.UsuarioRepository;
-import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -27,10 +31,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         // Define o "papel" (ROLE) do usuário para autorização futura
         String role = (usuario instanceof AdministradorEntity) ? "ADMIN" : "USER";
 
-        return User.builder()
-            .username(usuario.getEmail())
-            .password(usuario.getSenha()) // A senha já deve estar criptografada no banco
-            .roles(role)
-            .build();
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+
+        return new User(usuario.getEmail(), usuario.getSenha(), authorities);
     }
 }

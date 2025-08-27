@@ -10,28 +10,31 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import web.planorama.demo.dto.EstudanteDTO;
 import web.planorama.demo.entity.EstudanteEntity;
 import web.planorama.demo.mapping.UsuarioMapper;
-import web.planorama.demo.repository.EstudanteRepository;
+import web.planorama.demo.repository.UsuarioRepository;
 import web.planorama.demo.service.EstudanteService;
 
 @Service
 @RequiredArgsConstructor
-public class EstudanteServiceImpl implements EstudanteService{
+public class EstudanteServiceImpl implements EstudanteService {
 
-    private final EstudanteRepository repository;
+    private final UsuarioRepository repository;
     private final UsuarioMapper mapper;
     private final PasswordEncoder passwordEncoder;
 
-
     @Override
     public EstudanteDTO save(EstudanteDTO estudanteDTO) {
-        var entity = mapper.toEstudanteEntity(estudanteDTO);
+        if (repository.existsByEmail(estudanteDTO.email())) {
+            throw new RuntimeException("Este e-mail já está cadastrado.");
+        } else {
+            var entity = mapper.toEstudanteEntity(estudanteDTO);
 
-        String senhaCriptograda = passwordEncoder.encode(estudanteDTO.senha());
-        entity.setSenha(senhaCriptograda);
+            String senhaCriptograda = passwordEncoder.encode(estudanteDTO.senha());
+            entity.setSenha(senhaCriptograda);
 
-        var savedEntity = repository.save(entity);
+            var savedEntity = repository.save(entity);
 
-        return mapper.toEstudanteDTO(savedEntity);
+            return mapper.toEstudanteDTO(savedEntity);
+        }
     }
 
     @Override
@@ -52,7 +55,7 @@ public class EstudanteServiceImpl implements EstudanteService{
 
     @Override
     public void remove(UUID id) {
-        if (repository.existsById(id)){
+        if (repository.existsById(id)) {
             repository.deleteById(id);
         }
     }

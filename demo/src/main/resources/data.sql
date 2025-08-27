@@ -1,0 +1,1 @@
+INSERT INTO TB_USUARIO(TIPO_USUARIO, ID, NOME, EMAIL, SENHA, DESCRICAO_USUARIO) VALUES ('ADMIN', 'e571ac2c-a800-41b6-bb06-fcf57575bb8e', 'LIZ_ADM', 'liz@gmail.com', '$2a$10$WhvHXWrMNyyEVfB85ihEcu6Wei50hCuk/GWHjNs2gVsitE0sZJgUm', 'Conta adminstrativa');
