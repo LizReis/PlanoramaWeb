@@ -1,4 +1,4 @@
-//SCRIPT PARA APARECER O MENU QUANDO CLICAR
+//SCRIPT PARA APARECER O MENU ADM QUANDO CLICAR
 // NO MENU HAMBURGUER----------------------
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -11,4 +11,6 @@ public interface AdministradorService {
     AdministradorDTO findOne(UUID id);
     List<AdministradorDTO> findAll();
     void remove(UUID id);
+
+    void alterarDadoUsuario(UUID usuarioParaAlterar, String novoNomeUsuario, String novoEmailUsuario, String senhaADM);
 }

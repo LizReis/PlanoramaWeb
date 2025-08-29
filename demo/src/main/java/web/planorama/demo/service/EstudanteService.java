@@ -12,4 +12,11 @@ public interface EstudanteService {
     EstudanteDTO findOne(UUID id);
     List<EstudanteDTO> findAll();
     void remove(UUID id);
+
+    EstudanteDTO findByEmail(String email);
+
+    void alterarSenha(String senhaAtual, String novaSenha);
+    void alterarEmail(String novoEmail, String senhaAtual);
+    void alterarNomeUsuario(String novoNome, String senhaAtual);
+    void alterarDescricao(String novaDescricao, String senhaAtual);
 }

@@ -106,6 +106,14 @@
 }
 
 .sectionMenu .divPlanosArquivados{
+    padding: 2% 0% 10% 10%;
+    display: flex;
+    border-bottom: 0.1rem solid var(--corDestaqueVermelho);
+}
+
+.sectionMenu .divLogout{
+    display: flex;
+    margin-top: 30px;
     padding-left: 10%;
 }
 

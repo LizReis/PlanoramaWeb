@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
+
+
+<body>
+    <main class="cardAlteracao corpo" th:fragment="cardAlteracao">
+        <form id="formAlterarNome" th:action="@{/minha-conta/alterar-nome-usuario}" method="post">
+            <div class="nomeCard">
+                <span class="tituloCard">Alterar Nome do Usuário</span>
+                <span class="fecharX">X</span>
+            </div>
+
+            <div class="paragrafoCard">
+                <p class="paragrafoInfo">Altere seu nome de Usuário</p>
+            </div>
+
+            <div class="labelCard">
+                <label for="novoNome">Novo Nome:</label>
+                <input type="text" id="novoNome" name="novoNome" placeholder="Novo nome do Usuário" />
+            </div>
+            <br/>
+
+            <div class="labelCard">
+                <label for="senhaAtual">Senha Atual:</label>
+                <input type="password" id="senhaAtual" name="senhaAtual" placeholder="Digite a sua senha" />
+            </div>
+            
+            <button type="submit">Salvar</button>
+        </form>
+    </main>
+</body>
+
+</html>

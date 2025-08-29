@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -9,31 +9,19 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/administrarUsuarioStyle.css">
-    <link rel="stylesheet" href="css/homeAdmStyle.css">
+    <link rel="stylesheet" th:href="@{css/administrarUsuarioStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/barraNavStyle.css}">
+    <link rel="stylesheet" th:href="@{css/homeAdmStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/menuAdmStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/alterarCardStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/modalStyle.css}">
     <title>Planorama - Adm. Usuários</title>
 </head>
 
 <body>
-    <header class="conteudoPrincipal">
-        <section>
-            <div id="divMenuHamburguer">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <div th:replace="~{barraNavegacao :: barraNav}"></div>
 
-            <div class="divNomeSite">
-                <a href="index.html"><span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span></a>
-            </div>
-
-            <div class="divFotoUsuario">
-                <img src="../static/img/gatinho.jpg">
-            </div>
-        </section>
-    </header>
-
-    <section id="sectionAparecerMenu"></section>
+    <div th:replace="~{menuAdm :: menuAdmFragment}"></div>
 
 
     <section class="sectionAdmUsuario conteudoPrincipal">
@@ -49,12 +37,16 @@
             <p>Você pode adicionar, alterar ou remover um usuário do sistema.</p>
         </div>
 
+        <div th:if="${success}" class="alerta sucesso">
+            <p th:text="${success}"></p>
+        </div>
+
         <main class="conteudo-principal">
             <div class="seletor-container">
                 <select id="filtro-tipo-usuario" class="seletor-filtro">
-                    <option value="todos">Todos os Usuários</option>
-                    <option value="estudante">Apenas Estudantes</option>
-                    <option value="admin">Apenas Administradores</option>
+                    <option value="todos" th:selected="${tipoSelecionado == 'todos'}">Todos os Usuários</option>
+                    <option value="estudante" th:selected="${tipoSelecionado == 'estudante'}">Apenas Estudantes</option>
+                    <option value="admin" th:selected="${tipoSelecionado == 'admin'}">Apenas Administradores</option>
                 </select>
             </div>
 
@@ -67,21 +59,20 @@
                 </div>
 
                 <div class="tabela-corpo">
-                    <div class="linha-grid item-usuario" th:each="cadastro: ${listaDeUsuarios}" >
+                    <div class="linha-grid item-usuario" th:each="cadastro: ${listaDeUsuarios}">
                         <div th:text="${cadastro.nome}">Carlos (Admin)</div>
                         <div th:text="${cadastro.email}">carlos.admin@lalala</div>
                         <div><img th:src="@{${cadastro.fotoUsuario}}"></div>
                         <div class="acoes">
-                            <button class="btn-acao">
+                            <a class="btn-acao abrir-modal" href="" th:data-url="@{/listar-usuarios/alterar-usuario(id = ${cadastro.id})}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <path fill="currentColor"
                                         d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z" />
                                 </svg>
-                            </button>
+                            </a>
 
-                            <button class="btn-acao">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24">
+                            <a class="btn-acao" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
                                         <path
                                             d="M5.25 6.91A.75.75 0 0 1 6 6.16h12a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75" />
@@ -89,7 +80,7 @@
                                             d="M11.333 4.75c-.69 0-1.25.56-1.25 1.25v.91h-1.5V6a2.75 2.75 0 0 1 2.75-2.75h1.334A2.75 2.75 0 0 1 15.417 6v.91h-1.5V6c0-.69-.56-1.25-1.25-1.25zM6 6.91L8 20h8l2-13.09zm6.5 3.636a.5.5 0 1 0-1 0v5.818a.5.5 0 1 0 1 0zm-3.224-.5a.476.476 0 0 1 .55.423l.666 5.818a.525.525 0 0 1-.435.576a.477.477 0 0 1-.549-.423l-.667-5.818a.525.525 0 0 1 .435-.575m5.883.576a.525.525 0 0 0-.435-.575a.476.476 0 0 0-.55.422l-.666 5.818a.525.525 0 0 0 .435.576a.476.476 0 0 0 .549-.423z" />
                                     </g>
                                 </svg>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -98,10 +89,13 @@
         </main>
     </section>
 
+    <div id="modal-container"></div>
+
     <footer></footer>
 
-    <script src="../static/js/administrarUsuarioScripts.js"></script>
-    <script src="../static/js/menuAdmScript.js"></script>
+    <script th:src="@{/js/administrarUsuarioScripts.js}"></script>
+    <script th:src="@{/js/menuAdmScripts.js}"></script>
+    <script th:src="@{/js/modalScripts.js}"></script>
 </body>
 
 </html>

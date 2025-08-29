@@ -2,10 +2,13 @@ package web.planorama.demo.service.impl;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import web.planorama.demo.dto.AdministradorDTO;
 import web.planorama.demo.entity.AdministradorEntity;
+import web.planorama.demo.entity.UsuarioEntity;
 import web.planorama.demo.mapping.UsuarioMapper;
 import web.planorama.demo.repository.UsuarioRepository;
 import web.planorama.demo.service.AdministradorService;
@@ -58,5 +61,30 @@ public class AdministradorServiceImpl implements AdministradorService {
         if (repository.existsById(id)) {
             repository.deleteById(id);
         }
+    }
+
+    @Override
+    public void alterarDadoUsuario(UUID usuarioParaAlterar, String novoNomeUsuario, String novoEmailUsuario, String senhaADM) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String emailUsuarioLogado;
+
+
+        if (principal instanceof UserDetails) {
+            emailUsuarioLogado = ((UserDetails)principal).getUsername();
+        }else{
+            emailUsuarioLogado = principal.toString();
+        }
+
+        AdministradorEntity admin = (AdministradorEntity) repository.findByEmail(emailUsuarioLogado).orElseThrow(() -> new RuntimeException("Usuário não encontrado no banco de dados"));
+
+        if(!passwordEncoder.matches(senhaADM, admin.getSenha())){
+            throw new RuntimeException("A senha atual ADM está incorreta");
+        }
+
+        UsuarioEntity usuarioSelecionado = repository.findById(usuarioParaAlterar).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        
+        usuarioSelecionado.setNome(novoNomeUsuario);
+        usuarioSelecionado.setEmail(novoEmailUsuario);
+        repository.save(usuarioSelecionado);
     }
 }

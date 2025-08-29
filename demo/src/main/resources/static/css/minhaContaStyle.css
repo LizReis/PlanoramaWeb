@@ -124,6 +124,27 @@
     background-color: rgba(124,42,42,0.3);
 }
 
+.alerta {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    text-align: center;
+}
+
+.alerta.sucesso {
+    color: #155724; /* Verde escuro para o texto */
+    background-color: #d4edda; /* Fundo verde claro */
+    border: 1px solid #c3e6cb; /* Borda verde */
+}
+
+.alerta.erro {
+    color: #721c24; /* Vermelho escuro para o texto */
+    background-color: #f8d7da; /* Fundo rosa/vermelho claro */
+    border: 1px solid #f5c6cb; /* Borda vermelha */
+}
+
 /* ===================================== */
 /* ESTILOS PARA TELAS MÉDIAS (Tablets) */
 /* ===================================== */
@@ -163,6 +184,7 @@
     }
 
     .sectionMinhaConta .divBotoesAlteracao a {
+        margin-top: 10px;
         width: 250px;
         height: 35px;
     }

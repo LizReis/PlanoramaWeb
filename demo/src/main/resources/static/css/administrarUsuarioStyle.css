@@ -17,6 +17,10 @@
     text-decoration: none;
 }
 
+*:focus{
+    outline: none;
+}
+
 .sectionAdmUsuario{
     margin: 20px 10px 0px 10px;
 }
@@ -120,4 +124,71 @@
 
 .material-icons {
     font-size: 1.25rem; /* Tamanho dos ícones */
+}
+
+
+.alerta {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    text-align: center;
+}
+
+.alerta.sucesso {
+    color: #155724; /* Verde escuro para o texto */
+    background-color: #d4edda; /* Fundo verde claro */
+    border: 1px solid #c3e6cb; /* Borda verde */
+}
+
+.alerta.erro {
+    color: #721c24; /* Vermelho escuro para o texto */
+    background-color: #f8d7da; /* Fundo rosa/vermelho claro */
+    border: 1px solid #f5c6cb; /* Borda vermelha */
+}
+
+
+/* ===================================== */
+/* ESTILOS PARA TELAS MÉDIAS (Tablets) */
+/* ===================================== */
+@media screen and (min-width: 768px) {
+    .sectionAdmUsuario {
+        /* Define uma largura máxima e centraliza o conteúdo */
+        max-width: 720px;
+        margin: 2rem auto;
+    }
+
+    .sectionAdmUsuario .divInformativa h3 {
+        font-size: 1.5rem; /* 24px */
+    }
+
+    .sectionAdmUsuario .divInformativa p {
+        font-size: 1rem; /* 16px */
+    }
+}
+
+
+/* ======================================= */
+/* ESTILOS PARA TELAS GRANDES (Desktops) */
+/* ======================================= */
+@media screen and (min-width: 1200px) {
+    .sectionAdmUsuario {
+        /* Aumenta a largura máxima para desktops, ideal para tabelas */
+        max-width: 1100px;
+    }
+
+    .seletor-filtro {
+        max-width: 400px; /* Limita a largura do dropdown */
+    }
+
+    .linha-grid {
+        /* Aumenta o tamanho da fonte e o espaçamento na tabela */
+        font-size: 1rem; /* 16px */
+        padding: 1rem 0.5rem;
+    }
+
+    .tabela-cabecalho {
+        font-size: 0.85rem; /* 13.6px */
+    }
 }

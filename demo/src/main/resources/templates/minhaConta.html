@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -12,6 +12,8 @@
     <link rel="stylesheet" th:href="@{/css/minhaContaStyle.css}">
     <link rel="stylesheet" th:href="@{/css/menuStyle.css}">
     <link rel="stylesheet" th:href="@{/css/barraNavStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/modalStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/alterarCardStyle.css}">
     <title>Planorama - Minha conta</title>
 </head>
 
@@ -22,7 +24,7 @@
 
     <section id="sectionAparecerMenu"></section>
 
-    <section class="sectionMinhaConta">
+    <section class="sectionMinhaConta conteudoPrincipal">
         <div class="divTituloMinhaConta">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
                 <path fill="currentColor"
@@ -31,11 +33,20 @@
             <span>Minha Conta</span>
         </div>
 
+        <div th:if="${success}" class="alerta sucesso">
+            <p th:text="${success}"></p>
+        </div>
+
+        <div th:if="${error}" class="alerta erro">
+            <p th:text="${error}"></p>
+        </div>
+
         <div class="divFotoNomeUsuario">
             <div class="divFotoUsuario" th:if="${usuarioLogado != null}">
-                <img th:src="@{${usuarioLogado.fotoUsuario != null ? usuarioLogado.fotoUsuario : '/img/gatinho.jpg'}}" alt="Foto do Perfil">
+                <img th:src="@{${usuarioLogado.fotoUsuario != null ? usuarioLogado.fotoUsuario : '/img/gatinho.jpg'}}"
+                    alt="Foto do Perfil">
             </div>
-            <span id="spanNomeUsuario" th:text = "${usuarioLogado.nome}">Gatinho Zarolho</span>
+            <span id="spanNomeUsuario" th:text="${usuarioLogado.nome}">Gatinho Zarolho</span>
 
 
             <div class="alterarFoto">
@@ -50,22 +61,30 @@
         <div class="divDescricaoUsuario">
             <span>Descrição:</span>
             <div>
-                <p th:text = "${usuarioLogado.descricaoUsuario}">Meu objetivo é ajdhuasghdua dadbiuagdwiu afdIUFUBOUB DFASBDAJSBDASBDUOADOA
+                <p th:text="${usuarioLogado.descricaoUsuario}">Meu objetivo é ajdhuasghdua dadbiuagdwiu afdIUFUBOUB
+                    DFASBDAJSBDASBDUOADOA
                     usbdoauihwoirbeiwbiuegbfwbsfbs sfsodifhsodifhsoidhfoisdhfodshofsdih</p>
             </div>
         </div>
 
         <div class="divBotoesAlteracao">
-            <a id="ancoraAlterarNome" href="">Alterar Nome de Usuário</a>
-            <a id="ancoraAlterarEmail" href="">Alterar Email Atual</a>
-            <a id="ancoraAlterarSenha" href="">Alterar Senha Atual</a>
+            <a id="ancoraAlterarNome" href="" class="abrir-modal" th:data-url="@{/minha-conta/alterar-nome}">Alterar
+                Nome de Usuário</a>
+            <a id="ancoraAlterarEmail" href="" class="abrir-modal" th:data-url="@{/minha-conta/alterar-email}">Alterar
+                Email Atual</a>
+            <a id="ancoraAlterarSenha" href="" class="abrir-modal" th:data-url="@{/minha-conta/alterar-senha}">Alterar
+                Senha Atual</a>
+            <a id="ancoraAlterarDescricao" href="" class="abrir-modal"
+                th:data-url="@{/minha-conta/alterar-descricao}">Alterar Descrição Atual</a>
         </div>
     </section>
 
+    <div id="modal-container"></div>
 
     <footer></footer>
 
-    <script src="../static/js/menuScripts.js"></script>
+    <script th:src="@{js/menuScripts.js}"></script>
+    <script th:src="@{js/modalScripts.js}"></script>
 </body>
 
 </html>

@@ -9,30 +9,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/homeAdmStyle.css">
+    <link rel="stylesheet" th:href="@{/css/homeAdmStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/menuAdmStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/barraNavStyle.css}">
     <title>Planorama - ADM</title>
 </head>
 
 <body>
-    <header class="conteudoPrincipal">
-        <section>
-            <div id="divMenuHamburguer">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <div th:replace="~{barraNavegacao :: barraNav}"></div>
 
-            <div class="divNomeSite">
-                <a href="index.html"><span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span></a>
-            </div>
-
-            <div class="divFotoUsuario">
-                <img src="img/gatinho.jpg">
-            </div>
-        </section>
-    </header>
-
-    <section id="sectionAparecerMenu"></section>
+    <div th:replace="~{menuAdm :: menuAdmFragment}"></div>
 
 
     <section class="sectionPlanoramaAdm conteudoPrincipal">
@@ -50,7 +36,7 @@
         </div>
     </section>
 
-    <div class="divAbsolutBotao">
+    <div class="divAbsolutBotao" conteudoPrincipal>
         <a id="botaoCriarPlanoHome" class="botaoAncora" href="primeiroCriarPlano.html"><svg
                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 48 48">
                 <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
@@ -61,8 +47,8 @@
 
     <footer></footer>
 
-    <script src="js/homeAdm.js"></script>
-    <script src="js/menuAdmScript.js"></script>
+    <script th:src="@{js/homeAdm.js}"></script>
+    <script th:src="@{js/menuAdmScripts.js}"></script>
 </body>
 
 </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
+
+<body>
+    <main class="cardAlteracao corpo" th:fragment="cardAlteracao">
+        <form id="formAlterarSenha" th:action="@{/minha-conta/alterar-senha}" method="post">
+            <div class="nomeCard">
+                <span class="tituloCard">Alterar Senha do Usuário</span>
+                <span class="fecharX">X</span>
+            </div>
+
+            <div class="paragrafoCard">
+                <p class="paragrafoInfo">Altere sua senha de Usuário</p>
+            </div>
+
+            <div class="labelCard">
+                <label for="senhaAtual">Confirme a Senha Atual:</label>
+                <input type="password" id="senhaAtual" name="senhaAtual" placeholder="Confirme a Senha Atual" />
+            </div>
+            <br/>
+
+            <div class="labelCard">
+                <label for="novaSenha">Nova Senha:</label>
+                <input type="password" id="novaSenha" name="novaSenha" placeholder="Novo Senha do Usuário" />
+            </div>
+
+            <button type="submit">Salvar</button>
+        </form>
+    </main>
+</body>
+
+</html>

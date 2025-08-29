@@ -81,6 +81,7 @@ header section .divFotoUsuario img{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-bottom: 1rem; 
 }
 
 .sectionPlanoramaAdm .divTituloPlanoramaAdm{
@@ -115,11 +116,15 @@ header section .divFotoUsuario img{
     color: var(--corDestaqueVermelho);
 }
 
+.segundoParagrafo{
+    font-weight: 300;
+}
+
 .divAbsolutBotao{
-    position: absolute;
-    top: 93%;
-    right: 4%;
-    display: flex;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
 }
 
 .botaoAncora{
@@ -127,7 +132,7 @@ header section .divFotoUsuario img{
     justify-content: center;
     align-items: center;
     width: 9rem;
-    height: 1.8rem;
+    height: 2.2rem;
     background-color: var(--corDestaqueBege);
     color: var(--corFundoPrincipal);
     font-family: var(--fonteParaTexto);
@@ -135,7 +140,6 @@ header section .divFotoUsuario img{
     border: none;
     border-radius: 50px;
     box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
-    margin-bottom: 3%;
     cursor: pointer;
     transition: 0.2s linear;
 }
@@ -151,4 +155,69 @@ header section .divFotoUsuario img{
 
 .botaoAncora svg{
     margin-right: 5%;
+}
+
+/* ===================================== */
+/* ESTILOS PARA TELAS MÉDIAS (Tablets) */
+/* ===================================== */
+@media screen and (min-width: 768px) {
+    .sectionPlanoramaAdm {
+        max-width: 720px;
+        margin: 2rem auto;
+        
+        /* Define o layout em grid */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+            "titulo titulo"
+            "imagem texto";
+        gap: 1rem 2rem;
+        align-items: center;
+    }
+
+    .sectionPlanoramaAdm .divTituloPlanoramaAdm {
+        grid-area: titulo;
+        justify-self: center; /* Centraliza o título na área do grid */
+        margin-top: 0;
+    }
+
+    .sectionPlanoramaAdm .divImgAdm {
+        grid-area: imagem;
+        justify-self: end; /* Alinha a imagem à direita da sua coluna */
+        margin-top: 0;
+    }
+
+    .sectionPlanoramaAdm .divAdmInformativo {
+        grid-area: texto;
+        justify-self: start; /* Alinha o texto à esquerda da sua coluna */
+        align-items: flex-start; /* Alinha o conteúdo interno à esquerda */
+        margin-top: 0;
+    }
+}
+
+
+/* ======================================= */
+/* ESTILOS PARA TELAS GRANDES (Desktops) */
+/* ======================================= */
+@media screen and (min-width: 1200px) {
+    .sectionPlanoramaAdm {
+        max-width: 1100px;
+        gap: 2rem 3rem; /* Aumenta o espaçamento */
+    }
+
+    .sectionPlanoramaAdm .divTituloPlanoramaAdm{
+        font-size: 34px;
+    }
+
+    .sectionPlanoramaAdm .divImgAdm img{
+        width: 360px; /* Aumenta a imagem */
+    }
+
+    .sectionPlanoramaAdm .divAdmInformativo{
+        font-size: 24px;
+    }
+
+    .primeiroParagrafo{
+        font-size: 34px;
+    }
 }

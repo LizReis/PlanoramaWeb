@@ -21,7 +21,12 @@
                     <span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span>
                 </div>
                 <p>Já possui uma conta? Faça seu <span>Login</span> e entre agora mesmo no Planorama.</p>
+
+                <div th:if="${success}" class="alerta sucesso">
+                    <p th:text="${success}"></p>
+                </div>
             </div>
+
 
             <div class="containerLogin">
                 <h3>Login</h3>
