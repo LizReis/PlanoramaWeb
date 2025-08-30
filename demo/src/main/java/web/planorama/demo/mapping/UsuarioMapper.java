@@ -2,7 +2,7 @@ package web.planorama.demo.mapping;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.SubclassMapping;
+import org.springframework.stereotype.Component;
 
 import web.planorama.demo.dto.AdministradorDTO;
 import web.planorama.demo.entity.AdministradorEntity;
@@ -13,23 +13,26 @@ import web.planorama.demo.entity.EstudanteEntity;
 import web.planorama.demo.entity.UsuarioEntity;
 
 
-@Mapper(componentModel = "spring")
-public interface UsuarioMapper {
-    UsuarioDTO toUsuarioDTO(UsuarioEntity usuarioEntity);
+@Component
+public class UsuarioMapper {
+    public UsuarioDTO toUsuarioDTO(UsuarioEntity usuarioEntity){
+        return new UsuarioDTO(usuarioEntity.getId(), usuarioEntity.getNome(), usuarioEntity.getEmail(), usuarioEntity.getSenha(), usuarioEntity.getFotoUsuario(), usuarioEntity.getDescricaoUsuario());
+    }
 
-    //O SubclassMapping é utilizado para caso ele precise mapear de UsuarioDTO para UsuarioEntity
-    //Mas no nosso caso não é possível porque UsuarioEntity é uma classe abstrata, então utilizamos
-    //o subclassMapping para ver quem é o alvo e mandar para o target
-    //@SubclassMapping(source = EstudanteDTO.class, target = EstudanteEntity.class)
-    //@SubclassMapping(source = AdministradorDTO.class, target = AdministradorEntity.class)
-    //UsuarioEntity toUsuarioEntity(UsuarioDTO usuarioDTO);
 
-    EstudanteDTO toEstudanteDTO(EstudanteEntity estudanteEntity);
-    AdministradorDTO toAdministradorDTO(AdministradorEntity administradorEntity);
+    public EstudanteDTO toEstudanteDTO(EstudanteEntity estudanteEntity){
+        return new EstudanteDTO(estudanteEntity.getId(), estudanteEntity.getNome(), estudanteEntity.getEmail(), estudanteEntity.getSenha(), estudanteEntity.getFotoUsuario(), estudanteEntity.getDescricaoUsuario());
+    }
 
-    @Mapping(target = "id", source = "estudanteDTO.id")
-    EstudanteEntity toEstudanteEntity(EstudanteDTO estudanteDTO);
-    
-    @Mapping(target = "id", source = "administradorDTO.id")
-    AdministradorEntity toAdministradorEntity(AdministradorDTO administradorDTO);
+    public EstudanteEntity toEstudanteEntity(EstudanteDTO estudanteDTO){
+        return new EstudanteEntity(estudanteDTO.id(), estudanteDTO.nome(), estudanteDTO.email(), estudanteDTO.senha(), estudanteDTO.fotoUsuario(), estudanteDTO.descricaoUsuario());
+    }
+
+    public AdministradorDTO toAdministradorDTO(AdministradorEntity administradorEntity){
+        return new AdministradorDTO(administradorEntity.getId(), administradorEntity.getNome(), administradorEntity.getEmail(), administradorEntity.getSenha(), administradorEntity.getFotoUsuario(), administradorEntity.getDescricaoUsuario());
+    }
+
+    public AdministradorEntity toAdministradorEntity(AdministradorDTO administradorDTO){
+        return new AdministradorEntity(administradorDTO.id(), administradorDTO.nome(), administradorDTO.email(), administradorDTO.senha(), administradorDTO.fotoUsuario(), administradorDTO.descricaoUsuario());
+    }
 }
