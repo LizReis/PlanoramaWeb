@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;
 
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +13,7 @@ import web.planorama.demo.dto.UsuarioDTO;
 import web.planorama.demo.entity.AdministradorEntity;
 import web.planorama.demo.entity.EstudanteEntity;
 import web.planorama.demo.entity.UsuarioEntity;
+import web.planorama.demo.exceptions.MyNotFoundException;
 import web.planorama.demo.mapping.UsuarioMapper;
 import web.planorama.demo.repository.UsuarioRepository;
 import web.planorama.demo.service.UsuarioService;
@@ -37,8 +39,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioDTO findOne(UUID id) {
-        var entity = usuarioRepository.findById(id).orElseThrow();
+        var entity = usuarioRepository.findById(id).orElseThrow(() -> new MyNotFoundException("Usuário não encontrado."));
         return usuarioMapper.toUsuarioDTO(entity);
+    }
+
+    @Override
+    public void remove(UUID id) {
+        if (usuarioRepository.existsById(id)) {
+            usuarioRepository.deleteById(id);
+        }else{
+            throw new MyNotFoundException("Usuário não encontrado para remoção");
+        }
     }
 
     

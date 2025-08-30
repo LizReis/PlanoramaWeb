@@ -6,7 +6,7 @@
         <form id="formAlterarUsuario" th:action="@{/listar-usuarios/alterar-usuario}" th:object="${usuario}" method="post">
 
             <div class="nomeCard">
-                <span class="tituloCard">Alterar E-mail de: <span style="color: #7C2A2A;" th:text="${usuario.nome}"></span></span>
+                <span class="tituloCard">Alterar Informações de: <span style="color: #7C2A2A;" th:text="${usuario.nome}"></span></span>
                 <span class="fecharX">X</span>
             </div>
 
@@ -20,13 +20,13 @@
 
             <div class="labelCard">
                 <label for="novoEmail">Novo E-mail:</label>
-                <input type="email" id="novoEmail" name="novoEmail" placeholder="Novo e-mail do Usuário" />
+                <input type="email" id="novoEmail" name="novoEmail" th:placeholder="'Atual:'+' '+${usuario.email}" />
             </div>
             <br/>
 
             <div class="labelCard">
-                <label for="novoNome">Novo nome:</label>
-                <input type="text" id="novoNome" name="novoNome" placeholder="Novo nome do Usuário" />
+                <label for="novoNome" >Novo nome:</label>
+                <input type="text" id="novoNome" name="novoNome" th:placeholder="'Atual:'+' '+${usuario.nome}" />
             </div>
             <br/>
 

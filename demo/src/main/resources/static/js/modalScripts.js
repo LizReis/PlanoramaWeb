@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Previne o comportamento padrão do link (que seria navegar para outra página)
             event.preventDefault(); 
             
-            const url = link.dataset.url;
+            const url = link.getAttribute('href');
             if (url) {
                 abrirModal(url);
             }

@@ -82,6 +82,7 @@ public class AdministradorServiceImpl implements AdministradorService {
         }
 
         UsuarioEntity usuarioSelecionado = repository.findById(usuarioParaAlterar).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+
         
         usuarioSelecionado.setNome(novoNomeUsuario);
         usuarioSelecionado.setEmail(novoEmailUsuario);

@@ -15,6 +15,7 @@ public interface EstudanteService {
 
     EstudanteDTO findByEmail(String email);
 
+    void alterarFotoUsuario(String emailUsuarioLogado, String novaFoto);
     void alterarSenha(String senhaAtual, String novaSenha);
     void alterarEmail(String novoEmail, String senhaAtual);
     void alterarNomeUsuario(String novoNome, String senhaAtual);

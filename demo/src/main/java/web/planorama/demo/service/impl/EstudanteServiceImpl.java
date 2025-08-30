@@ -1,6 +1,7 @@
 package web.planorama.demo.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class EstudanteServiceImpl implements EstudanteService{
 
     private final EstudanteRepository repository;
     private final UsuarioMapper mapper;
+    
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -159,6 +161,14 @@ public class EstudanteServiceImpl implements EstudanteService{
         }
 
         estudante.setDescricaoUsuario(novaDescricao);
+        repository.save(estudante);
+    }
+
+    @Override
+    public void alterarFotoUsuario(String emailUsuarioLogado, String novaFoto) {
+        EstudanteEntity estudante = (EstudanteEntity) repository.findByEmail(emailUsuarioLogado).orElseThrow(() -> new RuntimeException("Usuário não encontrado no banco de dados"));
+
+        estudante.setFotoUsuario(novaFoto);
         repository.save(estudante);
     }
 }

@@ -34,6 +34,11 @@ public class MinhaContaController {
         return "minhaConta";
     }
 
+    @GetMapping("/alterar-foto-perfil")
+    public String getAlterarFotoFragment(){
+        return "alterarFotoPerfil :: cardAlteracao";
+    }
+
     @GetMapping("/alterar-nome-usuario")
     public String getAlterarNomeFragment(){
         return "alterarNomeEstudante :: cardAlteracao";
