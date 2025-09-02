@@ -4,44 +4,34 @@
 document.addEventListener("DOMContentLoaded", function () {
     let botaoAbrirMenu = document.getElementById("divMenuHamburguer");
     let botaoFecharMenu = document.getElementById("fecharMenu");
-    let containerMenu = document.getElementById("sectionAparecerMenu");
-    let conteudoPrincipal = document.querySelectorAll("conteudoPrincipal");
+    let containerMenu = document.querySelector(".sectionMenu");
+    let conteudoPrincipal = document.querySelectorAll(".conteudoPrincipal");
 
-    //COMO ESTÁ EM UM HTML DIFERENTE, UTILIZAMOS O fetch PARA CARREGAR
-    //A TELA DE MENU
-    fetch("../templates/menu.html").then(response =>{
-        if(!response.ok){
-            throw new Error("Erro ao carregar o menu");
-        }
-        return response.text();
-    }).then(menuHtml => {
-        containerMenu.innerHTML = menuHtml;
 
-        let menu = document.querySelector(".sectionMenu");
-        let botaoFecharMenu = document.getElementById("fecharMenu");
+    const abrirMenu = () => {
+        if (containerMenu) {
+            containerMenu.classList.add("menuAtivo");
+        }
+        conteudoPrincipal.forEach(conteudo => {
+            conteudo.classList.add("conteudoBlur");
+        });
+    };
 
-        let abrirMenu = () => {
-            menu.classList.add("menuAtivo");
-            conteudoPrincipal.forEach(conteudo => {
-                conteudo.classList.add("conteudoBlur");
-            });
+    const fechandoMenu = () => {
+        if (containerMenu) {
+            containerMenu.classList.remove("menuAtivo");
         }
+        conteudoPrincipal.forEach(conteudo => {
+            conteudo.classList.remove("conteudoBlur");
+        });
+    };
 
-        let fechandoMenu = () => {
-            menu.classList.remove("menuAtivo");
-            conteudoPrincipal.forEach(conteudo => {
-                conteudo.classList.remove("conteudoBlur");
-            });
-        }
-
-        if(botaoAbrirMenu){
-            botaoAbrirMenu.addEventListener("click", abrirMenu);
-        }
-        if(botaoFecharMenu){
-            botaoFecharMenu.addEventListener("click", fechandoMenu);
-        }
-    }).catch(error => {
-        console.error("Falha na operação de fetch", error);
-    });
+    // Adiciona os eventos de clique
+    if (botaoAbrirMenu) {
+        botaoAbrirMenu.addEventListener("click", abrirMenu);
+    }
+    if (botaoFecharMenu) {
+        botaoFecharMenu.addEventListener("click", fechandoMenu);
+    }
 
 });

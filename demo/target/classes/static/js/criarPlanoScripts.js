@@ -1,35 +1,123 @@
-//SCRIPT PARA SABER QUAL DIAS FORAM SELECIONADOS PARA A DISPONIBILIDADE DO USUÁRIO
+let currentTab = 0; // O passo atual é o 0
+showTab(currentTab); // Exibe o passo atual
 
-document.querySelectorAll(".dia").forEach(dia => {
-    dia.addEventListener("click", () => {
-        dia.classList.toggle("selecionado");
-    });
+function showTab(n) {
+    const tabs = document.getElementsByClassName("tab");
+    tabs[n].style.display = "block";
+    
+    document.getElementById("prevBtn").style.display = n === 0 ? "none" : "inline";
+    document.getElementById("nextBtn").innerHTML = n === (tabs.length - 1) ? "Salvar Plano" : "Próximo";
+
+    fixStepIndicator(n);
+}
+
+function nextPrev(n) {
+    const tabs = document.getElementsByClassName("tab");
+    
+    // Esconde o passo atual
+    tabs[currentTab].style.display = "none";
+    
+    // Avança para o próximo passo
+    currentTab = currentTab + n;
+    
+    // Se chegou ao fim do formulário...
+    if (currentTab >= tabs.length) {
+        // ...chama a função para enviar os dados.
+        submitForm();
+        return false;
+    }
+    
+    // Caso contrário, exibe o próximo passo
+    showTab(currentTab);
+}
+
+function fixStepIndicator(n) {
+    const steps = document.getElementsByClassName("step");
+    for (let i = 0; i < steps.length; i++) {
+        steps[i].className = steps[i].className.replace(" active", "");
+    }
+    steps[n].className += " active";
+}
+
+// --- LÓGICA PARA ADICIONAR MATÉRIAS ---
+
+document.getElementById("addMateriaBtn").addEventListener("click", function() {
+    const container = document.getElementById("materias-container");
+    const materiaIndex = container.getElementsByClassName("materia-item").length;
+
+    const newMateriaHTML = `
+        <div class="materia-item">
+            <h4>Matéria ${materiaIndex + 1}</h4>
+            <p><input type="text" placeholder="Nome da Matéria" class="nomeMateria"></p>
+            <p>Carga Horária Semanal: <input type="number" class="cargaHorariaSemanal" value="1" min="1"></p>
+            <p>Proficiência (1 a 5): <input type="number" class="proficiencia" value="3" min="1" max="5"></p>
+            <p>Tempo da Sessão (minutos): <input type="number" class="tempoSessao" value="50" min="10"></p>
+        </div>
+    `;
+    container.innerHTML += newMateriaHTML;
 });
 
-//SCRIPT PARA PEGAR OS DIAS QUE O USUÁRIO SELECIONOU 
-//pego os dias que foram selecionados e converto em um array de dias
-//o .map() vai passar por cada dia selecionado e pegar o nome do dia
-//d é o dia atual que ele está navegando d.dataset.dia pega o nome do dia em data-dia no html
-let diasSelecionados = Array.from(document.querySelectorAll(".dia.selecionado")).map(d => d.dataset.dia);
+// --- LÓGICA PARA ENVIAR OS DADOS ---
 
-console.log(diasSelecionados);
+async function submitForm() {
+    // 1. Coletar todos os dados do formulário
+    const planejamentoData = {
+        nomePlanejamento: document.getElementById("nomePlanejamento").value,
+        cargo: document.getElementById("cargo").value,
+        anoAplicacao: parseInt(document.getElementById("anoAplicacao").value),
+        
+        // Lê o valor do campo escondido que o Thymeleaf preencheu.
+        criadorId: document.getElementById("usuarioId").value,
 
-//-------------------------------------------------------------
+        planoArquivado: false,
+        preDefinidoAdm: false,
+        
+        disponibilidade: {
+            horasSegunda: parseInt(document.getElementById("horasSegunda").value),
+            horasTerca: parseInt(document.getElementById("horasTerca").value),
+            horasQuarta: parseInt(document.getElementById("horasQuarta").value),
+            horasQuinta: parseInt(document.getElementById("horasQuinta").value),
+            horasSexta: parseInt(document.getElementById("horasSexta").value),
+            horasSabado: parseInt(document.getElementById("horasSabado").value),
+            horasDomingo: parseInt(document.getElementById("horasDomingo").value)
+        },
+        
+        materias: []
+    };
 
-//SCRIPT PARA SABER QUAIS MATÉRIAS FORAM SELECIONADAS PARA O PLANO
-//QUE O USUÁRIO ACABOU DE CRIAR 
-document.querySelectorAll(".materia").forEach(materia => {
-    materia.addEventListener("click", () => {
-        materia.classList.toggle("selecionado");
-    });
-});
+    const materiaItems = document.getElementsByClassName("materia-item");
+    for (let i = 0; i < materiaItems.length; i++) {
+        const materia = {
+            nomeMateria: materiaItems[i].querySelector(".nomeMateria").value,
+            cargaHorariaSemanal: parseInt(materiaItems[i].querySelector(".cargaHorariaSemanal").value),
+            proficiencia: parseInt(materiaItems[i].querySelector(".proficiencia").value),
+            tempoSessao: parseInt(materiaItems[i].querySelector(".tempoSessao").value)
+        };
+        planejamentoData.materias.push(materia);
+    }
 
-//SCRIPT PARA SABER QUAIS MATÉRIAS FORAM SELECIONADAS PELO USUÁRIO
-//É O MESMO ESQUEMA DOS DIAS DA SEMANA ACIMA
+    console.log("Enviando JSON:", JSON.stringify(planejamentoData, null, 2));
 
-let materiasSelecionadas = Array.from(document.querySelectorAll(".materia.selecionado")).map(m => m.dataset.materia);
+    // 2. Enviar para o backend com a API Fetch
+    try {
+        const response = await fetch('/api/planejamentos', { // ATENÇÃO: Precisamos criar este endpoint!
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(planejamentoData),
+        });
 
-console.log(materiasSelecionadas);
-//--------------------------------------------------------------
-
-
+        if (response.ok) {
+            const result = await response.json();
+            alert("Plano de estudos salvo com sucesso!");
+            window.location.href = "/home"; // Redireciona para a home
+        } else {
+            const error = await response.text();
+            alert("Erro ao salvar o plano: " + error);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+        alert("Ocorreu um erro de comunicação com o servidor.");
+    }
+}

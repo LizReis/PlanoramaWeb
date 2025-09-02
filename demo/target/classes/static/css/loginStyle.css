@@ -24,26 +24,6 @@ body{
     background-color: var(--corFundoPrincipal);
 }
 
-header{
-    display: flex;
-    margin-top: 20%;
-}
-
-header section{
-    width: 100vw;
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-header section span{
-    font-family: var(--fonteDestaque);
-    font-weight: 500;
-    font-size: 30px;
-    margin-bottom: 10%;
-}
-
 .primeiroSpan{
     color: var(--corDestaqueVerde);
 }
@@ -53,21 +33,48 @@ header section span{
 
 .sectionLogin{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
+    min-height: 100vh;
 }
 
-.sectionLogin .containerLogin{
-    width: 80vw;
+.descricao-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.descricao-container .logo span {
+    font-family: var(--fonteDestaque);
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.descricao-container p {
+    font-family: var(--fonteParaTexto);
+    color: var(--corPrincipalFonte);
+    font-size: 16px;
+    margin-top: 1rem;
+}
+
+.descricao-container p span{
+    color: var(--corDestaqueVermelho);
+}
+
+.containerLogin{
+    width: 85vw;
+    max-width: 450px;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 50px;
     box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    padding: 1rem;
 }
 
-.sectionLogin .containerLogin h3{
+.containerLogin h3{
     margin-top: 10%;
     font-family: var(--fonteParaTexto);
     font-size: 25px;
@@ -75,33 +82,40 @@ header section span{
     color: var(--corDestaqueVermelho);
 }
 
-.sectionLogin .containerLogin form{
+.containerLogin form{
     display: flex;
     flex-direction: column;
     margin-top: 10%;
-    width: 55vw;
+    width: 90%;
 }
 
-.sectionLogin .containerLogin form label{
+.containerLogin form label{
     font-family: var(--fonteDestaque);
     font-size: 13px;
     color: var(--corDestaqueVermelho);
     margin-top: 10%;
 }
 
-.sectionLogin .containerLogin form input{
+.containerLogin form input, textarea{
     border: none;
     border-bottom: 0.1rem solid var(--corDestaqueVermelho);
     font-size: 17px;
     margin-top: 1%;
+    padding-bottom: 5px;
+    background-color: transparent;
 }
 
-.sectionLogin .containerLogin form input:focus{
+.containerLogin form input:focus,
+.containerLogin form textarea:focus {
     outline: none;
     border-bottom: 0.1rem solid var(--corDestaqueVerde);
 }
 
-.sectionLogin .containerLogin form button{
+.containerLogin form #fotoUsuario{
+    border-bottom: none;
+}
+
+.containerLogin form button{
     width: 9rem;
     height: 1.8rem;
     background-color: var(--corDestaqueBege);
@@ -113,21 +127,21 @@ header section span{
     box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
     cursor: pointer;
     transition: 0.2s linear;
-    margin: 20% 0% 4% 23%;
+    margin: 20% auto 4% auto;
 }
 
-.sectionLogin .containerLogin form button:hover{
+.containerLogin form button:hover{
     background-color: var(--corFundoPrincipal);
     color: var(--corDestaqueBege);
     border: 0.1rem solid var(--corDestaqueBege);
 }
 
-.sectionLogin .containerLogin p{
+.containerLogin p{
     font-family: var(--fonteParaTexto);
     font-size: 14px;
 }
 
-.sectionLogin .containerLogin a{
+.containerLogin a{
     margin: 1% 0% 10% 0%;
     font-family: var(--fonteDestaque);
     font-size: 13px;
@@ -137,7 +151,98 @@ header section span{
     transition: 0.2s linear;
 }
 
-.sectionLogin .containerLogin a:hover{
+.containerLogin a:hover{
     border-bottom: 0.1rem solid var(--corDestaqueVermelho);
     padding-bottom: 0.1rem;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.alerta {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    text-align: center;
+}
+
+.alerta.sucesso {
+    color: #155724; /* Verde escuro para o texto */
+    background-color: #d4edda; /* Fundo verde claro */
+    border: 1px solid #c3e6cb; /* Borda verde */
+}
+
+.alerta.erro {
+    color: #721c24; /* Vermelho escuro para o texto */
+    background-color: #f8d7da; /* Fundo rosa/vermelho claro */
+    border: 1px solid #f5c6cb; /* Borda vermelha */
+}
+
+
+/* ===================================== */
+/* ESTILOS PARA TELAS MÉDIAS (Tablets) */
+/* ===================================== */
+@media screen and (min-width: 768px) {
+    .descricao-container {
+        max-width: 500px;
+    }
+    .descricao-container .logo span {
+        font-size: 38px;
+    }
+    .descricao-container p {
+        font-size: 20px;
+    }
+
+    .containerLogin {
+        width: 60vw;
+        padding: 2rem 0;
+    }
+    .containerLogin form {
+        width: 70%;
+    }
+}
+
+/* ======================================= */
+/* ESTILOS PARA TELAS GRANDES (Desktops) */
+/* ======================================= */
+@media screen and (min-width: 1200px) {
+    .sectionLogin {
+        flex-direction: row;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-items: center;
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .descricao-container {
+        text-align: left;
+        margin-bottom: 0;
+    }
+
+    .descricao-container .logo{
+        margin-bottom: 0px;
+    }
+
+    .descricao-container .logo span {
+        font-size: 52px;
+    }
+
+    .descricao-container p {
+        font-size: 22px;
+        max-width: 400px;
+    }
+
+    .containerLogin {
+        width: 100%;
+        padding: 2.5rem 0;
+        margin: 0;
+    }
 }

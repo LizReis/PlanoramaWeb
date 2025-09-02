@@ -2,6 +2,7 @@
     --corFundoPrincipal: #FFFFFF;
     --corPrincipalFonte: #0D0D0D;
     --corCinzaFonte: #808080;
+    --corSecundariaCinzaFonte: #464545;
     --corDestaqueVerde: #7A7453;
     --corDestaqueVermelho: #7C2A2A;
     --corDestaqueBege: #C29A6E;
@@ -18,62 +19,6 @@
 }
 
 
-header{
-    width: 100vw;
-    padding: 1% 0% 1% 0%;
-    border-bottom: 0.1rem solid var(--corDestaqueVerde);
-}
-
-header section{
-    width: 100vw;
-    height: 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0rem 1rem;
-}
-
-header section #divMenuHamburguer{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 20px;
-    cursor: pointer;
-}
-
-header section #divMenuHamburguer span{
-    display: block;
-    height: 2px;
-    background-color: var(--corDestaqueVerde);
-}
-
-header section .divNomeSite span{
-    font-family: var(--fonteDestaque);
-    font-weight: 500;
-    font-size: 30px;
-}
-
-.primeiroSpan{
-    color: var(--corDestaqueVerde);
-}
-.segundoSpan{
-    color: var(--corDestaqueVermelho);
-}
-
-header section .divFotoUsuario{
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
-}
-
-header section .divFotoUsuario img{
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
 
 .sectionBarraProgresso{
     margin-top: 7%;
@@ -150,21 +95,19 @@ header section .divFotoUsuario img{
 /*TODO CARD TERÁ ESSE MESMO ESTILO APLICADO*/
 
 .sectionCards{
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0rem 1rem;
+    width: 100%;
+    padding: 0rem 1rem 5rem 1rem; /* Adicionado padding-bottom para não ser coberto pelo botão */
 }
 
 .sectionCards .divCard{
     margin-top: 5%;
     width: 100%;
-    padding: 1rem 2rem 0rem 2rem;
+    padding: 1rem 2rem 1rem 2rem;
     background-color: var(--corFundoPrincipal);
     box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
     border-radius: 10px;
     cursor: pointer;
+    color: var(--corSecundariaCinzaFonte);
 }
 
 .sectionCards .divCard .divCardTextoIcone{
@@ -174,7 +117,7 @@ header section .divFotoUsuario img{
 
 .sectionCards .divCard .divCardTextoIcone .cardContainerTexto .divCardParagrafo{
     margin-top: 5%;
-    width: 15rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -185,6 +128,7 @@ header section .divFotoUsuario img{
     font-family: var(--fonteParaTexto);
     font-size: 14px;
     margin-bottom: 1%;
+    flex-wrap: wrap; /* Permite que o texto quebre a linha se necessário */
 }
 
 .sectionCards .divCard .divCardTextoIcone .cardContainerTexto h4{
@@ -236,9 +180,9 @@ header section .divFotoUsuario img{
 
 .divAbsolutBotao{
     position: absolute;
-    top: 93%;
-    right: 2%;
-    display: flex;
+    bottom: 0.5rem;
+    right: 1rem;
+    z-index: 1000; /* Garante que o botão fique sobre outros elementos */
 }
 
 .botaoAncora{
@@ -246,7 +190,7 @@ header section .divFotoUsuario img{
     justify-content: center;
     align-items: center;
     width: 9rem;
-    height: 1.8rem;
+    height: 2.2rem; /* Aumentei um pouco a altura para melhor clique */
     background-color: var(--corDestaqueBege);
     color: var(--corFundoPrincipal);
     font-family: var(--fonteParaTexto);
@@ -254,7 +198,6 @@ header section .divFotoUsuario img{
     border: none;
     border-radius: 50px;
     box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
-    margin-bottom: 3%;
     cursor: pointer;
     transition: 0.2s linear;
 }
@@ -273,3 +216,58 @@ header section .divFotoUsuario img{
 }
 
 
+/* ===================================== */
+/* ESTILOS PARA TELAS MÉDIAS (Tablets) */
+/* ===================================== */
+@media screen and (min-width: 768px) {
+    /* Centraliza e limita a largura APENAS do conteúdo, não do header */
+    .sectionBarraProgresso, .sectionCards {
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Transforma a seção de cards em um grid de 2 colunas */
+    .sectionCards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 3%;
+    }
+
+    .sectionCards .divCard {
+        margin-top: 0;
+        width: 100%;
+        height: 100%; /* Garante que os cards na mesma linha tenham a mesma altura */
+    }
+}
+
+
+/* ======================================= */
+/* ESTILOS PARA TELAS GRANDES (Desktops) */
+/* ======================================= */
+@media screen and (min-width: 1200px) {
+    /* Aumenta a largura máxima do conteúdo para desktops */
+    .sectionBarraProgresso, .sectionCards {
+        max-width: 1100px;
+    }
+    
+    .sectionBarraProgresso .cardProgresso .tituloProgresso h3 {
+        font-size: 18px;
+    }
+    .sectionBarraProgresso .cardProgresso .paragrafoAtualizar p {
+        font-size: 16px;
+    }
+    
+    /* Transforma a seção de cards em um grid de 3 colunas */
+    .sectionCards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    .botaoAncora {
+        width: 10rem;
+        height: 2.5rem;
+        font-size: 16px;
+    }
+}

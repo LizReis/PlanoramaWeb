@@ -118,7 +118,7 @@ header section span{
 }
 
 .sectionPrincipal .divImagem img{
-    width: 60%;
+    width: 20rem;
     height: auto;
     transform: scale(0);
     transition: 0.6s ease-in;
@@ -189,4 +189,120 @@ header section span{
 .sectionPrincipal #divBotaoTexto .ancora:hover{
     border-bottom: 0.1rem solid var(--corDestaqueVermelho);
     padding-bottom: 0.1rem;
+}
+
+/* ================================== */
+/* ESTILOS PARA TELAS MÉDIAS (Tablets)*/
+/* ================================== */
+@media screen and (min-width: 768px) {
+    header section .linhaPrimaria {
+        width: 25%;
+    }
+
+    header section span {
+        font-size: 38px;
+    }
+
+    .sectionPrincipal .divTexto h2 {
+        font-size: 38px;
+    }
+
+    .sectionPrincipal .divTexto p {
+        font-size: 22px;
+    }
+
+    .sectionPrincipal .divTexto p span {
+        font-size: 28px;
+    }
+
+    .sectionPrincipal .divImagem img {
+        width: 30rem;
+    }
+
+    .botaoAncora {
+        width: 11rem;
+        height: 2.2rem;
+        font-size: 18px;
+    }
+
+    .sectionPrincipal #divBotaoTexto p {
+        font-size: 16px;
+    }
+
+    .sectionPrincipal #divBotaoTexto .ancora {
+        font-size: 15px;
+    }
+}
+
+/* ================================== */
+/* ESTILOS PARA TELAS GRANDES (Desktops)*/
+/* ================================== */
+@media screen and (min-width: 1200px) {
+    header section {
+        height: 15vh;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    header section .linhaPrimaria{
+        width: 20%;
+    }
+
+    .sectionPrincipal {
+        max-width: 1100px;
+        height: 70vh;
+        margin: 2% auto 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "imagem texto"
+            "imagem botoes";
+        align-items: center;
+        justify-items: center;
+        gap: 0 2rem; /* Espaçamento apenas entre colunas */
+    }
+
+    .sectionPrincipal .divImagem {
+        grid-area: imagem;
+        width: 100%;
+        max-width: 500px;
+        margin-top: 0;
+        justify-self: center;
+    }
+    
+    .sectionPrincipal .divImagem img {
+        width: 100%;
+    }
+
+    .sectionPrincipal .divTexto {
+        grid-area: texto;
+        align-self: center; /* Alinha ao final da célula do grid */
+        padding: 0;
+        text-align: center; 
+    }
+    
+    .sectionPrincipal .divTexto h2 {
+        font-size: 50px;
+        transition: 0.8s ease-in-out;
+    }
+    
+    .sectionPrincipal .divTexto p {
+        font-size: 18px;
+        transition: 0.8s ease-in-out;
+    }
+
+    .sectionPrincipal .divTexto p span {
+        font-size: 25px;
+    }
+
+    .sectionPrincipal #divBotaoTexto {
+        grid-area: botoes;
+        align-self: start; /* Alinha ao início da célula do grid */
+        margin-top: 2rem;
+        align-items: center; /* Alinha itens internos à esquerda */
+        
+        /* Remove a animação de subir, pois não faz sentido neste layout */
+        animation: none; 
+    }
 }

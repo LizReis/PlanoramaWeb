@@ -1,43 +1,60 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/loginStyle.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/loginStyle.css">
     <title>Planorama - Login</title>
 </head>
+
 <body>
-    <header>
-        <section>
-            <span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span>
+    <main>
+        <section class="sectionLogin">
+            <div class="descricao-container">
+                <div class="logo">
+                    <span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span>
+                </div>
+                <p>Já possui uma conta? Faça seu <span>Login</span> e entre agora mesmo no Planorama.</p>
+
+                <div th:if="${success}" class="alerta sucesso">
+                    <p th:text="${success}"></p>
+                </div>
+            </div>
+
+
+            <div class="containerLogin">
+                <h3>Login</h3>
+
+                <div th:if="${param.error}" class="error">
+                    <span>E-mail ou senha inválidos.</span>
+                </div>
+
+                <form th:action="@{/login}" method="post">
+                    <label for="username">E-mail:</label>
+                    <input type="email" id="username" name="username">
+                    <br>
+
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password">
+
+                    <button type="submit">Entrar</button>
+                </form>
+
+                <p>Não possui uma conta?</p>
+                <a th:href="@{/cadastro}">Cadastre-se</a>
+            </div>
         </section>
-    </header>
-
-    <section class="sectionLogin">
-        <div class="containerLogin">
-            <h3>Login</h3>
-
-            <form>
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email">
-                <br>
-
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" name="senha">
-
-                <button>Entrar</button>
-            </form>
-
-            <p>Não possui uma conta?</p>
-            <a href="cadastro.html">Cadastre-se</a>
-        </div>
-    </section>
+    </main>
 
     <footer></footer>
 
     <script src="../js/scripts.js"></script>
 </body>
+
 </html>

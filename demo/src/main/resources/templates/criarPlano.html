@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Novo Plano de Estudos</title>
+    <link rel="stylesheet" href="/css/criarPlanoStyle.css">
+</head>
+<body>
+<div class="container">
+    <h1>Criar Novo Plano de Estudos</h1>
+    <form id="regForm">
+        <input type="hidden" id="usuarioId" th:value="${usuarioId}" />
+
+        <div class="tab">
+            <h2>Informações do Concurso:</h2>
+            <p><input type="text" placeholder="Nome do Concurso..." id="nomePlanejamento"></p>
+            <p><input type="text" placeholder="Cargo..." id="cargo"></p>
+            <p><input type="number" placeholder="Ano de Aplicação..." id="anoAplicacao"></p>
+        </div>
+
+        <div class="tab">
+            <h2>Disponibilidade de Horas na Semana:</h2>
+            <p>Segunda: <input type="number" id="horasSegunda" value="0" min="0"></p>
+            <p>Terça:   <input type="number" id="horasTerca"   value="0" min="0"></p>
+            <p>Quarta:  <input type="number" id="horasQuarta"  value="0" min="0"></p>
+            <p>Quinta:  <input type="number" id="horasQuinta"  value="0" min="0"></p>
+            <p>Sexta:   <input type="number" id="horasSexta"   value="0" min="0"></p>
+            <p>Sábado:  <input type="number" id="horasSabado"  value="0" min="0"></p>
+            <p>Domingo: <input type="number" id="horasDomingo" value="0" min="0"></p>
+        </div>
+
+        <div class="tab">
+            <h2>Matérias do Plano:</h2>
+            <div id="materias-container">
+            </div>
+            <button type="button" id="addMateriaBtn">Adicionar Matéria</button>
+        </div>
+
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)">Próximo</button>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div>
+    </form>
+</div>
+
+<script src="/js/criarPlanoScripts.js"></script>
+</body>
+</html>

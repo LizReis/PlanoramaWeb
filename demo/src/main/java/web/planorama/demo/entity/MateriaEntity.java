@@ -1,19 +1,11 @@
 package web.planorama.demo.entity;
 
-import java.util.UUID;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -29,7 +21,16 @@ public class MateriaEntity {
     @Column(name = "NOME_MATERIA", nullable = false)
     private String nomeMateria;
 
+    @Column(name = "CARGA_HORARIA_SEMANAL", nullable = false)
+    private int cargaHorariaSemanal;
+
+    @Column(name = "PROFICIENCIA", nullable = false)
+    private int proficiencia; // De 1 a 5
+
+    @Column(name = "TEMPO_SESSAO", nullable = false)
+    private int tempoSessao; // Em minutos
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CRIADO_POR", nullable = true)
-    private UsuarioEntity criadoPor;
+    @JoinColumn(name = "planejamento_id")
+    private PlanejamentoEntity planejamento;
 }

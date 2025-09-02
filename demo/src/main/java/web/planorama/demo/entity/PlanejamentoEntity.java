@@ -1,12 +1,11 @@
 package web.planorama.demo.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -29,24 +28,20 @@ public class PlanejamentoEntity {
     @Column(name = "ANO_APLICACAO", nullable = false)
     private int anoAplicacao;
 
-    @Column(name = "DISPONILIBILIDADE", nullable = false)
-    private ArrayList<String> disponibilidade;
-
-    @Column(name = "HORAS_DIARIAS", nullable = false)
-    private int horasDiarias;
-
-    //Inicialmente materias como string porque ainda não criei a classe MateriaPlano
-    @Column(name = "MATERIAS", nullable = false)
-    private ArrayList<String> materias;
-
     @ManyToOne
-    @JoinColumn(name = "Criador")
+    @JoinColumn(name = "criador_id") // Nome da coluna de junção
     private UsuarioEntity criador;
 
-    @Column(name = "PLANO_ARQUIVADO", nullable = false)
-    private boolean planoArquivado;
+    @OneToMany(mappedBy = "planejamento", cascade = CascadeType.ALL)
+    private List<MateriaEntity> materias;
 
-    @Column(name = "PRE_DEFINIDO_ADM", nullable = true)
-    private boolean preDefinidoAdm;
+    @OneToOne(mappedBy = "planejamento", cascade = CascadeType.ALL)
+    private DisponibilidadeEntity disponibilidade;
+
+    @Column(name = "PLANO_ARQUIVADO", nullable = false)
+    private boolean planoArquivado = false;
+
+    @Column(name = "PRE_DEFINIDO_ADM")
+    private boolean preDefinidoAdm = false;
 
 }

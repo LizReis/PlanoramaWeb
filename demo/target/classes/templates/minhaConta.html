@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -9,33 +9,22 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/homeStyle.css">
-    <link rel="stylesheet" href="../static/css/minhaContaStyle.css">
+    <link rel="stylesheet" th:href="@{/css/minhaContaStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/menuStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/barraNavStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/modalStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/alterarCardStyle.css}">
     <title>Planorama - Minha conta</title>
 </head>
 
 <body>
-    <header class="conteudoPrincipal">
-        <section>
-            <div id="divMenuHamburguer">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <div th:replace="~{barraNavegacao :: barraNav}"></div>
 
-            <div class="divNomeSite">
-                <a href="index.html"><span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span></a>
-            </div>
-
-            <div class="divFotoUsuario">
-                <img src="../static/img/gatinho.jpg">
-            </div>
-        </section>
-    </header>
+    <div th:replace="~{menu :: menuFragment}"></div>
 
     <section id="sectionAparecerMenu"></section>
 
-    <section class="sectionMinhaConta">
+    <section class="sectionMinhaConta conteudoPrincipal">
         <div class="divTituloMinhaConta">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
                 <path fill="currentColor"
@@ -44,15 +33,24 @@
             <span>Minha Conta</span>
         </div>
 
+        <div th:if="${success}" class="alerta sucesso">
+            <p th:text="${success}"></p>
+        </div>
+
+        <div th:if="${error}" class="alerta erro">
+            <p th:text="${error}"></p>
+        </div>
+
         <div class="divFotoNomeUsuario">
-            <div class="divFotoUsuario">
-                <img src="../static/img/gatinho.jpg">
+            <div class="divFotoUsuario" th:if="${usuarioLogado != null}">
+                <img th:src="@{${usuarioLogado.fotoUsuario != null ? usuarioLogado.fotoUsuario : '/img/gatinho.jpg'}}"
+                    alt="Foto do Perfil">
             </div>
-            <span id="spanNomeUsuario">Gatinho Zarolho</span>
+            <span id="spanNomeUsuario" th:text="${usuarioLogado.nome}">Gatinho Zarolho</span>
 
 
             <div class="alterarFoto">
-                <a href=" "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                <a th:href="@{/minha-conta/alterar-foto-perfil}" class="abrir-modal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
                         <path fill="currentColor"
                             d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z" />
                     </svg>Alterar Foto
@@ -63,23 +61,30 @@
         <div class="divDescricaoUsuario">
             <span>Descrição:</span>
             <div>
-                <p>Meu objetivo é ajdhuasghdua dadbiuagdwiu afdIUFUBOUB DFASBDAJSBDASBDUOADOA
+                <p th:text="${usuarioLogado.descricaoUsuario}">Meu objetivo é ajdhuasghdua dadbiuagdwiu afdIUFUBOUB
+                    DFASBDAJSBDASBDUOADOA
                     usbdoauihwoirbeiwbiuegbfwbsfbs sfsodifhsodifhsoidhfoisdhfodshofsdih</p>
             </div>
         </div>
 
         <div class="divBotoesAlteracao">
-            <a id="ancoraAlterarNome" href="">Alterar Nome de Usuário</a>
-            <a id="ancoraAlterarEmail" href="">Alterar Email Atual</a>
-            <a id="ancoraAlterarSenha" href="">Alterar Senha Atual</a>
+            <a id="ancoraAlterarNome" class="abrir-modal" th:href="@{/minha-conta/alterar-nome-usuario}">Alterar
+                Nome de Usuário</a>
+            <a id="ancoraAlterarEmail" class="abrir-modal" th:href="@{/minha-conta/alterar-email}">Alterar
+                Email Atual</a>
+            <a id="ancoraAlterarSenha" class="abrir-modal" th:href="@{/minha-conta/alterar-senha}">Alterar
+                Senha Atual</a>
+            <a id="ancoraAlterarDescricao" class="abrir-modal"
+                th:href="@{/minha-conta/alterar-descricao}">Alterar Descrição Atual</a>
         </div>
     </section>
 
+    <div id="modal-container"></div>
 
     <footer></footer>
 
-    <script src="../static/js/homeScripts.js"></script>
-    <script src="../static/js/menuScripts.js"></script>
+    <script th:src="@{js/menuScripts.js}"></script>
+    <script th:src="@{js/modalScripts.js}"></script>
 </body>
 
 </html>

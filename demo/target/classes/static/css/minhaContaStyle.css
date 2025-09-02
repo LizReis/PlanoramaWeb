@@ -123,3 +123,69 @@
 .sectionMinhaConta .divBotoesAlteracao a:hover{
     background-color: rgba(124,42,42,0.3);
 }
+
+.alerta {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    text-align: center;
+}
+
+.alerta.sucesso {
+    color: #155724; /* Verde escuro para o texto */
+    background-color: #d4edda; /* Fundo verde claro */
+    border: 1px solid #c3e6cb; /* Borda verde */
+}
+
+.alerta.erro {
+    color: #721c24; /* Vermelho escuro para o texto */
+    background-color: #f8d7da; /* Fundo rosa/vermelho claro */
+    border: 1px solid #f5c6cb; /* Borda vermelha */
+}
+
+/* ===================================== */
+/* ESTILOS PARA TELAS MÉDIAS (Tablets) */
+/* ===================================== */
+@media screen and (min-width: 768px) {
+    .sectionMinhaConta {
+        /* Define uma largura máxima e centraliza o container na tela */
+        max-width: 600px;
+        margin: 2rem auto; /* O 'auto' nas laterais faz a centralização */
+    }
+}
+
+
+/* ======================================= */
+/* ESTILOS PARA TELAS GRANDES (Desktops) */
+/* ======================================= */
+@media screen and (min-width: 1200px) {
+    .sectionMinhaConta {
+        /* Aumenta um pouco a largura máxima para desktops */
+        max-width: 700px;
+    }
+
+    .sectionMinhaConta .divTituloMinhaConta span {
+        font-size: 18px;
+    }
+
+    .sectionMinhaConta .divFotoNomeUsuario .divFotoUsuario {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .sectionMinhaConta .divFotoNomeUsuario span {
+        font-size: 18px;
+    }
+
+    .sectionMinhaConta .divDescricaoUsuario span {
+        font-size: 18px;
+    }
+
+    .sectionMinhaConta .divBotoesAlteracao a {
+        margin-top: 10px;
+        width: 250px;
+        height: 35px;
+    }
+}

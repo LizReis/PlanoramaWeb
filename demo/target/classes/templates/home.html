@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -9,30 +9,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/homeStyle.css">
+    <link rel="stylesheet" th:href="@{/css/homeStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/menuStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/barraNavStyle.css}">
     <title>Planorama - Home</title>
 </head>
 
 <body>
-    <header class="conteudoPrincipal">
-        <section>
-            <div id="divMenuHamburguer">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <div th:replace="~{barraNavegacao :: barraNav}"></div>
 
-            <div class="divNomeSite">
-                <a href="index.html"><span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span></a>
-            </div>
-
-            <div class="divFotoUsuario">
-                <img src="../static/img/gatinho.jpg">
-            </div>
-        </section>
-    </header>
-
-    <section id="sectionAparecerMenu"></section>
+    <div th:replace="~{menu :: menuFragment}"></div>
 
 
     <section class="sectionBarraProgresso conteudoPrincipal">
@@ -127,8 +113,8 @@
 
     <footer></footer>
 
-    <script src="../static/js/homeScripts.js"></script>
-    <script src="../static/js/menuScripts.js"></script>
+    <script th:src="@{js/homeScripts.js}"></script>
+    <script th:src="@{js/menuScripts.js}"></script>
 </body>
 
 </html>
