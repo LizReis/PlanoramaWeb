@@ -32,3 +32,8 @@
     position: relative; 
     transform: scale(1);
 }
+
+#modal-container .cardCriacao{
+    position: relative; 
+    transform: scale(1);
+}

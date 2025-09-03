@@ -10,8 +10,10 @@
         href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/homeStyle.css}">
-    <link rel="stylesheet" th:href="@{/css/menuStyle.css}">
     <link rel="stylesheet" th:href="@{/css/barraNavStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/criarPlanoStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/menuStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/modalStyle.css}">
     <title>Planorama - Home</title>
 </head>
 
@@ -103,18 +105,23 @@
         </div>
 
         <div class="divAbsolutBotao">
-            <a id="botaoCriarPlanoHome" class="botaoAncora" href="primeiroCriarPlano.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+            <a id="botaoCriarPlanoHome" class="botaoAncora abrir-modal" th:href="@{/criar-planejamento}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                                                                 viewBox="0 0 48 48">
                     <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
                         d="M24 32V16m18 11v-6M6 27v-6m8-15H8a2 2 0 0 0-2 2v6m28-8h6a2 2 0 0 1 2 2v6m-8 28h6a2 2 0 0 0 2-2v-6m-28 8H8a2 2 0 0 1-2-2v-6M27 6h-6m11 18H16m11 18h-6" />
-                </svg>Criar Plano</a>
+                </svg>Criar Planejamento</a>
         </div>
     </section>
 
+    <div id="modal-container"></div>
+
+
     <footer></footer>
 
-    <script th:src="@{js/homeScripts.js}"></script>
-    <script th:src="@{js/menuScripts.js}"></script>
+    <script th:src="@{/js/homeScripts.js}"></script>
+    <script th:src="@{/js/menuScripts.js}"></script>
+    <script th:src="@{/js/criarPlanoScripts.js}"></script>
+    <script th:src="@{/js/modalScripts.js}"></script>
 </body>
 
 </html>

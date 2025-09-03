@@ -13,17 +13,10 @@ public interface PlanejamentoService {
     List<PlanejamentoDTO> findAllOfAdm(); //Aqui encontra todos os planejamento criados por Administadores
     List<PlanejamentoDTO> findAllOfEstudante(EstudanteDTO estudanteDTO); //Aqui encontra todos os planejamentos de um determinado Estudante
     //DEVE CRIAR DEPOIS UM MÉTODO PARA PEGAR TODAS AS MATERIASPLANO DE UM DETERMINADO PLANO
+
     PlanejamentoDTO atualizarPlanoDeEstudos(UUID id, PlanejamentoDTO planejamentoDTO);
     PlanejamentoDTO arquivarPlanoDeEstudos(UUID id);
+    PlanejamentoDTO desArquivarPlanoDeEstudos(UUID id);
     PlanejamentoDTO restaurarPlanoDeEstudos(UUID id);
-
-    List<PlanejamentoDTO> findAllOfEstudante(UUID estudanteId);
-
     void remove(UUID id);
-
-    //Arquiva um plano de estudos, ocultando-o da lista principal.
-    PlanejamentoDTO archive(UUID id);
-
-    // Restaura um plano de estudos que estava arquivado.
-    PlanejamentoDTO unarchive(UUID id);
 }

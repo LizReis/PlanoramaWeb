@@ -31,7 +31,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 return; // Encerra a execução para não haver mais redirecionamentos.
             }
             // Se o papel for "ROLE_USER"...
-            else if (authority.getAuthority().equals("ROLE_USER")) {
+            else if (authority.getAuthority().equals("ROLE_ESTUDANTE")) {
                 // ...redireciona para a home do estudante.
                 response.sendRedirect("/home");
                 return; // Encerra a execução.

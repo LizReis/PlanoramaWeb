@@ -1,10 +1,17 @@
 package web.planorama.demo.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+
 import web.planorama.demo.dto.EstudanteDTO;
 import web.planorama.demo.dto.PlanejamentoDTO;
-import web.planorama.demo.entity.DisponibilidadeEntity;
 import web.planorama.demo.entity.MateriaEntity;
 import web.planorama.demo.entity.PlanejamentoEntity;
 import web.planorama.demo.entity.UsuarioEntity;
@@ -14,121 +21,82 @@ import web.planorama.demo.repository.PlanejamentoRepository;
 import web.planorama.demo.repository.UsuarioRepository;
 import web.planorama.demo.service.PlanejamentoService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 @Service
-public class PlanejamentoServiceImpl implements PlanejamentoService {
+@RequiredArgsConstructor
+public class PlanejamentoServiceImpl implements PlanejamentoService{
 
     private final PlanejamentoRepository planejamentoRepository;
     private final UsuarioRepository usuarioRepository;
     private final PlanejamentoMapper mapper;
 
-    // Construtor explícito para injeção de dependências
-    public PlanejamentoServiceImpl(
-            PlanejamentoRepository planejamentoRepository,
-            UsuarioRepository usuarioRepository,
-            PlanejamentoMapper mapper
-    ) {
-        this.planejamentoRepository = planejamentoRepository;
-        this.usuarioRepository = usuarioRepository;
-        this.mapper = mapper;
-    }
-
     @Override
     @Transactional
-    public PlanejamentoDTO save(PlanejamentoDTO dto) {
-        validarPlanejamentoDTO(dto);
+    public PlanejamentoDTO save(PlanejamentoDTO planejamentoDTO) {
+        validarPlanejamentoDTO(planejamentoDTO);
 
-        UsuarioEntity criador = usuarioRepository.findById(dto.criadorId())
-                .orElseThrow(() -> new MyNotFoundException("Usuário com ID " + dto.criadorId() + " não encontrado."));
+        UsuarioEntity criador = usuarioRepository.findById(planejamentoDTO.getCriador().getId())
+                .orElseThrow(() -> new MyNotFoundException("Usuário com ID " + planejamentoDTO.getCriador().getId() + " não encontrado."));
 
-        PlanejamentoEntity planejamentoEntity = mapper.toPlanejamentoEntity(dto);
+        PlanejamentoEntity planejamentoEntity = mapper.toPlanejamentoEntity(planejamentoDTO);
         planejamentoEntity.setCriador(criador);
+        return planejamentoDTO;
 
-        DisponibilidadeEntity disponibilidadeEntity = mapper.disponibilidadeDTOToEntity(dto.disponibilidade());
-        disponibilidadeEntity.setPlanejamento(planejamentoEntity);
-        planejamentoEntity.setDisponibilidade(disponibilidadeEntity);
-
-        List<MateriaEntity> materiaEntities = new ArrayList<>();
-        if (dto.materias() != null) {
-            dto.materias().forEach(materiaDTO -> {
-                MateriaEntity materiaEntity = mapper.materiaToEntity(materiaDTO);
-                materiaEntity.setPlanejamento(planejamentoEntity);
-                materiaEntities.add(materiaEntity);
-            });
-        }
-        planejamentoEntity.setMaterias(materiaEntities);
-
-        PlanejamentoEntity savedPlanejamento = planejamentoRepository.save(planejamentoEntity);
-        return mapper.toPlanejamentoDTO(savedPlanejamento);
+        //FALTA A LÓGICA PARA SALVAR A MATÉRIA E A DO TERCEIRO CARD QUE É RESPONSÁVEL POR
+        //DEFINIR O NIVEL DE CONHECIMENTO DE CARGA HORÁRIA DE CADA MATÉRIA
+        // ========LEMBRANDO QUE A LÓGICA DO NIVEL DE CONHECIMENTO E DA CARGA HORARIA=========
+        //=========FICAM NO MateriaPlanejamento===============================================
+        //DEPOIS DISSO TUDO, AÍ SIM O SAVE DO PLANEJAMENTO VAI SALVAR O PLANEJAMENTO
     }
 
     @Override
     public PlanejamentoDTO findOne(UUID id) {
-        var entity = planejamentoRepository.findById(id)
-                .orElseThrow(() -> new MyNotFoundException("Planejamento com ID " + id + " não encontrado."));
-        return mapper.toPlanejamentoDTO(entity);
+       var entity = planejamentoRepository.findById(id).orElseThrow();
+       return mapper.toPlanejamentoDTO(entity);
     }
 
     @Override
     public List<PlanejamentoDTO> findAll() {
-        return planejamentoRepository.findAll()
+       return planejamentoRepository.findAll()
                 .stream()
                 .map(mapper::toPlanejamentoDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public List<PlanejamentoDTO> findAllOfAdm() {
-        return planejamentoRepository.findByPreDefinidoAdmIsTrue()
+        return planejamentoRepository.findAll()
                 .stream()
+                .filter(plano -> Boolean.TRUE.equals(plano.isPreDefinidoAdm()))
                 .map(mapper::toPlanejamentoDTO)
-                .collect(Collectors.toList());
+                .toList();
+    }
+
+    
+    @Override
+    public List<PlanejamentoDTO> findAllOfEstudante(EstudanteDTO estudanteDTO) {
+       return planejamentoRepository.findAll()
+                .stream()
+                .filter(plano -> plano.getCriador() != null && plano.getCriador().getId().equals(estudanteDTO.id()))
+                .map(mapper::toPlanejamentoDTO)
+                .toList();
     }
 
     @Override
-    public List<PlanejamentoDTO> findAllOfEstudante(EstudanteDTO estudanteDTO) {
-        return List.of();
+    public void remove(UUID id) {
+        if(planejamentoRepository.existsById(id)){
+            planejamentoRepository.deleteById(id);
+        }
     }
 
     @Override
     public PlanejamentoDTO atualizarPlanoDeEstudos(UUID id, PlanejamentoDTO planejamentoDTO) {
-        return null;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'atualizarPlanoDeEstudos'");
     }
 
     @Override
+    @Transactional
     public PlanejamentoDTO arquivarPlanoDeEstudos(UUID id) {
-        return null;
-    }
-
-    @Override
-    public PlanejamentoDTO restaurarPlanoDeEstudos(UUID id) {
-        return null;
-    }
-
-    @Override
-    public List<PlanejamentoDTO> findAllOfEstudante(UUID estudanteId) {
-        return planejamentoRepository.findByCriador_Id(estudanteId)
-                .stream()
-                .map(mapper::toPlanejamentoDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    @Transactional
-    public void remove(UUID id) {
-        if(!planejamentoRepository.existsById(id)){
-            throw new MyNotFoundException("Não é possível remover. Planejamento com ID " + id + " não encontrado.");
-        }
-        planejamentoRepository.deleteById(id);
-    }
-
-    @Override
-    @Transactional
-    public PlanejamentoDTO archive(UUID id) {
         PlanejamentoEntity entity = planejamentoRepository.findById(id)
                 .orElseThrow(() -> new MyNotFoundException("Planejamento com ID " + id + " não encontrado."));
         entity.setPlanoArquivado(true);
@@ -138,7 +106,7 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
     @Override
     @Transactional
-    public PlanejamentoDTO unarchive(UUID id) {
+    public PlanejamentoDTO desArquivarPlanoDeEstudos(UUID id) {
         PlanejamentoEntity entity = planejamentoRepository.findById(id)
                 .orElseThrow(() -> new MyNotFoundException("Planejamento com ID " + id + " não encontrado."));
         entity.setPlanoArquivado(false);
@@ -146,32 +114,40 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         return mapper.toPlanejamentoDTO(updatedEntity);
     }
 
+    @Override
+    @Transactional
+    public PlanejamentoDTO restaurarPlanoDeEstudos(UUID id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'restaurarPlanoDeEstudos'");
+    }
+
     private void validarPlanejamentoDTO(PlanejamentoDTO dto) {
-        if (dto.nomePlanejamento() == null || dto.nomePlanejamento().isBlank()) {
+        if (dto.getNomePlanejamento() == null || dto.getNomePlanejamento().isBlank()) {
             throw new IllegalArgumentException("O nome do planejamento é obrigatório.");
         }
-        if (dto.cargo() == null || dto.cargo().isBlank()) {
+        if (dto.getCargo() == null || dto.getCargo().isBlank()) {
             throw new IllegalArgumentException("O cargo é obrigatório.");
         }
-        if (dto.anoAplicacao() <= 2020) {
+        if (dto.getAnoAplicacao() <= 2020) {
             throw new IllegalArgumentException("O ano de aplicação deve ser superior a 2020.");
         }
-        if (dto.criadorId() == null) {
+        if (dto.getCriador().getId() == null) {
             throw new IllegalArgumentException("O ID do criador do plano é obrigatório.");
         }
-        if (dto.disponibilidade() == null) {
+        if (dto.getDisponibilidade() == null) {
             throw new IllegalArgumentException("A disponibilidade de horários é obrigatória.");
         }
-        if (dto.materias() == null || dto.materias().isEmpty()) {
+        if (dto.getMaterias() == null || dto.getMaterias().isEmpty()) {
             throw new IllegalArgumentException("O plano de estudos deve ter pelo menos uma matéria.");
         }
-        dto.materias().forEach(materia -> {
-            if (materia.nomeMateria() == null || materia.nomeMateria().isBlank()) {
+        dto.getMaterias().forEach(materia -> {
+            if (materia.getMateriaEntity().getNomeMateria() == null || materia.getMateriaEntity().getNomeMateria().isBlank()) {
                 throw new IllegalArgumentException("O nome da matéria não pode ser vazio.");
             }
-            if (materia.proficiencia() < 1 || materia.proficiencia() > 5) {
-                throw new IllegalArgumentException("A proficiência da matéria '" + materia.nomeMateria() + "' deve ser entre 1 e 5.");
+            if (materia.getNivelConhecimento() < 1 || materia.getNivelConhecimento() > 5) {
+                throw new IllegalArgumentException("A proficiência da matéria '" + materia.getMateriaEntity().getNomeMateria() + "' deve ser entre 1 e 5.");
             }
         });
     }
+
 }
