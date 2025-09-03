@@ -185,13 +185,17 @@
     z-index: 1000; /* Garante que o botão fique sobre outros elementos */
 }
 
+#botaoCriarPlanoHome{
+    width: 250px;
+}
+
 .botaoAncora{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 9rem;
     height: 2.2rem; /* Aumentei um pouco a altura para melhor clique */
-    background-color: var(--corDestaqueBege);
+    background-color: var(--corDestaqueVerde);
     color: var(--corFundoPrincipal);
     font-family: var(--fonteParaTexto);
     font-size: 15px;
@@ -203,12 +207,12 @@
 }
 .botaoAncora:hover{
     background-color: var(--corFundoPrincipal);
-    color: var(--corDestaqueBege);
-    border: 0.1rem solid var(--corDestaqueBege);
+    color: var(--corDestaqueVerde);
+    border: 0.1rem solid var(--corDestaqueVerde);
 }
 .botaoAncora:hover path{
-    stroke:var(--corDestaqueBege);
-    fill: var(--corDestaqueBege);
+    stroke:var(--corDestaqueVerde);
+    fill: var(--corDestaqueVerde);
 }
 
 .botaoAncora svg{

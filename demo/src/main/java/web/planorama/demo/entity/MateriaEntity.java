@@ -1,11 +1,23 @@
 package web.planorama.demo.entity;
 
-import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -21,16 +33,15 @@ public class MateriaEntity {
     @Column(name = "NOME_MATERIA", nullable = false)
     private String nomeMateria;
 
-    @Column(name = "CARGA_HORARIA_SEMANAL", nullable = false)
-    private int cargaHorariaSemanal;
-
-    @Column(name = "PROFICIENCIA", nullable = false)
-    private int proficiencia; // De 1 a 5
-
-    @Column(name = "TEMPO_SESSAO", nullable = false)
-    private int tempoSessao; // Em minutos
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "planejamento_id")
-    private PlanejamentoEntity planejamento;
+    @JoinColumn(name = "CRIADO_POR", nullable = true)
+    private UsuarioEntity criadoPor;
+
+    //Uma matéria tem muitos assuntos, exclua todos os assuntos caso a matéria seja excluída
+    //carregue todos os assuntos junto com essa matéria (é o que o eager faz)
+    @OneToMany(mappedBy = "materiaEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<AssuntoEntity> listaAssuntos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "materiaEntity")
+    private List<MateriaPlanejamentoEntity> planejamentosComMateria = new ArrayList<>();
 }

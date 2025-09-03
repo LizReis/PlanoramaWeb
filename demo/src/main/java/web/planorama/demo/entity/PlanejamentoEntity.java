@@ -1,10 +1,12 @@
 package web.planorama.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,20 +30,28 @@ public class PlanejamentoEntity {
     @Column(name = "ANO_APLICACAO", nullable = false)
     private int anoAplicacao;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "TB_PLANEJAMENTO_DISPONIBILIDADE", 
+    joinColumns = @JoinColumn(name = "PLANEJAMENTO_ID"))
+    @Column(name = "DISPONIBILIDADE", nullable = false)
+    private List<String> disponibilidade = new ArrayList<>();
+
+    @Column(name = "HORAS_DIARIAS", nullable = false)
+    private int horasDiarias;
+
+    //Quando salvarmos, editarmos ou deletarmos um Planejamento todas as matérias ligadas a ele
+    //Serão alteradas juntamente
+    @OneToMany(mappedBy = "planejamentoEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MateriaPlanejamentoEntity> materias = new ArrayList<>();
+
     @ManyToOne
-    @JoinColumn(name = "criador_id") // Nome da coluna de junção
+    @JoinColumn(name = "Criador")
     private UsuarioEntity criador;
 
-    @OneToMany(mappedBy = "planejamento", cascade = CascadeType.ALL)
-    private List<MateriaEntity> materias;
-
-    @OneToOne(mappedBy = "planejamento", cascade = CascadeType.ALL)
-    private DisponibilidadeEntity disponibilidade;
-
     @Column(name = "PLANO_ARQUIVADO", nullable = false)
-    private boolean planoArquivado = false;
+    private boolean planoArquivado;
 
-    @Column(name = "PRE_DEFINIDO_ADM")
-    private boolean preDefinidoAdm = false;
+    @Column(name = "PRE_DEFINIDO_ADM", nullable = true)
+    private boolean preDefinidoAdm;
 
 }

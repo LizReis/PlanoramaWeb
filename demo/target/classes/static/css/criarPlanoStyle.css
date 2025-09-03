@@ -1,71 +1,500 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+:root {
+    --corFundoPrincipal: #FFFFFF;
+    --corPrincipalFonte: #0D0D0D;
+    --corCinzaFonte: #808080;
+    --corDestaqueVerde: #7A7453;
+    --corDestaqueVermelho: #7C2A2A;
+    --corDestaqueBege: #C29A6E;
+
+    --fonteDestaque: "Merriweather", serif;
+    --fonteParaTexto: "Roboto", sans-serif;
 }
 
-.container {
-    background-color: #fff;
-    margin: 50px auto;
-    padding: 40px;
-    width: 70%;
-    min-width: 300px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
 }
 
-input {
-    padding: 10px;
-    width: 100%;
-    font-size: 17px;
-    border: 1px solid #aaaaaa;
-    box-sizing: border-box; /* Importante */
+*:focus{
+    outline: none;
 }
 
-/* Esconde todos os passos por padrão: */
-.tab {
-    display: none;
+
+.sectionCriarPlano{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--corFundoPrincipal);
+    border-radius: 10px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    
+    margin: 7% 5% 5% 5%;
 }
 
-button {
-    background-color: #04AA6D;
-    color: #ffffff;
+.titulo{
+    display: flex;
+    gap: 5px;
+    margin: 1rem 0rem 0rem 0rem;
+    padding: 0% 0% 3% 2%;
+    font-family: var(--fonteDestaque);
+    font-weight: 700;
+    color: var(--corDestaqueVerde);
+    border-bottom: 0.1rem solid var(--corDestaqueVerde);
+}
+.sectionCriarPlano div p{
+    font-family: var(--fonteParaTexto);
+    font-size: 14px;
+    margin: 5px 0px 0px 0px;
+}
+
+.sectionCriarPlano form{
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 1rem 0rem 1rem;
+}
+
+.sectionCriarPlano form label{
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.sectionCriarPlano form input{
+    margin-top: 2%;
+    padding-left: 2%;
+    font-size: 15px;
+    margin-bottom: 15px;
     border: none;
-    padding: 10px 20px;
-    font-size: 17px;
+    border-bottom: 0.1rem solid var(--corDestaqueVerde);
+}
+.sectionCriarPlano form input:focus{
+    outline: none;
+}
+
+.sectionCriarPlano form .spanForm{
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 2%;
+}
+
+.sectionCriarPlano .divBotoes{
+    display: flex;
+    justify-content: space-between;
+    padding: 5% 10% 0% 10%;
+    margin-bottom: 7%;
+}
+
+.sectionCriarPlano form #botaoCriar{
+    background-color: var(--corDestaqueVerde);
+    margin-top: 10%;
+    width: 100px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    color: var(--corFundoPrincipal);
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+.sectionCriarPlano form #botaoCriar:hover{
+    color: var(--corDestaqueVerde);
+    background-color: var(--corFundoPrincipal);
+    border: 0.1rem solid var(--corDestaqueVerde);
+}
+
+.sectionCriarPlano form #botaoCancelar{
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVerde);
+    border: 0.1rem solid var(--corDestaqueVerde);
+    margin-top: 10%;
+    width: 100px;
+    height: 30px;
+    border-radius: 50px;
+    color: var(--corDestaqueVerde);
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+.sectionCriarPlano form #botaoCancelar:hover{
+    color: var(--corFundoPrincipal);
+    background-color: var(--corDestaqueVerde);
+}
+
+.sectionCriarPlano form .divAnoHora{
+    display: flex;
+    gap: 15px;
+}
+
+.sectionCriarPlano form .divAnoHora input{
+    width: 4rem;
+}
+
+
+.sectionCriarPlano .inputDiasSemana{
+    height: 30px;
+    display: flex;
+    overflow: hidden;
+    justify-content: space-around;
+    border: 0.1rem solid var(--corDestaqueVerde);
+    border-radius: 50px;
+}
+
+.sectionCriarPlano .inputDiasSemana .dia{
+    width: 15%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 0.1rem solid var(--corDestaqueVerde);
+    font-family: var(--fonteParaTexto);
+    font-weight: 500;
+    transition: 0.3s linear;
+}
+.sectionCriarPlano .inputDiasSemana .dia:hover{
+    background-color: rgba(0,0,0,0.3);
     cursor: pointer;
 }
 
-button:hover {
-    opacity: 0.8;
+.sectionCriarPlano .dia.selecionado{
+    background-color: var(--corDestaqueVermelho);
+    color: var(--corFundoPrincipal);
 }
 
-#prevBtn {
-    background-color: #bbbbbb;
-}
-
-/* Estilo para os indicadores de passo */
-.step {
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbbbbb;
-    border: none;
-    border-radius: 50%;
-    display: inline-block;
-    opacity: 0.5;
-}
-
-.step.active {
-    opacity: 1;
-}
-
-.step.finish {
-    background-color: #04AA6D;
-}
-
-/* Estilo para campos de matéria */
-.materia-item {
-    border: 1px solid #ddd;
-    padding: 10px;
+.error {
+    color: red;
+    font-size: 0.9em;
     margin-bottom: 10px;
+}
+
+
+
+/* ===================================== */
+/* ESTILOS PARA TELAS MÉDIAS (Tablets) */
+/* ===================================== */
+@media screen and (min-width: 768px) {
+    .sectionCriarPlano {
+        /* Centraliza o card na tela e define uma largura máxima */
+        max-width: 650px;
+        margin: 5% auto; /* A mágica do 'auto' centraliza horizontalmente */
+    }
+}
+
+
+/* ======================================= */
+/* ESTILOS PARA TELAS GRANDES (Desktops) */
+/* ======================================= */
+@media screen and (min-width: 1200px) {
+    .sectionCriarPlano {
+        margin: 4% auto; /* Ajusta a margem para telas maiores */
+        padding: 1rem 2rem; /* Adiciona um pouco mais de espaçamento interno */
+    }
+
+    .titulo {
+        font-size: 18px;
+    }
+
+    .sectionCriarPlano form label,
+    .sectionCriarPlano form span {
+        font-size: 16px; /* Aumenta a fonte dos rótulos para melhor leitura */
+    }
+
+    .sectionCriarPlano form input {
+        font-size: 16px;
+    }
+
+    .sectionCriarPlano .divBotoes {
+        padding: 5% 15% 0% 15%; /* Ajusta o espaçamento dos botões */
+    }
+}
+
+/* AQUI COMEÇA O ESTILO DA SEGUNDA TELA PARA CRIAR PLANO*/
+/*====================================================*/
+
+.sectionCriarPlano-segundo{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--corFundoPrincipal);
+    border-radius: 10px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+
+    margin: 7% 5% 5% 5%;
+}
+
+.sectionCriarPlano-segundo .titulo{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3%;
+}
+
+.sectionCriarPlano-segundo .titulo p{
+    margin: 0rem 0rem 0rem 0rem;
+    padding: 0% 0% 0% 5%;
+    font-size: 13px;
+    font-family: var(--fonteParaTexto);
+    font-weight: 400;
+    color: var(--corPrincipalFonte);
+}
+
+.sectionCriarPlano-segundo .divAdicionarMateriaNova{
+    height: 30px;
+    align-self: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.sectionCriarPlano-segundo .divAdicionarMateriaNova a{
+    width: 385px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    padding: 0px 10px 0px 10px;
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    color: var(--corDestaqueVerde);
+    border: 0.1rem solid var(--corDestaqueVerde);
     border-radius: 5px;
+    transition: 0.3s linear;
+}
+
+.sectionCriarPlano-segundo .divAdicionarMateriaNova a:hover{
+    color: var(--corFundoPrincipal);
+    background-color: var(--corDestaqueVerde);
+}
+
+.sectionCriarPlano-segundo .divMaterias{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.sectionCriarPlano-segundo .divMaterias .materia{
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--corFundoPrincipal);
+    border: 0.1rem dashed var(--corDestaqueBege);
+
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    font-family: var(--fonteDestaque);
+    font-size: 13px;
+    font-weight: 600;
+}
+.sectionCriarPlano-segundo .divMaterias .materia:hover{
+    background-color: rgba(194,154,110,0.5);
+    cursor: pointer;
+}
+
+.sectionCriarPlano-segundo .materia.selecionado{
+    background-color: var(--corDestaqueBege);
+    color: var(--corFundoPrincipal);
+}
+
+.sectionCriarPlano-segundo .divBotoes{
+    display: flex;
+    justify-content: space-between;
+    padding: 5% 10% 0% 10%;
+    margin-bottom: 7%;
+}
+
+.sectionCriarPlano-segundo #botaoConfirmar{
+    align-self: center;
+    background-color: var(--corDestaqueVermelho);
+    margin-top: 10%;
+}
+.sectionCriarPlano-segundo #botaoConfirmar:hover{
+    color: var(--corDestaqueVermelho);
+    background-color: var(--corFundoPrincipal);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+}
+
+.sectionCriarPlano-segundo #botaoVoltar{
+    align-self: center;
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVermelho);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+    margin-top: 10%;
+}
+.sectionCriarPlano-segundo #botaoVoltar:hover{
+    color: var(--corFundoPrincipal);
+    background-color: var(--corDestaqueVermelho);
+}
+
+
+/* --- Responsividade para a Segunda Tela de Criar Plano --- */
+@media screen and (min-width: 768px) {
+    .sectionCriarPlano-segundo {
+        max-width: 650px;
+        margin: 5% auto;
+        padding: 1rem 2rem;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .sectionCriarPlano-segundo {
+        max-width: 700px;
+        margin: 4% auto;
+        padding: 1.5rem 2.5rem;
+    }
+
+    .sectionCriarPlano-segundo .titulo p {
+        font-size: 14px;
+    }
+
+    .sectionCriarPlano-segundo .divMaterias {
+        gap: 25px; /* Aumenta o espaçamento entre os cards */
+    }
+}
+
+
+
+
+/* AQUI COMEÇA O ESTILO DA TERCEIRA TELA PARA CRIAR PLANO*/
+/*====================================================*/
+
+.sectionCriarPlano-segundo .containerMaterias{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--corFundoPrincipal);
+    margin: 0% 5% 5% 5%;
+    gap: 20px;
+}
+
+.sectionCriarPlano-segundo .containerMaterias .cardMaterias{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    padding: 4% 6% 4% 6%;
+}
+
+.sectionCriarPlano-segundo .containerMaterias .cardMaterias span{
+    padding-bottom: 1%;
+    font-weight: 600;
+    font-family: var(--fonteParaTexto);
+    color: var(--corDestaqueVerde);
+    border-bottom: 0.1rem solid var(--corDestaqueVerde);
+}
+
+.sectionCriarPlano-segundo .containerMaterias .cardMaterias div{
+    margin-top: 5%;
+    font-family: var(--fonteParaTexto);
+    font-size: 14px;
+}
+
+.sectionCriarPlano-segundo .containerMaterias .cardMaterias div input{
+    width: 50px;
+    border: 0.1rem solid var(--corDestaqueVerde);
+}
+.sectionCriarPlano-segundo .containerMaterias .cardMaterias div input:focus{
+    outline: none;
+}
+
+.sectionCriarPlano-segundo .containerMaterias .divBotoes #botaoConfirmarFinalizar{
+    background-color: var(--corDestaqueVermelho);
+}
+.sectionCriarPlano-segundo .containerMaterias .divBotoes #botaoConfirmarFinalizar:hover{
+    background-color: var(--corFundoPrincipal);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+    color: var(--corDestaqueVermelho);
+}
+
+
+.sectionCriarPlano-segundo .containerMaterias .divBotoes #botaoCancelarFinalizar{
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVermelho);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+}
+.sectionCriarPlano-segundo .containerMaterias .divBotoes #botaoCancelarFinalizar:hover{
+    background-color: var(--corDestaqueVermelho);
+    color: var(--corFundoPrincipal);
+}
+
+/*=============================================*/
+/*================= ESTILO DO CARD CRIAR MATERIA*/
+
+.criarMateria{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    width: 400px;
+    background-color: var(--corFundoPrincipal);
+    gap: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+}
+
+.criarMateria .nomeCard{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 20px 0px 20px;
+    padding-bottom: 7px;
+    font-family: var(--fonteDestaque);
+    color: var(--corDestaqueVermelho);
+    border-bottom: 0.1rem solid var(--corDestaqueVermelho);
+}
+
+.criarMateria .paragrafoCard{
+    margin: 5px 0px 20px 20px;
+    font-family: var(--fonteParaTexto);
+    font-size: 14px;
+}
+
+.criarMateria form{
+    display: flex;
+    flex-direction: column;
+}
+
+.criarMateria form .labelCard{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px;
+    font-family: var(--fonteDestaque);
+    font-size: 15px;
+}
+
+.criarMateria form .assuntosCard{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px;
+    margin-bottom: 30px;
+    gap: 5px;
+    font-family: var(--fonteDestaque);
+}
+
+.criarMateria form .assuntosCard h4{
+    font-weight: 400;
+}
+
+.criarMateria form .assuntosCard button{
+    width: 150px;
+    background-color: var(--corFundoPrincipal);
+    border-radius: 5px;
+    border: 0.1rem solid var(--corDestaqueVermelho);
+    cursor: pointer;
+}
+
+.criarMateria #salvarMateria{
+    margin-bottom: 20px;
+    align-self: center;
+    background-color: var(--corDestaqueVermelho);
+    width: 100px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    color: var(--corFundoPrincipal);
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.criarMateria #salvarMateria:hover{
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVermelho);
+    border: 0.1rem solid var(--corDestaqueVermelho);
 }
