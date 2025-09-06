@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import web.planorama.demo.dto.EstudanteDTO;
 import web.planorama.demo.dto.PlanejamentoDTO;
 import web.planorama.demo.entity.MateriaEntity;
+import web.planorama.demo.dto.SessaoEstudoDTO;
+import web.planorama.demo.entity.MateriaPlanejamentoEntity;
 import web.planorama.demo.entity.PlanejamentoEntity;
 import web.planorama.demo.entity.UsuarioEntity;
 import web.planorama.demo.exceptions.MyNotFoundException;
@@ -81,6 +83,7 @@ public class PlanejamentoServiceImpl implements PlanejamentoService{
                 .toList();
     }
 
+
     @Override
     public void remove(UUID id) {
         if(planejamentoRepository.existsById(id)){
@@ -148,6 +151,8 @@ public class PlanejamentoServiceImpl implements PlanejamentoService{
                 throw new IllegalArgumentException("A proficiência da matéria '" + materia.getMateriaEntity().getNomeMateria() + "' deve ser entre 1 e 5.");
             }
         });
+
+
     }
 
 }
