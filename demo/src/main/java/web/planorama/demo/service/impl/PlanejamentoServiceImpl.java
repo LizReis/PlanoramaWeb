@@ -3,6 +3,7 @@ package web.planorama.demo.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +21,7 @@ import web.planorama.demo.entity.MateriaPlanejamentoEntity;
 import web.planorama.demo.entity.PlanejamentoEntity;
 import web.planorama.demo.entity.UsuarioEntity;
 import web.planorama.demo.exceptions.MyNotFoundException;
+import web.planorama.demo.mapping.MateriaPlanejamentoMapper;
 import web.planorama.demo.mapping.PlanejamentoMapper;
 import web.planorama.demo.repository.PlanejamentoRepository;
 import web.planorama.demo.repository.UsuarioRepository;
@@ -48,14 +50,17 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         planejamentoEntity.setCriador(criador);
         
         if(planejamentoEntity.getMaterias() != null){
-            List<MateriaPlanejamentoEntity> materiasDoPlanejamento = planejamentoDTO.getMaterias().stream().map(materiaDTO -> {
-                MateriaPlanejamentoEntity materiaPlanejamentoEntity = materiaPlanejamentoMapper.toMateriaPlanejamentoEntity(materiaDTO);
+            List<MateriaPlanejamentoEntity> materiasDoPlanejamento = planejamentoDTO.getMaterias().stream().map(materia -> {
 
-                materiaPlanejamentoEntity.setPlanejamentoEntity(planejamentoEntity);
+                materia.setPlanejamentoEntity(planejamentoEntity);
 
-                return materiaPlanejamentoEntity;
+                return materia;
             }).collect(Collectors.toList());
+
+            planejamentoEntity.setMaterias(materiasDoPlanejamento);
         }
+
+
 
         return mapper.toPlanejamentoDTO(planejamentoRepository.save(planejamentoEntity));
 
