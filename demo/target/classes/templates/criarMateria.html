@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<body>
+    <main class="criarMateria cardCriacao corpo" th:fragment="cardCriacao">
+        <form id="formCriarMateria" th:action="@{/materia/salvar}" method="post">
+            <div class="nomeCard">
+                <span class="tituloCard">Criar Matéria</span>
+                <span class="fecharX">X</span>
+            </div>
+
+            <div class="paragrafoCard">
+                <p class="paragrafoInfo">Crie uma nova matéria para o sistema.</p>
+            </div>
+
+            <div class="labelCard">
+                <label for="nomeMateria">Nome da Matéria:</label>
+                <input type="text" id="nomeMateria" name="nomeMateria" placeholder="Nome da matéria" />
+            </div>
+            <br />
+
+            <div class="assuntosCard">
+                <h4>Assuntos da Matéria:</h4>
+                <div id="assuntos-container"></div>
+
+                <button type="button" id="btn-adicionar-assunto">Adicionar Assunto</button>
+            </div>
+
+            <button id="salvarMateria" type="submit">Salvar</button>
+        </form>
+    </main>
+
+</body>
+
+</html>

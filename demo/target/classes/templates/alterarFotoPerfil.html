@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
+
+
+<body>
+    <main class="cardAlteracao corpo" th:fragment="cardAlteracao">
+        <form id="formAlterarFoto" th:action="@{/minha-conta/alterar-foto-perfil}" method="post" enctype="multipart/form-data">
+            <div class="nomeCard">
+                <span class="tituloCard">Alterar Foto</span>
+                <span class="fecharX">X</span>
+            </div>
+
+            <div class="paragrafoCard">
+                <p class="paragrafoInfo">Altere sua Foto de Perfil</p>
+            </div>
+
+            <div class="labelCard">
+                <label for="novaFoto">Nova Foto:</label>
+                <input type="file" id="novaFoto" name="novaFoto" accept="image/*" placeholder="Novo nome do Usuário" />
+            </div>
+            <br/>
+            
+            <button type="submit">Salvar</button>
+        </form>
+    </main>
+</body>
+
+</html>

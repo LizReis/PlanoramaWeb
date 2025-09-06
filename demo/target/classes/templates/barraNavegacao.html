@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
+
+<body>
+    <header class="conteudoPrincipal" th:fragment="barraNav">
+        <section>
+            <div id="divMenuHamburguer">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="divNomeSite">
+                <a th:href="@{/home}"><span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span></a>
+            </div>
+
+            <div class="divFotoUsuario">
+                <a th:if="${usuarioLogado != null}" th:href="@{/minha-conta}">
+                    <img th:src="@{${usuarioLogado.fotoUsuario != null ? usuarioLogado.fotoUsuario : '/img/gatinho.jpg'}}" alt="Foto do Perfil">
+                </a>
+
+
+            </div>
+        </section>
+    </header>
+</body>
+</html>

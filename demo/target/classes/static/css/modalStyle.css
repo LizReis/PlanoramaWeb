@@ -1,0 +1,39 @@
+/* O contêiner do modal (o fundo escuro) */
+#modal-container {
+    position: fixed; /* Fica fixo na tela, mesmo com scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo preto com 60% de opacidade */
+    
+    /* Centraliza o conteúdo (o formulário) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Começa escondido */
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s;
+}
+
+/* Classe para mostrar o modal */
+#modal-container.mostrar {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* O conteúdo do modal (o .cardAlteracao que vem dos outros arquivos) 
+  pode ser estilizado aqui ou no alterarCardStyle.css
+*/
+#modal-container .cardAlteracao {
+    /* Garante que o card não tenha estilos estranhos aqui dentro */
+    position: relative; 
+    transform: scale(1);
+}
+
+#modal-container .cardCriacao{
+    position: relative; 
+    transform: scale(1);
+}

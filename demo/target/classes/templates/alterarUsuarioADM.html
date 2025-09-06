@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
+
+<body>
+    <main class="cardAlteracao corpo" th:fragment="cardAlteracao">
+        <form id="formAlterarUsuario" th:action="@{/listar-usuarios/alterar-usuario}" th:object="${usuario}" method="post">
+
+            <div class="nomeCard">
+                <span class="tituloCard">Alterar Informações de: <span style="color: #7C2A2A;" th:text="${usuario.nome}"></span></span>
+                <span class="fecharX">X</span>
+            </div>
+
+            <div class="paragrafoCard">
+                <p class="paragrafoInfo">Altere as informações do Usuário</p>
+            </div>
+
+            <!--Input escondido que identifica qual o id do  usuário estamos lidando-->
+            <!--Então quando esse form for enviado, ele irá com o usuário que foi alterado-->
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="labelCard">
+                <label for="novoEmail">Novo E-mail:</label>
+                <input type="email" id="novoEmail" name="novoEmail" th:placeholder="'Atual:'+' '+${usuario.email}" />
+            </div>
+            <br/>
+
+            <div class="labelCard">
+                <label for="novoNome" >Novo nome:</label>
+                <input type="text" id="novoNome" name="novoNome" th:placeholder="'Atual:'+' '+${usuario.nome}" />
+            </div>
+            <br/>
+
+            <div class="labelCard">
+                <label for="senhaAtual">Senha ADM:</label>
+                <input type="password" id="senhaAtual" name="senhaAtual" placeholder="Digite a sua senha" />
+            </div>
+
+            <button type="submit">Salvar</button>
+        </form>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+:root {
+    --corFundoPrincipal: #FFFFFF;
+    --corPrincipalFonte: #0D0D0D;
+    --corCinzaFonte: #808080;
+    --corDestaqueVerde: #7A7453;
+    --corDestaqueVermelho: #7C2A2A;
+    --corDestaqueBege: #C29A6E;
+
+    --fonteDestaque: "Merriweather", serif;
+    --fonteParaTexto: "Roboto", sans-serif;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+*:focus{
+    outline: none;
+}
+
+.corpo{
+    width: 350px;
+    background-color: var(--corFundoPrincipal);
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    font-family: var(--fonteParaTexto);
+    margin: 20px 0px 0px 0px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 0px 20px 0px 20px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+form .nomeCard{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    border-bottom: 0.1rem solid var(--corDestaqueVermelho);
+    font-family: var(--fonteDestaque);
+}
+
+form .fecharX:hover{
+    color: var(--corDestaqueVermelho);
+    cursor: pointer;
+}
+
+form .paragrafoCard{
+    font-size: 13px;
+    margin: 5px 0px 15px 0px;
+}
+
+form .labelCard{
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+}
+
+form .labelCard input{
+    border: none;
+    border-bottom: 0.1rem solid var(--corDestaqueVermelho);
+    font-size: 15px;
+    margin-top: 1%;
+    padding-bottom: 5px;
+    background-color: transparent;
+}
+
+form button{
+    width: 9rem;
+    height: 1.8rem;
+    background-color: var(--corDestaqueVermelho);
+    color: var(--corFundoPrincipal);
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: 0.2s linear;
+    align-self: center;
+    margin: 10% auto 4% auto;
+}
+
+form button:hover{
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVermelho);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+}

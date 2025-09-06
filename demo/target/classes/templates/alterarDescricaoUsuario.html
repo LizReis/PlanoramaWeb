@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
+
+<body>
+    <main class="cardAlteracao corpo" th:fragment="cardAlteracao">
+        <form id="formAlterarDescricao" th:action="@{/minha-conta/alterar-descricao}" method="post">
+            <div class="nomeCard">
+                <span class="tituloCard">Alterar Descrição do Usuário</span>
+                <span class="fecharX">X</span>
+            </div>
+
+            <div class="paragrafoCard">
+                <p class="paragrafoInfo">Altere sua Descrição de Usuário</p>
+            </div>
+
+            <div class="labelCard">
+                <label for="novaDescricao">Nova descrição:</label>
+                <textarea type="text" id="novaDescricao" name="novaDescricao" placeholder="Nova Descrição do Usuário"></textarea>
+            </div>
+            <br/>
+
+            <div class="labelCard">
+                <label for="senhaAtual">Senha Atual:</label>
+                <input type="password" id="senhaAtual" name="senhaAtual" placeholder="Digite a sua senha" />
+            </div>
+
+            <button type="submit">Salvar</button>
+        </form>
+    </main>
+</body>
+
+</html>

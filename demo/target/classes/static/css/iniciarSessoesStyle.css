@@ -1,0 +1,211 @@
+:root {
+    --corFundoPrincipal: #FFFFFF;
+    --corPrincipalFonte: #0D0D0D;
+    --corCinzaFonte: #808080;
+    --corSecundariaCinzaFonte: #464545;
+    --corDestaqueVerde: #7A7453;
+    --corDestaqueVermelho: #7C2A2A;
+    --corDestaqueBege: #C29A6E;
+
+    --fonteDestaque: "Merriweather", serif;
+    --fonteParaTexto: "Roboto", sans-serif;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+*:focus{
+    outline: none;
+}
+
+
+main {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    margin: 20px 0px 0px 0px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+
+.tituloSelecionar {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 20px 15px 20px;
+    font-family: var(--fonteDestaque);
+}
+
+.tituloSelecionar h3 {
+    color: var(--corSecundariaCinzaFonte);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.tituloSelecionar span {
+    color: var(--corDestaqueVermelho);
+    font-family: var(--fonteParaTexto);
+}
+
+.tituloSelecionar span:hover{
+    cursor: pointer;
+}
+
+.paragrafoInformativo {
+    margin: 5px 20px 20px 20px;
+    font-family: var(--fonteParaTexto);
+    font-size: 13px;
+}
+
+.divAssuntos {
+    margin: 0px 20px 0px 20px;
+}
+
+.divAssuntos ul{
+    height: 200px;
+    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+.divAssuntos li {
+    font-family: var(--fonteParaTexto);
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 0px 0px 0px 5px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+
+.divBotoes {
+    margin: 20px 0px 20px 0px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.divBotoes button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7rem;
+    height: 2.2rem;
+    /* Aumentei um pouco a altura para melhor clique */
+    background-color: var(--corDestaqueVerde);
+    color: var(--corFundoPrincipal);
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: 0.3s linear;
+}
+
+.divBotoes button:hover {
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVerde);
+    border: 0.1rem solid var(--corDestaqueVerde);
+}
+
+.divBotoes #botaoCancelar {
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVerde);
+    border: 0.1rem solid var(--corDestaqueVerde);
+    transition: 0.3s linear;
+}
+
+.divBotoes #botaoCancelar:hover {
+    background-color: var(--corDestaqueVerde);
+    color: var(--corFundoPrincipal);
+}
+
+
+/*==============================*/
+/*CARD DO Finalizar COMEÇA AQUI*/
+/*------------------------------*/
+
+.divFinalizar{
+    margin-top: 20px;
+    align-self: center;
+    font-family: var(--fonteParaTexto);
+    font-size: 40px;
+}
+
+.divInformacoesMateria{
+    margin: 20px 0px 20px 0px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: var(--fonteParaTexto);
+    font-size: 14px;
+}
+
+.divInformacoesMateria h4{
+    margin-bottom: 5px;
+}
+
+.divBotoes #botaoCancelarFinalizar {
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVerde);
+    border: 0.1rem solid var(--corDestaqueVerde);
+    transition: 0.3s linear;
+}
+
+.divBotoes #botaoCancelarFinalizar:hover {
+    background-color: var(--corDestaqueVerde);
+    color: var(--corFundoPrincipal);
+}
+
+
+/*==============================*/
+/*CARD FINALIZAR O ASSUNTO/SESSAO COMEÇA AQUI*/
+/*------------------------------*/
+
+.formFinalizarAssunto{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 20px 0px 20px;
+}
+
+.formFinalizarAssunto h3, h4{
+    font-family: var(--fonteParaTexto);
+    font-weight: 500;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.formGroup{
+    margin-bottom: 20px;
+}
+
+.formGroup span, label{
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.formGroup #quantidadeQuestoes{
+    width: 40px;
+}
+
+.divBotoes #botaoCancelarFinalizar {
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVerde);
+    border: 0.1rem solid var(--corDestaqueVerde);
+    transition: 0.3s linear;
+}
+
+.divBotoes #botaoCancelarFinalizar:hover {
+    background-color: var(--corDestaqueVerde);
+    color: var(--corFundoPrincipal);
+}
