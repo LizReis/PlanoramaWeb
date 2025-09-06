@@ -42,6 +42,9 @@ public class MateriaEntity {
     @OneToMany(mappedBy = "materiaEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<AssuntoEntity> listaAssuntos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "materiaEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<SessaoEstudoEntity> listaSessao = new ArrayList<>();
+
     @OneToMany(mappedBy = "materiaEntity")
     private List<MateriaPlanejamentoEntity> planejamentosComMateria = new ArrayList<>();
 }

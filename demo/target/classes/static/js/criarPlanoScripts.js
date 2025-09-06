@@ -126,7 +126,7 @@ document.body.addEventListener('submit', async function (event) {
         const form = event.target;
         const modalContainer = document.getElementById("modal-container");
 
-        const materiasSelecionadas = Array.from(document.querySelectorAll(".materia.selecionada")).map(m => m.dataset.materiaId);
+        const materiasSelecionadas = Array.from(document.querySelectorAll(".materia.selecionado")).map(m => m.dataset.materiaId);
 
         console.log("Ids das matérias: ", materiasSelecionadas);
 

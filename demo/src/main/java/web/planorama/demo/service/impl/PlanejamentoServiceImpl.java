@@ -155,4 +155,10 @@ public class PlanejamentoServiceImpl implements PlanejamentoService{
 
     }
 
+    @Override
+    public List<SessaoEstudoDTO> gerarCicloDeEstudos(UUID planejamentoId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'gerarCicloDeEstudos'");
+    }
+
 }

@@ -1,39 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/criarPlanoStyle.css">
-    <link rel="stylesheet" href="../static/css/homeStyle.css">
-    <title>Planorama - Criar Plano</title>
-</head>
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
 
 <body>
-    <header class="conteudoPrincipal">
-        <section>
-            <div id="divMenuHamburguer">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
 
-            <div class="divNomeSite">
-                <a href="index.html"><span class="primeiroSpan">Plano</span><span class="segundoSpan">rama</span></a>
-            </div>
-
-            <div class="divFotoUsuario">
-                <img src="../static/img/gatinho.jpg">
-            </div>
-        </section>
-    </header>
-
-    <section class="sectionCriarPlano-segundo">
+    <main class="sectionCriarPlano-segundo cardCriacao corpo" th:fragment="cardCriacao">
         <div class="titulo">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
@@ -45,46 +15,35 @@
             </div>
 
             <div>
-                <p>Defina a carga horária e seu nível de conhecimento em cada matéria <br>(1 = Péssimo, 2 = Ruim, 3 = Razoável,
+                <p>Defina a carga horária e seu nível de conhecimento em cada matéria <br>(1 = Péssimo, 2 = Ruim, 3 =
+                    Razoável,
                     4 = Bom, 5 = Ótimo).</p>
             </div>
         </div>
 
-        <div class="containerMaterias">
-            <div class="cardMaterias">
-                <span>Lingua Portuguesa</span>
+        <form id="formCriarPlanejamento_3" th:action="@{/criar-planejamento/terceiro-card}" th:object="${planejamentoDTO}" method="post">
+            <div class="containerMaterias" th:each="materia : ${materiasDoPlanejamento}">
+                <div class="cardMaterias">
+                    <span th:text="${materia.nomeMateria}">Lingua Portuguesa</span>
 
-                <div class="divConhecimento">
-                    <label for="nivelConhecimento">Nível de Conhecimento:</label>
-                    <input type="number" id="nivelConhecimento" name="nivelConhecimento" min="1" max="5">
+                    <div class="divConhecimento">
+                        <label for="nivelConhecimento">Nível de Conhecimento:</label>
+                        <input type="number" id="nivelConhecimento" th:field="*{nivelConhecimento}" min="1" max="5">
+                    </div>
+
+                    <div class="divCargaHoraria">
+                        <label for="cargaHorariaMateriaPlano">Carga Horária:</label>
+                        <input type="number" id="cargaHorariaMateriaPlano" th:field="*{cargaHorariaMateriaPlano}" min="0">
+                    </div>
                 </div>
 
-                <div class="divCargaHoraria"> 
-                    <label for="cargaHoraria">Carga Horária:</label>
-                    <input type="number" id="cargaHoraria" name="cargaHoraria" min="0">
-                </div>
-            </div>
-
-            <div class="cardMaterias">
-                <span>Matemática</span>
-
-                <div class="divConhecimento">
-                    <label for="nivelConhecimento">Nível de Conhecimento:</label>
-                    <input type="number" id="nivelConhecimento" name="nivelConhecimento" min="1" max="5">
-                </div>
-
-                <div class="divCargaHoraria"> 
-                    <label for="cargaHoraria">Carga Horária:</label>
-                    <input type="number" id="cargaHoraria" name="cargaHoraria" min="0">
+                <div class="divBotoes">
+                    <button id="botaoCancelarFinalizar" class="botaoAncora">Cancelar</button>
+                    <button id="botaoConfirmarFinalizar" class="botaoAncora">Finalizar</button>
                 </div>
             </div>
-
-            <div class="divBotoes">
-                <button id="botaoCancelarFinalizar" class="botaoAncora">Cancelar</button>
-                <button id="botaoConfirmarFinalizar" class="botaoAncora">Finalizar</button>
-            </div>
-        </div>
-    </section>
+        </form>
+    </main>
 
     <section id="sectionAparecerMenu"></section>
 
