@@ -3,9 +3,7 @@ package web.planorama.demo.mapping;
 
 import org.springframework.stereotype.Component;
 
-import web.planorama.demo.dto.MateriaDTO;
 import web.planorama.demo.dto.MateriaPlanejamentoDTO;
-import web.planorama.demo.entity.MateriaEntity;
 import web.planorama.demo.entity.MateriaPlanejamentoEntity;
 
 @Component

@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 
 
@@ -73,9 +74,8 @@ public class CriarPlanejamentoController {
         return "segundoCriarPlano :: cardCriacao";
     }
 
-    @GetMapping("/terceiro-card")
-    public String getTerceiroCard(Model model){
-
+    @GetMapping("/finalizar")
+    public String getTerceiroCard(){
         return "terceiroCriarPlano :: cardCriacao";
     }
     
@@ -115,7 +115,20 @@ public class CriarPlanejamentoController {
 
         planejamentoDTO.setMaterias(materiasSelecionadasEntity);
 
+        model.addAttribute("planejamentoDTO", planejamentoDTO);
+
         return "terceiroCriarPlano :: cardCriacao";
+    }
+
+    @PostMapping("/finalizar")
+    public String postFinalizarCriacao(@ModelAttribute("planejamentoDTO") PlanejamentoDTO planejamentoDTO, SessionStatus status){
+        log.info("Request: {}", planejamentoDTO);
+
+        planejamentoService.save(planejamentoDTO);
+
+        status.setComplete();
+
+        return "redirect:/home";
     }
     
 }

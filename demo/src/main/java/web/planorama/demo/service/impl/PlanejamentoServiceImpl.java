@@ -32,6 +32,7 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
     private final PlanejamentoRepository planejamentoRepository;
     private final UsuarioRepository usuarioRepository;
     private final PlanejamentoMapper mapper;
+    private final MateriaPlanejamentoMapper materiaPlanejamentoMapper;
 
     @Override
     @Transactional
@@ -47,19 +48,17 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         planejamentoEntity.setCriador(criador);
         
         if(planejamentoEntity.getMaterias() != null){
-            plnejamentoEntity.getMaterias().forEach(materiaPlanejamento -> materiaPlanejamento.setPlanejamentoEntity(planejamentoEntity));
+            List<MateriaPlanejamentoEntity> materiasDoPlanejamento = planejamentoDTO.getMaterias().stream().map(materiaDTO -> {
+                MateriaPlanejamentoEntity materiaPlanejamentoEntity = materiaPlanejamentoMapper.toMateriaPlanejamentoEntity(materiaDTO);
+
+                materiaPlanejamentoEntity.setPlanejamentoEntity(planejamentoEntity);
+
+                return materiaPlanejamentoEntity;
+            }).collect(Collectors.toList());
         }
 
         return mapper.toPlanejamentoDTO(planejamentoRepository.save(planejamentoEntity));
 
-        // FALTA A LÓGICA PARA SALVAR A MATÉRIA E A DO TERCEIRO CARD QUE É RESPONSÁVEL
-        // POR
-        // DEFINIR O NIVEL DE CONHECIMENTO DE CARGA HORÁRIA DE CADA MATÉRIA
-        // ========LEMBRANDO QUE A LÓGICA DO NIVEL DE CONHECIMENTO E DA CARGA
-        // HORARIA=========
-        // =========FICAM NO
-        // MateriaPlanejamento===============================================
-        // DEPOIS DISSO TUDO, AÍ SIM O SAVE DO PLANEJAMENTO VAI SALVAR O PLANEJAMENTO
     }
 
     @Override
