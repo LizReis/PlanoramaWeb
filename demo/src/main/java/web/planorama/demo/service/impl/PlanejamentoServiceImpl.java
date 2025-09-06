@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -25,7 +27,7 @@ import web.planorama.demo.service.PlanejamentoService;
 
 @Service
 @RequiredArgsConstructor
-public class PlanejamentoServiceImpl implements PlanejamentoService{
+public class PlanejamentoServiceImpl implements PlanejamentoService {
 
     private final PlanejamentoRepository planejamentoRepository;
     private final UsuarioRepository usuarioRepository;
@@ -36,29 +38,39 @@ public class PlanejamentoServiceImpl implements PlanejamentoService{
     public PlanejamentoDTO save(PlanejamentoDTO planejamentoDTO) {
         validarPlanejamentoDTO(planejamentoDTO);
 
-        UsuarioEntity criador = usuarioRepository.findById(planejamentoDTO.getCriador().getId())
-                .orElseThrow(() -> new MyNotFoundException("Usuário com ID " + planejamentoDTO.getCriador().getId() + " não encontrado."));
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String emailUsuarioLogado = ((UserDetails) principal).getUsername();
+        UsuarioEntity criador = usuarioRepository.findByEmail(emailUsuarioLogado)
+                .orElseThrow(() -> new MyNotFoundException("Usuário não encontrado."));
 
         PlanejamentoEntity planejamentoEntity = mapper.toPlanejamentoEntity(planejamentoDTO);
         planejamentoEntity.setCriador(criador);
-        return planejamentoDTO;
+        
+        if(planejamentoEntity.getMaterias() != null){
+            plnejamentoEntity.getMaterias().forEach(materiaPlanejamento -> materiaPlanejamento.setPlanejamentoEntity(planejamentoEntity));
+        }
 
-        //FALTA A LÓGICA PARA SALVAR A MATÉRIA E A DO TERCEIRO CARD QUE É RESPONSÁVEL POR
-        //DEFINIR O NIVEL DE CONHECIMENTO DE CARGA HORÁRIA DE CADA MATÉRIA
-        // ========LEMBRANDO QUE A LÓGICA DO NIVEL DE CONHECIMENTO E DA CARGA HORARIA=========
-        //=========FICAM NO MateriaPlanejamento===============================================
-        //DEPOIS DISSO TUDO, AÍ SIM O SAVE DO PLANEJAMENTO VAI SALVAR O PLANEJAMENTO
+        return mapper.toPlanejamentoDTO(planejamentoRepository.save(planejamentoEntity));
+
+        // FALTA A LÓGICA PARA SALVAR A MATÉRIA E A DO TERCEIRO CARD QUE É RESPONSÁVEL
+        // POR
+        // DEFINIR O NIVEL DE CONHECIMENTO DE CARGA HORÁRIA DE CADA MATÉRIA
+        // ========LEMBRANDO QUE A LÓGICA DO NIVEL DE CONHECIMENTO E DA CARGA
+        // HORARIA=========
+        // =========FICAM NO
+        // MateriaPlanejamento===============================================
+        // DEPOIS DISSO TUDO, AÍ SIM O SAVE DO PLANEJAMENTO VAI SALVAR O PLANEJAMENTO
     }
 
     @Override
     public PlanejamentoDTO findOne(UUID id) {
-       var entity = planejamentoRepository.findById(id).orElseThrow();
-       return mapper.toPlanejamentoDTO(entity);
+        var entity = planejamentoRepository.findById(id).orElseThrow();
+        return mapper.toPlanejamentoDTO(entity);
     }
 
     @Override
     public List<PlanejamentoDTO> findAll() {
-       return planejamentoRepository.findAll()
+        return planejamentoRepository.findAll()
                 .stream()
                 .map(mapper::toPlanejamentoDTO)
                 .toList();
@@ -73,20 +85,18 @@ public class PlanejamentoServiceImpl implements PlanejamentoService{
                 .toList();
     }
 
-    
     @Override
     public List<PlanejamentoDTO> findAllOfEstudante(EstudanteDTO estudanteDTO) {
-       return planejamentoRepository.findAll()
+        return planejamentoRepository.findAll()
                 .stream()
                 .filter(plano -> plano.getCriador() != null && plano.getCriador().getId().equals(estudanteDTO.id()))
                 .map(mapper::toPlanejamentoDTO)
                 .toList();
     }
 
-
     @Override
     public void remove(UUID id) {
-        if(planejamentoRepository.existsById(id)){
+        if (planejamentoRepository.existsById(id)) {
             planejamentoRepository.deleteById(id);
         }
     }
@@ -144,14 +154,15 @@ public class PlanejamentoServiceImpl implements PlanejamentoService{
             throw new IllegalArgumentException("O plano de estudos deve ter pelo menos uma matéria.");
         }
         dto.getMaterias().forEach(materia -> {
-            if (materia.getMateriaEntity().getNomeMateria() == null || materia.getMateriaEntity().getNomeMateria().isBlank()) {
+            if (materia.getMateriaEntity().getNomeMateria() == null
+                    || materia.getMateriaEntity().getNomeMateria().isBlank()) {
                 throw new IllegalArgumentException("O nome da matéria não pode ser vazio.");
             }
             if (materia.getNivelConhecimento() < 1 || materia.getNivelConhecimento() > 5) {
-                throw new IllegalArgumentException("A proficiência da matéria '" + materia.getMateriaEntity().getNomeMateria() + "' deve ser entre 1 e 5.");
+                throw new IllegalArgumentException("A proficiência da matéria '"
+                        + materia.getMateriaEntity().getNomeMateria() + "' deve ser entre 1 e 5.");
             }
         });
-
 
     }
 

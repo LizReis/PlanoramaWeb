@@ -21,25 +21,27 @@
             </div>
         </div>
 
-        <form id="formCriarPlanejamento_3" th:action="@{/criar-planejamento/terceiro-card}" th:object="${planejamentoDTO}" method="post">
-            <div class="containerMaterias" th:each="materia : ${materiasDoPlanejamento}">
-                <div class="cardMaterias">
-                    <span th:text="${materia.nomeMateria}">Lingua Portuguesa</span>
+        <form id="formCriarPlanejamento_3" th:action="@{/criar-planejamento/finalizar}" th:object="${planejamentoDTO}" method="post">
+            <div class="containerMaterias">
+                <div class="cardMaterias" th:each="materia, iterStat: *{materias}">
+                    <span th:text="${materia.materiaEntity.nomeMateria}">Lingua Portuguesa</span>
+
+                    <input type="hidden" th:field="*{materias[_${iterStat.index}_].materiaEntity}" />
 
                     <div class="divConhecimento">
                         <label for="nivelConhecimento">Nível de Conhecimento:</label>
-                        <input type="number" id="nivelConhecimento" th:field="*{nivelConhecimento}" min="1" max="5">
+                        <input type="number" id="nivelConhecimento" th:field="*{materias[_${iterStat.index}_].nivelConhecimento}" min="1" max="5">
                     </div>
 
                     <div class="divCargaHoraria">
                         <label for="cargaHorariaMateriaPlano">Carga Horária:</label>
-                        <input type="number" id="cargaHorariaMateriaPlano" th:field="*{cargaHorariaMateriaPlano}" min="0">
+                        <input type="number" id="cargaHorariaMateriaPlano"  th:field="*{materias[__${iterStat.index}__].cargaHorariaMateriaPlano}" min="0">
                     </div>
                 </div>
 
                 <div class="divBotoes">
-                    <button id="botaoCancelarFinalizar" class="botaoAncora">Cancelar</button>
-                    <button id="botaoConfirmarFinalizar" class="botaoAncora">Finalizar</button>
+                    <a th:href="@{/criar-planejamento/segundo-card}"><button id="botaoCancelarFinalizar" class="botaoAncora abrir-sub-modal">Cancelar</button></a>
+                    <button type="submit" id="botaoConfirmarFinalizar" class="botaoAncora">Finalizar</button>
                 </div>
             </div>
         </form>

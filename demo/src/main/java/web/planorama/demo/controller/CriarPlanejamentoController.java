@@ -76,12 +76,6 @@ public class CriarPlanejamentoController {
     @GetMapping("/terceiro-card")
     public String getTerceiroCard(Model model){
 
-        List<MateriaPlanejamentoDTO> materiasDoPlanejamento = planejamentoDTO().getMaterias().stream().map(materia -> {
-            return materiaPlanejamentoMapper.toMateriaPlanejamentoDTO(materia);
-        }).collect(Collectors.toList());
-
-        model.addAttribute("materiasDoPlanejamento", materiasDoPlanejamento);
-
         return "terceiroCriarPlano :: cardCriacao";
     }
     

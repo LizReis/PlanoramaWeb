@@ -182,6 +182,29 @@ document.body.addEventListener('submit', async function (event) {
         }
     }
 
+    //=================SCRIPT DO TERCEIRO FORM
+    if (event.target.id === 'formCriarPlanejamento_3') {
+    event.preventDefault();
+    const form = event.target;
+    
+    try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: new URLSearchParams(formData)
+        });
+
+        if (response.redirected) {
+            window.location.href = response.url;
+        } else {
+            const htmlComErros = await response.text();
+            document.getElementById('modal-container').innerHTML = htmlComErros;
+        }
+    } catch (error) {
+        console.error("Erro ao finalizar o planejamento:", error);
+    }
+}
+
 });
 
 
