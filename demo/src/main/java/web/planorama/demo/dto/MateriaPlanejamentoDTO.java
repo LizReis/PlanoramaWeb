@@ -15,13 +15,14 @@ import web.planorama.demo.entity.PlanejamentoEntity;
 @AllArgsConstructor
 public class MateriaPlanejamentoDTO {
     private UUID id;
-    private PlanejamentoDTO planejamentoEntity;
-    private MateriaDTO materiaEntity;
+    private PlanejamentoDTO planejamentoDTO;
+    private MateriaDTO materiaDTO;
+    private UUID idMateriaDTO;
     @NotNull
     @Min(value = 1, message = "O valor deve ser no mínimo 1.")
     @Max(value = 5, message = "O valor deve ser no máximo 5.")
-    private int nivelConhecimento;
+    private Integer nivelConhecimento;
     @NotNull(message = "A carga horária é obrigatória.")
     @Min(value = 1, message = "A carga horária deve ser de no mínimo 1 hora.")
-    private int cargaHorariaMateriaPlano;
+    private Integer cargaHorariaMateriaPlano;
 }

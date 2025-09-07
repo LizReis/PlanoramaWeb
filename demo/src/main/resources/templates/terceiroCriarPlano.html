@@ -25,9 +25,9 @@
             method="post">
             <div class="containerMaterias">
                 <div class="cardMaterias" th:each="materia, iterStat: *{materias}">
-                    <span th:text="${materia.materiaEntity.nomeMateria}">Lingua Portuguesa</span>
+                    <span th:text="${materia.materiaDTO.nomeMateria}">Lingua Portuguesa</span>
 
-                    <input type="hidden" th:field="*{materias[__${iterStat.index}__].materiaEntity}" />
+                    <input type="hidden" th:field="*{materias[__${iterStat.index}__].idMateriaDTO}" />
 
                     <div class="divConhecimento">
                         <label for="nivelConhecimento">Nível de Conhecimento:</label>
@@ -53,8 +53,7 @@
                 </div>
 
                 <div class="divBotoes">
-                    <a th:href="@{/criar-planejamento/segundo-card}"><button id="botaoCancelarFinalizar"
-                            class="botaoAncora abrir-sub-modal">Cancelar</button></a>
+                    <a th:href="@{/criar-planejamento/segundo-card}" id="botaoCancelarFinalizar" class="botaoAncora abrir-sub-modal">Cancelar</a>
                     <button type="submit" id="botaoConfirmarFinalizar" class="botaoAncora">Finalizar</button>
                 </div>
             </div>

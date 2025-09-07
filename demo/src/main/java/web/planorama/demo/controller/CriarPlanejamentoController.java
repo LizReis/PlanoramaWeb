@@ -44,7 +44,8 @@ public class CriarPlanejamentoController {
     private final PlanejamentoService planejamentoService;
     private final MateriaService materiaService;
 
-    private UsuarioMapper usuarioMapper;
+    private final UsuarioMapper usuarioMapper;
+    private final MateriaMapper materiaMapper;
 
     private final UsuarioRepository usuarioRepository;
 
@@ -74,7 +75,7 @@ public class CriarPlanejamentoController {
     }
 
     @GetMapping("/finalizar")
-    public String getTerceiroCard() {
+    public String getTerceiroCard(Model model) {
         return "terceiroCriarPlano :: cardCriacao";
     }
 
@@ -115,7 +116,8 @@ public class CriarPlanejamentoController {
             MateriaDTO materia = materiaService.findById(id);
             MateriaPlanejamentoDTO materiaPlanejamentoDTO = new MateriaPlanejamentoDTO();
 
-            materiaPlanejamentoDTO.setMateriaEntity(materia);
+            materiaPlanejamentoDTO.setMateriaDTO(materia);
+            materiaPlanejamentoDTO.setIdMateriaDTO(materia.getId());
 
             return materiaPlanejamentoDTO;
         }).collect(Collectors.toList());
@@ -128,8 +130,7 @@ public class CriarPlanejamentoController {
     }
 
     @PostMapping("/finalizar")
-    public String postFinalizarCriacao(@Valid @ModelAttribute("planejamentoDTO") PlanejamentoDTO planejamentoDTO,
-            SessionStatus status, BindingResult result, Model model) {
+    public String postFinalizarCriacao(@Valid @ModelAttribute("planejamentoDTO") PlanejamentoDTO planejamentoDTO, BindingResult result, SessionStatus status,  Model model) {
         log.info("Request: {}", planejamentoDTO);
 
         if(result.hasErrors()){

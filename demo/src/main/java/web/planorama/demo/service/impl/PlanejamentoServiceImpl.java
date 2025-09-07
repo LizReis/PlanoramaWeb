@@ -1,6 +1,5 @@
 package web.planorama.demo.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -8,22 +7,22 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import web.planorama.demo.dto.EstudanteDTO;
 import web.planorama.demo.dto.PlanejamentoDTO;
-import web.planorama.demo.entity.MateriaEntity;
 import web.planorama.demo.dto.SessaoEstudoDTO;
+import web.planorama.demo.entity.EstudanteEntity;
+import web.planorama.demo.entity.MateriaEntity;
 import web.planorama.demo.entity.MateriaPlanejamentoEntity;
 import web.planorama.demo.entity.PlanejamentoEntity;
 import web.planorama.demo.entity.UsuarioEntity;
 import web.planorama.demo.exceptions.MyNotFoundException;
-import web.planorama.demo.mapping.MateriaMapper;
 import web.planorama.demo.mapping.MateriaPlanejamentoMapper;
 import web.planorama.demo.mapping.PlanejamentoMapper;
+import web.planorama.demo.repository.MateriaRepository;
 import web.planorama.demo.repository.PlanejamentoRepository;
 import web.planorama.demo.repository.UsuarioRepository;
 import web.planorama.demo.service.PlanejamentoService;
@@ -34,13 +33,13 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
     private final PlanejamentoRepository planejamentoRepository;
     private final UsuarioRepository usuarioRepository;
+    private final MateriaRepository materiaRepository;
     private final PlanejamentoMapper mapper;
     private final MateriaPlanejamentoMapper materiaPlanejamentoMapper;
 
     @Override
     @Transactional
     public PlanejamentoDTO save(PlanejamentoDTO planejamentoDTO) {
-        validarPlanejamentoDTO(planejamentoDTO);
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String emailUsuarioLogado = ((UserDetails) principal).getUsername();
@@ -49,20 +48,36 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
         PlanejamentoEntity planejamentoEntity = mapper.toPlanejamentoEntity(planejamentoDTO);
         planejamentoEntity.setCriador(criador);
+        planejamentoEntity.setNomePlanejamento(planejamentoDTO.getNomePlanejamento());
+        planejamentoEntity.setDisponibilidade(planejamentoDTO.getDisponibilidade());
+        planejamentoEntity.setCargo(planejamentoDTO.getCargo());
+        planejamentoEntity.setAnoAplicacao(planejamentoDTO.getAnoAplicacao());
+        planejamentoEntity.setHorasDiarias(planejamentoDTO.getHorasDiarias());
+        planejamentoEntity.setPlanoArquivado(planejamentoDTO.isPlanoArquivado());
+        planejamentoEntity.setPreDefinidoAdm(planejamentoDTO.isPreDefinidoAdm());
+        //if(criador.){
+        //    planejamentoEntity.setPreDefinidoAdm(false);
+        //}else{
+        //    planejamentoEntity.setPreDefinidoAdm(true);
+        //}
         
         if(planejamentoEntity.getMaterias() != null){
             List<MateriaPlanejamentoEntity> materiasDoPlanejamento = planejamentoDTO.getMaterias().stream().map(materiaPlano -> {
-                MateriaPlanejamentoEntity materia =  materiaPlanejamentoMapper.toMateriaPlanejamentoEntity(materiaPlano);
+                MateriaPlanejamentoEntity materiaPlanejamento =  materiaPlanejamentoMapper.toMateriaPlanejamentoEntity(materiaPlano);
+                materiaPlanejamento.setNivelConhecimento(materiaPlano.getNivelConhecimento());
+                materiaPlanejamento.setCargaHorariaMateriaPlano(materiaPlano.getCargaHorariaMateriaPlano());
+                materiaPlanejamento.setPlanejamentoEntity(planejamentoEntity);
 
-                materia.setPlanejamentoEntity(planejamentoEntity);
+                MateriaEntity materiaEntity = materiaRepository.findById(materiaPlano.getIdMateriaDTO()).orElseThrow(() -> new RuntimeException("Matéria não encontrada."));
 
-                return materia;
+                materiaPlanejamento.setMateriaEntity(materiaEntity);
+                materiaPlanejamento.setPlanejamentoEntity(planejamentoEntity);
+
+                return materiaPlanejamento;
             }).collect(Collectors.toList());
 
             planejamentoEntity.setMaterias(materiasDoPlanejamento);
         }
-
-
 
         return mapper.toPlanejamentoDTO(planejamentoRepository.save(planejamentoEntity));
 
@@ -140,37 +155,6 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         throw new UnsupportedOperationException("Unimplemented method 'restaurarPlanoDeEstudos'");
     }
 
-    private void validarPlanejamentoDTO(PlanejamentoDTO dto) {
-        if (dto.getNomePlanejamento() == null || dto.getNomePlanejamento().isBlank()) {
-            throw new IllegalArgumentException("O nome do planejamento é obrigatório.");
-        }
-        if (dto.getCargo() == null || dto.getCargo().isBlank()) {
-            throw new IllegalArgumentException("O cargo é obrigatório.");
-        }
-        if (dto.getAnoAplicacao() <= 2020) {
-            throw new IllegalArgumentException("O ano de aplicação deve ser superior a 2020.");
-        }
-        if (dto.getCriador().id() == null) {
-            throw new IllegalArgumentException("O ID do criador do plano é obrigatório.");
-        }
-        if (dto.getDisponibilidade() == null) {
-            throw new IllegalArgumentException("A disponibilidade de horários é obrigatória.");
-        }
-        if (dto.getMaterias() == null || dto.getMaterias().isEmpty()) {
-            throw new IllegalArgumentException("O plano de estudos deve ter pelo menos uma matéria.");
-        }
-        dto.getMaterias().forEach(materia -> {
-            if (materia.getMateriaEntity().getNomeMateria() == null
-                    || materia.getMateriaEntity().getNomeMateria().isBlank()) {
-                throw new IllegalArgumentException("O nome da matéria não pode ser vazio.");
-            }
-            if (materia.getNivelConhecimento() < 1 || materia.getNivelConhecimento() > 5) {
-                throw new IllegalArgumentException("A proficiência da matéria '"
-                        + materia.getMateriaEntity().getNomeMateria() + "' deve ser entre 1 e 5.");
-            }
-        });
-
-    }
 
     @Override
     public List<SessaoEstudoDTO> gerarCicloDeEstudos(UUID planejamentoId) {

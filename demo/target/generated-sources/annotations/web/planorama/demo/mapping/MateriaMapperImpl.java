@@ -8,17 +8,15 @@ import org.springframework.stereotype.Component;
 import web.planorama.demo.dto.AssuntoDTO;
 import web.planorama.demo.dto.MateriaDTO;
 import web.planorama.demo.dto.MateriaPlanejamentoDTO;
-import web.planorama.demo.dto.PlanejamentoDTO;
 import web.planorama.demo.dto.SessaoEstudoDTO;
 import web.planorama.demo.entity.AssuntoEntity;
 import web.planorama.demo.entity.MateriaEntity;
 import web.planorama.demo.entity.MateriaPlanejamentoEntity;
-import web.planorama.demo.entity.PlanejamentoEntity;
 import web.planorama.demo.entity.SessaoEstudoEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-07T01:09:13-0300",
+    date = "2025-09-07T13:34:01-0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.4 (Oracle Corporation)"
 )
 @Component
@@ -116,29 +114,6 @@ public class MateriaMapperImpl implements MateriaMapper {
         return list1;
     }
 
-    protected PlanejamentoEntity planejamentoDTOToPlanejamentoEntity(PlanejamentoDTO planejamentoDTO) {
-        if ( planejamentoDTO == null ) {
-            return null;
-        }
-
-        PlanejamentoEntity planejamentoEntity = new PlanejamentoEntity();
-
-        planejamentoEntity.setNomePlanejamento( planejamentoDTO.getNomePlanejamento() );
-        planejamentoEntity.setCargo( planejamentoDTO.getCargo() );
-        planejamentoEntity.setAnoAplicacao( planejamentoDTO.getAnoAplicacao() );
-        List<String> list = planejamentoDTO.getDisponibilidade();
-        if ( list != null ) {
-            planejamentoEntity.setDisponibilidade( new ArrayList<String>( list ) );
-        }
-        planejamentoEntity.setHorasDiarias( planejamentoDTO.getHorasDiarias() );
-        planejamentoEntity.setMaterias( materiaPlanejamentoDTOListToMateriaPlanejamentoEntityList( planejamentoDTO.getMaterias() ) );
-        planejamentoEntity.setCriador( usuarioMapper.toUsuarioEntity( planejamentoDTO.getCriador() ) );
-        planejamentoEntity.setPlanoArquivado( planejamentoDTO.isPlanoArquivado() );
-        planejamentoEntity.setPreDefinidoAdm( planejamentoDTO.isPreDefinidoAdm() );
-
-        return planejamentoEntity;
-    }
-
     protected MateriaPlanejamentoEntity materiaPlanejamentoDTOToMateriaPlanejamentoEntity(MateriaPlanejamentoDTO materiaPlanejamentoDTO) {
         if ( materiaPlanejamentoDTO == null ) {
             return null;
@@ -147,10 +122,12 @@ public class MateriaMapperImpl implements MateriaMapper {
         MateriaPlanejamentoEntity materiaPlanejamentoEntity = new MateriaPlanejamentoEntity();
 
         materiaPlanejamentoEntity.setId( materiaPlanejamentoDTO.getId() );
-        materiaPlanejamentoEntity.setPlanejamentoEntity( planejamentoDTOToPlanejamentoEntity( materiaPlanejamentoDTO.getPlanejamentoEntity() ) );
-        materiaPlanejamentoEntity.setMateriaEntity( toMateriaEntity( materiaPlanejamentoDTO.getMateriaEntity() ) );
-        materiaPlanejamentoEntity.setNivelConhecimento( materiaPlanejamentoDTO.getNivelConhecimento() );
-        materiaPlanejamentoEntity.setCargaHorariaMateriaPlano( materiaPlanejamentoDTO.getCargaHorariaMateriaPlano() );
+        if ( materiaPlanejamentoDTO.getNivelConhecimento() != null ) {
+            materiaPlanejamentoEntity.setNivelConhecimento( materiaPlanejamentoDTO.getNivelConhecimento() );
+        }
+        if ( materiaPlanejamentoDTO.getCargaHorariaMateriaPlano() != null ) {
+            materiaPlanejamentoEntity.setCargaHorariaMateriaPlano( materiaPlanejamentoDTO.getCargaHorariaMateriaPlano() );
+        }
 
         return materiaPlanejamentoEntity;
     }
@@ -221,29 +198,6 @@ public class MateriaMapperImpl implements MateriaMapper {
         return list1;
     }
 
-    protected PlanejamentoDTO planejamentoEntityToPlanejamentoDTO(PlanejamentoEntity planejamentoEntity) {
-        if ( planejamentoEntity == null ) {
-            return null;
-        }
-
-        PlanejamentoDTO planejamentoDTO = new PlanejamentoDTO();
-
-        planejamentoDTO.setNomePlanejamento( planejamentoEntity.getNomePlanejamento() );
-        planejamentoDTO.setCargo( planejamentoEntity.getCargo() );
-        planejamentoDTO.setAnoAplicacao( planejamentoEntity.getAnoAplicacao() );
-        List<String> list = planejamentoEntity.getDisponibilidade();
-        if ( list != null ) {
-            planejamentoDTO.setDisponibilidade( new ArrayList<String>( list ) );
-        }
-        planejamentoDTO.setHorasDiarias( planejamentoEntity.getHorasDiarias() );
-        planejamentoDTO.setMaterias( materiaPlanejamentoEntityListToMateriaPlanejamentoDTOList( planejamentoEntity.getMaterias() ) );
-        planejamentoDTO.setCriador( usuarioMapper.toUsuarioDTO( planejamentoEntity.getCriador() ) );
-        planejamentoDTO.setPlanoArquivado( planejamentoEntity.isPlanoArquivado() );
-        planejamentoDTO.setPreDefinidoAdm( planejamentoEntity.isPreDefinidoAdm() );
-
-        return planejamentoDTO;
-    }
-
     protected MateriaPlanejamentoDTO materiaPlanejamentoEntityToMateriaPlanejamentoDTO(MateriaPlanejamentoEntity materiaPlanejamentoEntity) {
         if ( materiaPlanejamentoEntity == null ) {
             return null;
@@ -252,8 +206,6 @@ public class MateriaMapperImpl implements MateriaMapper {
         MateriaPlanejamentoDTO materiaPlanejamentoDTO = new MateriaPlanejamentoDTO();
 
         materiaPlanejamentoDTO.setId( materiaPlanejamentoEntity.getId() );
-        materiaPlanejamentoDTO.setPlanejamentoEntity( planejamentoEntityToPlanejamentoDTO( materiaPlanejamentoEntity.getPlanejamentoEntity() ) );
-        materiaPlanejamentoDTO.setMateriaEntity( toMateriaDTO( materiaPlanejamentoEntity.getMateriaEntity() ) );
         materiaPlanejamentoDTO.setNivelConhecimento( materiaPlanejamentoEntity.getNivelConhecimento() );
         materiaPlanejamentoDTO.setCargaHorariaMateriaPlano( materiaPlanejamentoEntity.getCargaHorariaMateriaPlano() );
 
