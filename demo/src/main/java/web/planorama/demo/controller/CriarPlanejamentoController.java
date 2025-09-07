@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+
 import org.springframework.ui.Model;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +18,13 @@ import lombok.extern.slf4j.Slf4j;
 import web.planorama.demo.dto.MateriaDTO;
 import web.planorama.demo.dto.MateriaPlanejamentoDTO;
 import web.planorama.demo.dto.PlanejamentoDTO;
+import web.planorama.demo.dto.UsuarioDTO;
 import web.planorama.demo.entity.MateriaPlanejamentoEntity;
+import web.planorama.demo.entity.UsuarioEntity;
 import web.planorama.demo.mapping.MateriaMapper;
 import web.planorama.demo.mapping.MateriaPlanejamentoMapper;
-import web.planorama.demo.mapping.PlanejamentoMapper;
-import web.planorama.demo.repository.MateriaPlanejamentoRepository;
-import web.planorama.demo.service.MateriaPlanejamentoService;
+import web.planorama.demo.mapping.UsuarioMapper;
+import web.planorama.demo.repository.UsuarioRepository;
 import web.planorama.demo.service.MateriaService;
 import web.planorama.demo.service.PlanejamentoService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +33,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
-
 
 @Controller
 @RequestMapping("/criar-planejamento")
@@ -41,24 +43,21 @@ public class CriarPlanejamentoController {
 
     private final PlanejamentoService planejamentoService;
     private final MateriaService materiaService;
-    private final MateriaPlanejamentoService materiaPlanejamentoService;
 
-    private final PlanejamentoMapper planejamentoMapper;
-    private final MateriaMapper materiaMapper;
-    private final MateriaPlanejamentoMapper materiaPlanejamentoMapper;
+    private UsuarioMapper usuarioMapper;
 
-    private final MateriaPlanejamentoRepository materiaPlanejamentoRepository;
+    private final UsuarioRepository usuarioRepository;
 
-
-    //Temos que criar um DTO vazio para que ele seja usado ao longo das telas de criação
-    //do planejamento, ele guardará os dados para criação.
-    //Toda vez que o usuário clicar em criar ou salvar dos cards, ele guardará e redirecionará
-    //para o próximo
+    // Temos que criar um DTO vazio para que ele seja usado ao longo das telas de
+    // criação
+    // do planejamento, ele guardará os dados para criação.
+    // Toda vez que o usuário clicar em criar ou salvar dos cards, ele guardará e
+    // redirecionará
+    // para o próximo
     @ModelAttribute("planejamentoDTO")
-    public PlanejamentoDTO planejamentoDTO(){
+    public PlanejamentoDTO planejamentoDTO() {
         return new PlanejamentoDTO();
     }
-    
 
     @GetMapping
     public String getPrimeiroCard(Model model) {
@@ -75,13 +74,13 @@ public class CriarPlanejamentoController {
     }
 
     @GetMapping("/finalizar")
-    public String getTerceiroCard(){
+    public String getTerceiroCard() {
         return "terceiroCriarPlano :: cardCriacao";
     }
-    
-    
+
     @PostMapping("/primeiro-card")
-    public String postPrimeiroCard(@Valid @ModelAttribute("planejamentoDTO") PlanejamentoDTO planejamentoDTO, BindingResult result, Model model) {
+    public String postPrimeiroCard(@Valid @ModelAttribute("planejamentoDTO") PlanejamentoDTO planejamentoDTO,
+            BindingResult result, Model model) {
         log.info("Request: {} {}", planejamentoDTO, result.hasErrors());
         if (result.hasErrors()) {
             model.addAttribute("planejamentoDTO", planejamentoDTO);
@@ -90,30 +89,38 @@ public class CriarPlanejamentoController {
             return "primeiroCriarPlano :: cardCriacao";
         }
 
-        //Senão tiver erros, ele apenas pega as coisas possíveis no planejamentodto vazio
-        //e redireciona para o próximo card
+        List<MateriaDTO> materias = materiaService.findAll();
+        model.addAttribute("materias", materias);
+
+        // Senão tiver erros, ele apenas pega as coisas possíveis no planejamentodto
+        // vazio
+        // e redireciona para o próximo card
         return "segundoCriarPlano :: cardCriacao";
     }
-    
 
     @PostMapping("/segundo-card")
-    public String postSegundoCard(@Valid @ModelAttribute("planejamentoDTO") PlanejamentoDTO planejamentoDTO, BindingResult result, Model model, @RequestParam("materiaIds") List<UUID> materiaIds) {
-        
+    public String postSegundoCard(@ModelAttribute("planejamentoDTO") PlanejamentoDTO planejamentoDTO, Model model,
+            @RequestParam(value = "materiaIds", required = false) List<UUID> materiaIds) {
+
+        if(materiaIds == null || materiaIds.isEmpty()){
+            model.addAttribute("error", "Você deve selecionar, pelo menos, uma matéria para o Planejamento.");
+            
+            List<MateriaDTO> materias = materiaService.findAll();
+            model.addAttribute("materias", materias);
+
+            return "segundoCriarPlano :: cardCriacao";
+        }
+
         List<MateriaPlanejamentoDTO> materiasSelecionadas = materiaIds.stream().map(id -> {
             MateriaDTO materia = materiaService.findById(id);
             MateriaPlanejamentoDTO materiaPlanejamentoDTO = new MateriaPlanejamentoDTO();
 
-            materiaPlanejamentoDTO.setMateriaEntity(materiaMapper.toMateriaEntity(materia));
+            materiaPlanejamentoDTO.setMateriaEntity(materia);
 
             return materiaPlanejamentoDTO;
         }).collect(Collectors.toList());
 
-
-        List<MateriaPlanejamentoEntity> materiasSelecionadasEntity = materiasSelecionadas.stream().map(m -> {
-           return materiaPlanejamentoMapper.toMateriaPlanejamentoEntity(m);
-        }).collect(Collectors.toList());
-
-        planejamentoDTO.setMaterias(materiasSelecionadasEntity);
+        planejamentoDTO.setMaterias(materiasSelecionadas);
 
         model.addAttribute("planejamentoDTO", planejamentoDTO);
 
@@ -121,8 +128,25 @@ public class CriarPlanejamentoController {
     }
 
     @PostMapping("/finalizar")
-    public String postFinalizarCriacao(@ModelAttribute("planejamentoDTO") PlanejamentoDTO planejamentoDTO, SessionStatus status){
+    public String postFinalizarCriacao(@Valid @ModelAttribute("planejamentoDTO") PlanejamentoDTO planejamentoDTO,
+            SessionStatus status, BindingResult result, Model model) {
         log.info("Request: {}", planejamentoDTO);
+
+        if(result.hasErrors()){
+            log.error("Erros de validação encontrados ao finalizar: {}", result.getAllErrors());
+
+            model.addAttribute("planejamentoDTO", planejamentoDTO);
+
+            return "terceiroCriarPlano :: cardCriacao";
+        }
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String emailUsuarioLogado = ((UserDetails) principal).getUsername();
+
+        UsuarioEntity criador = usuarioRepository.findByEmail(emailUsuarioLogado)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado para finalização do plano."));
+
+        planejamentoDTO.setCriador(usuarioMapper.toUsuarioDTO(criador));
 
         planejamentoService.save(planejamentoDTO);
 
@@ -130,5 +154,5 @@ public class CriarPlanejamentoController {
 
         return "redirect:/home";
     }
-    
+
 }

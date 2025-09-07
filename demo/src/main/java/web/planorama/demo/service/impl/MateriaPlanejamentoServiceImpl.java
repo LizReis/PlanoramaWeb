@@ -19,7 +19,7 @@ public class MateriaPlanejamentoServiceImpl implements MateriaPlanejamentoServic
     private final MateriaPlanejamentoMapper materiaPlanejamentoMapper;
 
     @Override
-    public MateriaPlanejamentoDTO save(MateriaPlanejamentoDTO materiaPlanejamentoDTO) {
+    public MateriaPlanejamentoDTO save(int nivelConhecimento, int cargaHorariaMateriaPlano) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }

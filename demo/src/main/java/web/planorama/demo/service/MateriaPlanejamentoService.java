@@ -6,7 +6,7 @@ import java.util.UUID;
 import web.planorama.demo.dto.MateriaPlanejamentoDTO;
 
 public interface MateriaPlanejamentoService {
-    MateriaPlanejamentoDTO save(MateriaPlanejamentoDTO materiaPlanejamentoDTO);
+    MateriaPlanejamentoDTO save(int nivelConhecimento, int cargaHorariaMateriaPlano);
     MateriaPlanejamentoDTO findById(UUID id);
     List<MateriaPlanejamentoDTO> findAll();
    

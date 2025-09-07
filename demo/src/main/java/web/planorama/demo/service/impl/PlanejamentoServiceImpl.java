@@ -21,6 +21,7 @@ import web.planorama.demo.entity.MateriaPlanejamentoEntity;
 import web.planorama.demo.entity.PlanejamentoEntity;
 import web.planorama.demo.entity.UsuarioEntity;
 import web.planorama.demo.exceptions.MyNotFoundException;
+import web.planorama.demo.mapping.MateriaMapper;
 import web.planorama.demo.mapping.MateriaPlanejamentoMapper;
 import web.planorama.demo.mapping.PlanejamentoMapper;
 import web.planorama.demo.repository.PlanejamentoRepository;
@@ -50,7 +51,8 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         planejamentoEntity.setCriador(criador);
         
         if(planejamentoEntity.getMaterias() != null){
-            List<MateriaPlanejamentoEntity> materiasDoPlanejamento = planejamentoDTO.getMaterias().stream().map(materia -> {
+            List<MateriaPlanejamentoEntity> materiasDoPlanejamento = planejamentoDTO.getMaterias().stream().map(materiaPlano -> {
+                MateriaPlanejamentoEntity materia =  materiaPlanejamentoMapper.toMateriaPlanejamentoEntity(materiaPlano);
 
                 materia.setPlanejamentoEntity(planejamentoEntity);
 
@@ -148,7 +150,7 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         if (dto.getAnoAplicacao() <= 2020) {
             throw new IllegalArgumentException("O ano de aplicação deve ser superior a 2020.");
         }
-        if (dto.getCriador().getId() == null) {
+        if (dto.getCriador().id() == null) {
             throw new IllegalArgumentException("O ID do criador do plano é obrigatório.");
         }
         if (dto.getDisponibilidade() == null) {

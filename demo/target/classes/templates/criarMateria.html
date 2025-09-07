@@ -3,7 +3,7 @@
 
 <body>
     <main class="criarMateria cardCriacao corpo" th:fragment="cardCriacao">
-        <form id="formCriarMateria" th:action="@{/materia/salvar}" method="post">
+        <form id="formCriarMateria" th:action="@{/materia/salvar}" th:object="${materiaDTO}" method="post">
             <div class="nomeCard">
                 <span class="tituloCard">Criar Matéria</span>
                 <span class="fecharX">X</span>
@@ -16,12 +16,14 @@
             <div class="labelCard">
                 <label for="nomeMateria">Nome da Matéria:</label>
                 <input type="text" id="nomeMateria" name="nomeMateria" placeholder="Nome da matéria" />
+                <span class="error" th:if="${error_nomeMateria}" th:text="${error_nomeMateria}"></span>
             </div>
             <br />
 
             <div class="assuntosCard">
                 <h4>Assuntos da Matéria:</h4>
                 <div id="assuntos-container"></div>
+                <span class="error" th:if="${error_assuntos}" th:text="${error_assuntos}"></span>
 
                 <button type="button" id="btn-adicionar-assunto">Adicionar Assunto</button>
             </div>

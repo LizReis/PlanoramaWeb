@@ -2,14 +2,13 @@ package web.planorama.demo.dto;
 
 import java.util.UUID;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import web.planorama.demo.entity.MateriaPlanejamentoEntity;
-import web.planorama.demo.entity.UsuarioEntity;
 
 import java.util.List;
 
@@ -41,9 +40,10 @@ public class PlanejamentoDTO{
     @Min(value = 1, message = "Deve ser no mínimo 1 hora por dia.")
     private int horasDiarias;
 
-    private List<MateriaPlanejamentoEntity> materias;
+    @Valid
+    private List<MateriaPlanejamentoDTO> materias;
 
-    private UsuarioEntity criador;
+    private UsuarioDTO criador;
 
     @NotNull 
     private boolean planoArquivado;

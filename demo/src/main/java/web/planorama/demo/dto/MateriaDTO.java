@@ -5,18 +5,27 @@ import java.util.UUID;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import web.planorama.demo.entity.AssuntoEntity;
-import web.planorama.demo.entity.MateriaPlanejamentoEntity;
-import web.planorama.demo.entity.SessaoEstudoEntity;
-import web.planorama.demo.entity.UsuarioEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record MateriaDTO(UUID id, 
-                @NotBlank
-                @NotNull
-                String nomeMateria, 
-                UsuarioEntity criadoPor, 
-                List<AssuntoEntity> listaAssuntos,
-                List<SessaoEstudoEntity> listaSessao,
-                List<MateriaPlanejamentoEntity> planejamentosComMateria) {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class MateriaDTO {
+    private UUID id;
+
+    @NotNull
+    @NotBlank
+    private String nomeMateria;
+
+    private UsuarioDTO criadoPor;
+
+    @NotBlank
+    @NotNull
+    private List<AssuntoDTO> listaAssuntos;
+
+    private List<SessaoEstudoDTO>listaSessao;
+    private List<MateriaPlanejamentoDTO> planejamentosComMateria;
 
 }

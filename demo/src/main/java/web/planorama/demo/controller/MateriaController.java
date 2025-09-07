@@ -14,11 +14,9 @@ import web.planorama.demo.dto.AssuntoDTO;
 import web.planorama.demo.dto.MateriaDTO;
 import web.planorama.demo.entity.AssuntoEntity;
 import web.planorama.demo.mapping.AssuntoMapper;
-import web.planorama.demo.service.AssuntoService;
 import web.planorama.demo.service.MateriaService;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -31,7 +29,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MateriaController {
 
     private final MateriaService materiaService;
-    private final AssuntoService assuntoService;
     private final AssuntoMapper assuntoMapper;
 
     @GetMapping
@@ -41,7 +38,17 @@ public class MateriaController {
     
 
     @PostMapping("/salvar")
-    public String salvarMateria(@RequestParam("nomeMateria") String nomeMateria, @RequestParam("assuntos") List<String> listaAssuntos, Model model) {
+    public String salvarMateria(@RequestParam("nomeMateria") String nomeMateria, @RequestParam(value = "assuntos", required = false) List<String> listaAssuntos, Model model) {
+
+        if (nomeMateria == null || nomeMateria.isEmpty()) {
+            model.addAttribute("error_nomeMateria", "Digite o nome da matéria");
+            model.addAttribute("nomeMateria", model);
+            return "criarMateria :: cardCriacao";
+        }else if(listaAssuntos == null || listaAssuntos.isEmpty()){
+            model.addAttribute("error_assuntos", "Adicione, pelo menos, um assunto à matéria");
+            model.addAttribute("listaAssuntos", model);
+            return "criarMateria :: cardCriacao";
+        }
 
         List<AssuntoEntity> assuntos = listaAssuntos.stream().map(assunto ->{
             AssuntoDTO assuntoDTO =  new AssuntoDTO();

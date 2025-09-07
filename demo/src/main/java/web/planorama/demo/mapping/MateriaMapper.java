@@ -1,18 +1,14 @@
 package web.planorama.demo.mapping;
 
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
 import web.planorama.demo.dto.MateriaDTO;
 import web.planorama.demo.entity.MateriaEntity;
 
-@Component
-public class MateriaMapper {
+@Mapper(componentModel = "spring", uses = { UsuarioMapper.class})
+public interface MateriaMapper {
 
-    public MateriaEntity toMateriaEntity(MateriaDTO materiaDTO){
-        return new MateriaEntity(materiaDTO.id(), materiaDTO.nomeMateria(), materiaDTO.criadoPor(), materiaDTO.listaAssuntos(), materiaDTO.listaSessao(), materiaDTO.planejamentosComMateria());
-    }
+    public MateriaEntity toMateriaEntity(MateriaDTO materiaDTO);
 
-    public MateriaDTO toMateriaDTO(MateriaEntity materiaEntity){
-        return new MateriaDTO(materiaEntity.getId(), materiaEntity.getNomeMateria(), materiaEntity.getCriadoPor(), materiaEntity.getListaAssuntos(), materiaEntity.getListaSessao(), materiaEntity.getPlanejamentosComMateria());
-    }
+    public MateriaDTO toMateriaDTO(MateriaEntity materiaEntity);
 }

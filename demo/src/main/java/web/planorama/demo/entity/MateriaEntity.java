@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -39,6 +40,7 @@ public class MateriaEntity {
 
     //Uma matéria tem muitos assuntos, exclua todos os assuntos caso a matéria seja excluída
     //carregue todos os assuntos junto com essa matéria (é o que o eager faz)
+    @ToString.Exclude
     @OneToMany(mappedBy = "materiaEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<AssuntoEntity> listaAssuntos = new ArrayList<>();
 

@@ -34,6 +34,7 @@
         </div>
 
         <form id="formCriarPlanejamento_2" th:action="@{/criar-planejamento/segundo-card}" th:object="${planejamentoDTO}" method="post">
+             <span class="error" th:if="${error}" th:text="${error}"></span>
             <!-- Aqui são divs que vão aparecer dinâmicamente com base nas materias cadastradas no sistema. temos que mudar o data-materia pois é com base nele que saberemos quais materias foram selecionadas para aquele plano-->
             <!-- Ou seja, esse data-materia deve ser adicionado dinamicamente-->
             <div class="divMaterias">

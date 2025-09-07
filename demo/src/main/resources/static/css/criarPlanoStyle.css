@@ -166,6 +166,12 @@
     margin-bottom: 10px;
 }
 
+.alerta.erro {
+    color: #721c24; /* Vermelho escuro para o texto */
+    background-color: #f8d7da; /* Fundo rosa/vermelho claro */
+    border: 1px solid #f5c6cb; /* Borda vermelha */
+}
+
 
 
 /* ===================================== */
