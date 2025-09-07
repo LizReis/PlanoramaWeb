@@ -149,11 +149,11 @@ public class CriarPlanejamentoController {
 
         planejamentoDTO.setCriador(usuarioMapper.toUsuarioDTO(criador));
 
-        planejamentoService.save(planejamentoDTO);
+        PlanejamentoDTO planejamentoSalvo = planejamentoService.save(planejamentoDTO);
 
         status.setComplete();
 
-        return "redirect:/home";
+        return "redirect:/planejamento/" + planejamentoSalvo.getId();
     }
 
 }

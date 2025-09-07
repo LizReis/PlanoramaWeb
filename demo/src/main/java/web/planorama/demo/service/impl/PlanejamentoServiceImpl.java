@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import web.planorama.demo.dto.EstudanteDTO;
 import web.planorama.demo.dto.PlanejamentoDTO;
 import web.planorama.demo.dto.SessaoEstudoDTO;
-import web.planorama.demo.entity.EstudanteEntity;
 import web.planorama.demo.entity.MateriaEntity;
 import web.planorama.demo.entity.MateriaPlanejamentoEntity;
 import web.planorama.demo.entity.PlanejamentoEntity;
@@ -79,7 +78,9 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
             planejamentoEntity.setMaterias(materiasDoPlanejamento);
         }
 
-        return mapper.toPlanejamentoDTO(planejamentoRepository.save(planejamentoEntity));
+        var planoSalvo = planejamentoRepository.save(planejamentoEntity);
+
+        return mapper.toPlanejamentoDTO(planoSalvo);
 
     }
 

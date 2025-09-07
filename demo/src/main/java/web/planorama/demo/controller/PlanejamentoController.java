@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.RequiredArgsConstructor;
 import web.planorama.demo.dto.PlanejamentoDTO;
 import web.planorama.demo.dto.SessaoEstudoDTO;
 import web.planorama.demo.service.PlanejamentoService;
@@ -15,26 +17,29 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/planejamento")
+@RequiredArgsConstructor
 public class PlanejamentoController {
 
     private final PlanejamentoService planejamentoService;
 
-    public PlanejamentoController(PlanejamentoService planejamentoService) {
-        this.planejamentoService = planejamentoService;
-    }
-
     @GetMapping("/{id}")
-    public String exibirPlano(@PathVariable UUID id, Model model) {
-        // 1. Busca os dados do plano (nome, cargo, etc.)
-        PlanejamentoDTO plano = planejamentoService.findOne(id);
+    public String exibirPlano(@PathVariable String id, Model model) {
 
-        // 2. Gera o ciclo de estudos usando nosso novo método
-        List<SessaoEstudoDTO> ciclo = planejamentoService.gerarCicloDeEstudos(id);
+        UUID idUUID;
 
-        // 3. Envia os dados para a página HTML
-        model.addAttribute("plano", plano);
-        model.addAttribute("ciclo", ciclo);
+        try{
+            idUUID = UUID.fromString(id);
+        }catch(IllegalArgumentException e){
+            return "paginaErro";
+        }
 
-        return "telaPlano"; // Renderiza a página telaPlano.html
+        PlanejamentoDTO planejamento = planejamentoService.findOne(idUUID);
+
+        //List<SessaoEstudoDTO> ciclo = planejamentoService.gerarCicloDeEstudos(idUUID);
+
+        model.addAttribute("planejamento", planejamento);
+        //model.addAttribute("ciclo", ciclo);
+
+        return "telaPlano";
     }
 }

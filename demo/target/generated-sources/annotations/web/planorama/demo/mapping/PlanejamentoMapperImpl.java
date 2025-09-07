@@ -12,7 +12,7 @@ import web.planorama.demo.entity.PlanejamentoEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-07T13:34:02-0300",
+    date = "2025-09-07T17:05:22-0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.4 (Oracle Corporation)"
 )
 @Component
@@ -29,6 +29,7 @@ public class PlanejamentoMapperImpl implements PlanejamentoMapper {
 
         PlanejamentoEntity planejamentoEntity = new PlanejamentoEntity();
 
+        planejamentoEntity.setId( planejamentoDTO.getId() );
         planejamentoEntity.setNomePlanejamento( planejamentoDTO.getNomePlanejamento() );
         planejamentoEntity.setCargo( planejamentoDTO.getCargo() );
         planejamentoEntity.setAnoAplicacao( planejamentoDTO.getAnoAplicacao() );
@@ -53,6 +54,7 @@ public class PlanejamentoMapperImpl implements PlanejamentoMapper {
 
         PlanejamentoDTO planejamentoDTO = new PlanejamentoDTO();
 
+        planejamentoDTO.setId( planejamentoEntity.getId() );
         planejamentoDTO.setNomePlanejamento( planejamentoEntity.getNomePlanejamento() );
         planejamentoDTO.setCargo( planejamentoEntity.getCargo() );
         planejamentoDTO.setAnoAplicacao( planejamentoEntity.getAnoAplicacao() );

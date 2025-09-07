@@ -19,7 +19,7 @@ public class PlanejamentoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID idPlanejamento;
+    private UUID id;
 
     @Column(name = "NOME_PLANEJAMENTO", nullable = false)
     private String nomePlanejamento;

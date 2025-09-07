@@ -1,60 +1,60 @@
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\config\CustomAuthenticationSuccessHandler.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\config\DeterminarImagemUploadConfig.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\config\SecurityConfig.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\AdministrarUsuarioController.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\AlterarDadosEstudanteController.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\CadastroUsuarioController.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\CriarPlanejamentoController.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\GlobalControllerAdvice.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\GlobalExceptionHandler.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\HomeController.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\LoginController.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\MateriaController.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\MinhaContaController.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\PlanejamentoController.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\DemoApplication.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\AdministradorDTO.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\AssuntoDTO.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\EstudanteDTO.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\MateriaDTO.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\MateriaPlanejamentoDTO.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\PlanejamentoDTO.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\SessaoEstudoDTO.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\UsuarioDTO.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\AdministradorEntity.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\AssuntoEntity.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\EstudanteEntity.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\MateriaEntity.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\MateriaPlanejamentoEntity.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\PlanejamentoEntity.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\SessaoEstudoEntity.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\UsuarioEntity.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\exceptions\MyNotFoundException.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\GeradorSenhaAdm.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\mapping\AssuntoMapper.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\mapping\MateriaMapper.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\mapping\MateriaPlanejamentoMapper.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\mapping\PlanejamentoMapper.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\mapping\UsuarioMapper.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\AssuntoRepository.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\EstudanteRepository.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\MateriaPlanejamentoRepository.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\MateriaRepository.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\PlanejamentoRepository.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\UsuarioRepository.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\AdministradorService.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\ArquivosUsuarioService.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\AssuntoService.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\EstudanteService.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\impl\AdministradorServiceImpl.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\impl\AssuntoServiceImpl.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\impl\EstudanteServiceImpl.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\impl\MateriaPlanejamentoServiceImpl.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\impl\MateriaServiceImpl.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\impl\PlanejamentoServiceImpl.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\impl\UserDetailsServiceImpl.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\impl\UsuarioServiceImpl.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\MateriaPlanejamentoService.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\MateriaService.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\PlanejamentoService.java
-C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\UsuarioService.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\config\CustomAuthenticationSuccessHandler.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\config\DeterminarImagemUploadConfig.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\config\SecurityConfig.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\controller\AdministrarUsuarioController.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\controller\AlterarDadosEstudanteController.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\controller\CadastroUsuarioController.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\controller\CriarPlanejamentoController.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\controller\GlobalControllerAdvice.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\controller\GlobalExceptionHandler.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\controller\HomeController.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\controller\LoginController.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\controller\MateriaController.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\controller\MinhaContaController.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\controller\PlanejamentoController.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\DemoApplication.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\dto\AdministradorDTO.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\dto\AssuntoDTO.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\dto\EstudanteDTO.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\dto\MateriaDTO.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\dto\MateriaPlanejamentoDTO.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\dto\PlanejamentoDTO.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\dto\SessaoEstudoDTO.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\dto\UsuarioDTO.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\entity\AdministradorEntity.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\entity\AssuntoEntity.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\entity\EstudanteEntity.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\entity\MateriaEntity.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\entity\MateriaPlanejamentoEntity.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\entity\PlanejamentoEntity.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\entity\SessaoEstudoEntity.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\entity\UsuarioEntity.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\exceptions\MyNotFoundException.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\GeradorSenhaAdm.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\mapping\AssuntoMapper.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\mapping\MateriaMapper.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\mapping\MateriaPlanejamentoMapper.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\mapping\PlanejamentoMapper.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\mapping\UsuarioMapper.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\repository\AssuntoRepository.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\repository\EstudanteRepository.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\repository\MateriaPlanejamentoRepository.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\repository\MateriaRepository.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\repository\PlanejamentoRepository.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\repository\UsuarioRepository.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\AdministradorService.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\ArquivosUsuarioService.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\AssuntoService.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\EstudanteService.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\impl\AdministradorServiceImpl.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\impl\AssuntoServiceImpl.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\impl\EstudanteServiceImpl.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\impl\MateriaPlanejamentoServiceImpl.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\impl\MateriaServiceImpl.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\impl\PlanejamentoServiceImpl.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\impl\UserDetailsServiceImpl.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\impl\UsuarioServiceImpl.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\MateriaPlanejamentoService.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\MateriaService.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\PlanejamentoService.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb - Copia\demo\src\main\java\web\planorama\demo\service\UsuarioService.java

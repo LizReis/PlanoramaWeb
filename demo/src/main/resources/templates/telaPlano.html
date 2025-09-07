@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <title>Meu Plano de Estudos</title>
     <link rel="stylesheet" th:href="@{/css/telaPlanoStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/barraNavStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/menuStyle.css}">
 </head>
+
 <body>
-<div th:replace="~{barraNavegacao :: nav}"></div>
+    <div th:replace="~{barraNavegacao :: barraNav}"></div>
 
-<div class="main-container">
-    <h1 th:text="${plano.nomePlanejamento}">Nome do Plano de Estudos</h1>
-    <h3 th:text="${plano.cargo}">Cargo do Concurso</h3>
+    <div th:replace="~{menu :: menuFragment}"></div>
 
-    <div class="ciclo-container">
-        <div id="ciclo-visual" class="ciclo-visual">
+    <div class="main-container" th:object="${planejamento}">
+        <h1 th:text="*{nomePlanejamento}">Nome do Plano de Estudos</h1>
+        <h3 th:text="*{cargo}">Cargo do Concurso</h3>
+
+        <div class="ciclo-container">
+            <div id="ciclo-visual" class="ciclo-visual">
+            </div>
+
+            <div id="lista-materias" class="lista-materias">
+                <h2>Matérias do Ciclo</h2>
+                <ul>
+                </ul>
+            </div>
         </div>
 
-        <div id="lista-materias" class="lista-materias">
-            <h2>Matérias do Ciclo</h2>
-            <ul>
-            </ul>
+        <div id="cronometro-container" class="cronometro-container" style="display:none;">
+            <h2 id="cronometro-materia">Nome da Matéria</h2>
+            <div id="cronometro-display">00:00</div>
+            <button id="btn-concluir">Concluir Sessão</button>
         </div>
     </div>
 
-    <div id="cronometro-container" class="cronometro-container" style="display:none;">
-        <h2 id="cronometro-materia">Nome da Matéria</h2>
-        <div id="cronometro-display">00:00</div>
-        <button id="btn-concluir">Concluir Sessão</button>
-    </div>
-</div>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    const cicloData = /*[[${ciclo}]]*/ [];
-    /*]]>*/
-</script>
-
-<script th:src="@{/js/telaPlanoScripts.js}"></script>
+    <script th:src="@{/js/telaPlanoScripts.js}"></script>
+    <script th:src="@{/js/menuScripts.js}"></script>
+    <script th:src="@{/js/criarPlanoScripts.js}"></script>
 </body>
+
 </html>

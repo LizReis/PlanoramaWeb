@@ -7,5 +7,4 @@ import web.planorama.demo.entity.PlanejamentoEntity;
 import java.util.UUID;
 
 public interface PlanejamentoRepository extends JpaRepository<PlanejamentoEntity, UUID>{
-
 }
