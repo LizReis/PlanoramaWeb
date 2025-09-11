@@ -88,7 +88,7 @@ public class MateriaMapperImpl implements MateriaMapper {
         AssuntoEntity assuntoEntity = new AssuntoEntity();
 
         assuntoEntity.setId( assuntoDTO.getId() );
-        assuntoEntity.setMateriaEntity( assuntoDTO.getMateriaEntity() );
+        assuntoEntity.setMateriaEntity( assuntoDTO.getMateriaDTO() );
         assuntoEntity.setNomeAssunto( assuntoDTO.getNomeAssunto() );
 
         return assuntoEntity;

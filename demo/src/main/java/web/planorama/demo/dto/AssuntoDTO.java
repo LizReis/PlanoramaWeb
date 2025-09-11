@@ -5,7 +5,6 @@ import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import web.planorama.demo.entity.MateriaEntity;
 
 @Data
 @NoArgsConstructor
@@ -13,5 +12,5 @@ import web.planorama.demo.entity.MateriaEntity;
 public class AssuntoDTO {
     private UUID id;
     private String nomeAssunto;
-    private MateriaEntity materiaEntity;
+    private MateriaDTO materiaDTO;
 }
