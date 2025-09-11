@@ -18,7 +18,7 @@ import web.planorama.demo.entity.UsuarioEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-10T23:29:23-0300",
+    date = "2025-09-11T13:47:15-0300",
     comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.43.0.v20250819-1513, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
@@ -88,7 +88,6 @@ public class MateriaMapperImpl implements MateriaMapper {
         AssuntoEntity assuntoEntity = new AssuntoEntity();
 
         assuntoEntity.setId( assuntoDTO.getId() );
-        assuntoEntity.setMateriaEntity( assuntoDTO.getMateriaDTO() );
         assuntoEntity.setNomeAssunto( assuntoDTO.getNomeAssunto() );
 
         return assuntoEntity;
@@ -172,7 +171,6 @@ public class MateriaMapperImpl implements MateriaMapper {
         AssuntoDTO assuntoDTO = new AssuntoDTO();
 
         assuntoDTO.setId( assuntoEntity.getId() );
-        assuntoDTO.setMateriaEntity( assuntoEntity.getMateriaEntity() );
         assuntoDTO.setNomeAssunto( assuntoEntity.getNomeAssunto() );
 
         return assuntoDTO;

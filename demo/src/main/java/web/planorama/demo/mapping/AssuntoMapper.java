@@ -1,5 +1,6 @@
 package web.planorama.demo.mapping;
 
+import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
 import web.planorama.demo.dto.AssuntoDTO;
