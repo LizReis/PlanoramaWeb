@@ -7,8 +7,8 @@ import web.planorama.demo.entity.MateriaPlanejamentoEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-07T17:05:21-0300",
-    comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.4 (Oracle Corporation)"
+    date = "2025-09-10T23:29:24-0300",
+    comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.43.0.v20250819-1513, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class MateriaPlanejamentoMapperImpl implements MateriaPlanejamentoMapper {
@@ -46,9 +46,9 @@ public class MateriaPlanejamentoMapperImpl implements MateriaPlanejamentoMapper 
 
         MateriaPlanejamentoDTO materiaPlanejamentoDTO = new MateriaPlanejamentoDTO();
 
+        materiaPlanejamentoDTO.setCargaHorariaMateriaPlano( materiaPlanejamentoEntity.getCargaHorariaMateriaPlano() );
         materiaPlanejamentoDTO.setId( materiaPlanejamentoEntity.getId() );
         materiaPlanejamentoDTO.setNivelConhecimento( materiaPlanejamentoEntity.getNivelConhecimento() );
-        materiaPlanejamentoDTO.setCargaHorariaMateriaPlano( materiaPlanejamentoEntity.getCargaHorariaMateriaPlano() );
 
         return materiaPlanejamentoDTO;
     }

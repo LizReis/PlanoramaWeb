@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
-import web.planorama.demo.dto.EstudanteDTO;
 import web.planorama.demo.dto.PlanejamentoDTO;
 import web.planorama.demo.dto.SessaoEstudoDTO;
+import web.planorama.demo.dto.UsuarioDTO;
 import web.planorama.demo.entity.MateriaEntity;
 import web.planorama.demo.entity.MateriaPlanejamentoEntity;
 import web.planorama.demo.entity.PlanejamentoEntity;
@@ -108,10 +108,10 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
     }
 
     @Override
-    public List<PlanejamentoDTO> findAllOfEstudante(EstudanteDTO estudanteDTO) {
+    public List<PlanejamentoDTO> findAllOfEstudante(UsuarioDTO usuarioDTO) {
         return planejamentoRepository.findAll()
                 .stream()
-                .filter(plano -> plano.getCriador() != null && plano.getCriador().getId().equals(estudanteDTO.id()))
+                .filter(plano -> plano.getCriador() != null && plano.getCriador().getId().equals(usuarioDTO.id()))
                 .map(mapper::toPlanejamentoDTO)
                 .toList();
     }

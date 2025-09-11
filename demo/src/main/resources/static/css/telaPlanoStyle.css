@@ -41,8 +41,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 2rem;
-    color: var(--corDestaqueVerde);
-    border-bottom: 0.1rem solid var(--corDestaqueVerde);
+    color: var(--corDestaqueVermelho);
+    border-bottom: 0.1rem solid var(--corDestaqueVermelho);
 }
 
 .sectionGrafico .divTituloGrafico .divTitulo .titulo {
@@ -121,7 +121,7 @@
     padding: 0.5rem 1rem;
     border-radius: 10px;
     box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
-    color: var(--corDestaqueVermelho);
+    color: var(--corDestaqueVerde);
     font-family: var(--fonteParaTexto);
     font-size: 15px;
     font-weight: 500;
@@ -138,8 +138,33 @@
     justify-content: space-between;
 }
 
+.sectionGrafico .divAbsolutBotao #concluirAssunto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 2.2rem; /* Aumentei um pouco a altura para melhor clique */
+    background-color: var(--corDestaqueVermelho);
+    color: var(--corFundoPrincipal);
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.sectionGrafico .divAbsolutBotao #concluirAssunto:hover{
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVermelho);
+    border: 0.1rem solid var(--corDestaqueVermelho);
+}
+
+
 .sectionGrafico .divAbsolutBotao .botaoAncora {
     width: 11rem;
+    justify-self: end;
 }
 
 .sectionGrafico .divAbsolutBotao .botaoAncora svg {

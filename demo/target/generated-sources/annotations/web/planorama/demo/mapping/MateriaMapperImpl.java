@@ -9,15 +9,17 @@ import web.planorama.demo.dto.AssuntoDTO;
 import web.planorama.demo.dto.MateriaDTO;
 import web.planorama.demo.dto.MateriaPlanejamentoDTO;
 import web.planorama.demo.dto.SessaoEstudoDTO;
+import web.planorama.demo.dto.UsuarioDTO;
 import web.planorama.demo.entity.AssuntoEntity;
 import web.planorama.demo.entity.MateriaEntity;
 import web.planorama.demo.entity.MateriaPlanejamentoEntity;
 import web.planorama.demo.entity.SessaoEstudoEntity;
+import web.planorama.demo.entity.UsuarioEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-07T17:05:22-0300",
-    comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.4 (Oracle Corporation)"
+    date = "2025-09-10T23:29:23-0300",
+    comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.43.0.v20250819-1513, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class MateriaMapperImpl implements MateriaMapper {
@@ -33,11 +35,11 @@ public class MateriaMapperImpl implements MateriaMapper {
 
         MateriaEntity materiaEntity = new MateriaEntity();
 
+        materiaEntity.setCriadoPor( usuarioDTOToUsuarioEntity( materiaDTO.getCriadoPor() ) );
         materiaEntity.setId( materiaDTO.getId() );
-        materiaEntity.setNomeMateria( materiaDTO.getNomeMateria() );
-        materiaEntity.setCriadoPor( usuarioMapper.toUsuarioEntity( materiaDTO.getCriadoPor() ) );
         materiaEntity.setListaAssuntos( assuntoDTOListToAssuntoEntityList( materiaDTO.getListaAssuntos() ) );
         materiaEntity.setListaSessao( sessaoEstudoDTOListToSessaoEstudoEntityList( materiaDTO.getListaSessao() ) );
+        materiaEntity.setNomeMateria( materiaDTO.getNomeMateria() );
         materiaEntity.setPlanejamentosComMateria( materiaPlanejamentoDTOListToMateriaPlanejamentoEntityList( materiaDTO.getPlanejamentosComMateria() ) );
 
         return materiaEntity;
@@ -51,14 +53,31 @@ public class MateriaMapperImpl implements MateriaMapper {
 
         MateriaDTO materiaDTO = new MateriaDTO();
 
-        materiaDTO.setId( materiaEntity.getId() );
-        materiaDTO.setNomeMateria( materiaEntity.getNomeMateria() );
         materiaDTO.setCriadoPor( usuarioMapper.toUsuarioDTO( materiaEntity.getCriadoPor() ) );
+        materiaDTO.setId( materiaEntity.getId() );
         materiaDTO.setListaAssuntos( assuntoEntityListToAssuntoDTOList( materiaEntity.getListaAssuntos() ) );
         materiaDTO.setListaSessao( sessaoEstudoEntityListToSessaoEstudoDTOList( materiaEntity.getListaSessao() ) );
+        materiaDTO.setNomeMateria( materiaEntity.getNomeMateria() );
         materiaDTO.setPlanejamentosComMateria( materiaPlanejamentoEntityListToMateriaPlanejamentoDTOList( materiaEntity.getPlanejamentosComMateria() ) );
 
         return materiaDTO;
+    }
+
+    protected UsuarioEntity usuarioDTOToUsuarioEntity(UsuarioDTO usuarioDTO) {
+        if ( usuarioDTO == null ) {
+            return null;
+        }
+
+        UsuarioEntity usuarioEntity = new UsuarioEntity();
+
+        usuarioEntity.setDescricaoUsuario( usuarioDTO.descricaoUsuario() );
+        usuarioEntity.setEmail( usuarioDTO.email() );
+        usuarioEntity.setFotoUsuario( usuarioDTO.fotoUsuario() );
+        usuarioEntity.setId( usuarioDTO.id() );
+        usuarioEntity.setNome( usuarioDTO.nome() );
+        usuarioEntity.setSenha( usuarioDTO.senha() );
+
+        return usuarioEntity;
     }
 
     protected AssuntoEntity assuntoDTOToAssuntoEntity(AssuntoDTO assuntoDTO) {
@@ -69,8 +88,8 @@ public class MateriaMapperImpl implements MateriaMapper {
         AssuntoEntity assuntoEntity = new AssuntoEntity();
 
         assuntoEntity.setId( assuntoDTO.getId() );
-        assuntoEntity.setNomeAssunto( assuntoDTO.getNomeAssunto() );
         assuntoEntity.setMateriaEntity( assuntoDTO.getMateriaEntity() );
+        assuntoEntity.setNomeAssunto( assuntoDTO.getNomeAssunto() );
 
         return assuntoEntity;
     }
@@ -95,8 +114,8 @@ public class MateriaMapperImpl implements MateriaMapper {
 
         SessaoEstudoEntity sessaoEstudoEntity = new SessaoEstudoEntity();
 
-        sessaoEstudoEntity.setId( sessaoEstudoDTO.getId() );
         sessaoEstudoEntity.setDuracaoSessao( sessaoEstudoDTO.getDuracaoSessao() );
+        sessaoEstudoEntity.setId( sessaoEstudoDTO.getId() );
 
         return sessaoEstudoEntity;
     }
@@ -121,12 +140,12 @@ public class MateriaMapperImpl implements MateriaMapper {
 
         MateriaPlanejamentoEntity materiaPlanejamentoEntity = new MateriaPlanejamentoEntity();
 
+        if ( materiaPlanejamentoDTO.getCargaHorariaMateriaPlano() != null ) {
+            materiaPlanejamentoEntity.setCargaHorariaMateriaPlano( materiaPlanejamentoDTO.getCargaHorariaMateriaPlano() );
+        }
         materiaPlanejamentoEntity.setId( materiaPlanejamentoDTO.getId() );
         if ( materiaPlanejamentoDTO.getNivelConhecimento() != null ) {
             materiaPlanejamentoEntity.setNivelConhecimento( materiaPlanejamentoDTO.getNivelConhecimento() );
-        }
-        if ( materiaPlanejamentoDTO.getCargaHorariaMateriaPlano() != null ) {
-            materiaPlanejamentoEntity.setCargaHorariaMateriaPlano( materiaPlanejamentoDTO.getCargaHorariaMateriaPlano() );
         }
 
         return materiaPlanejamentoEntity;
@@ -153,8 +172,8 @@ public class MateriaMapperImpl implements MateriaMapper {
         AssuntoDTO assuntoDTO = new AssuntoDTO();
 
         assuntoDTO.setId( assuntoEntity.getId() );
-        assuntoDTO.setNomeAssunto( assuntoEntity.getNomeAssunto() );
         assuntoDTO.setMateriaEntity( assuntoEntity.getMateriaEntity() );
+        assuntoDTO.setNomeAssunto( assuntoEntity.getNomeAssunto() );
 
         return assuntoDTO;
     }
@@ -179,8 +198,8 @@ public class MateriaMapperImpl implements MateriaMapper {
 
         SessaoEstudoDTO sessaoEstudoDTO = new SessaoEstudoDTO();
 
-        sessaoEstudoDTO.setId( sessaoEstudoEntity.getId() );
         sessaoEstudoDTO.setDuracaoSessao( sessaoEstudoEntity.getDuracaoSessao() );
+        sessaoEstudoDTO.setId( sessaoEstudoEntity.getId() );
 
         return sessaoEstudoDTO;
     }
@@ -205,9 +224,9 @@ public class MateriaMapperImpl implements MateriaMapper {
 
         MateriaPlanejamentoDTO materiaPlanejamentoDTO = new MateriaPlanejamentoDTO();
 
+        materiaPlanejamentoDTO.setCargaHorariaMateriaPlano( materiaPlanejamentoEntity.getCargaHorariaMateriaPlano() );
         materiaPlanejamentoDTO.setId( materiaPlanejamentoEntity.getId() );
         materiaPlanejamentoDTO.setNivelConhecimento( materiaPlanejamentoEntity.getNivelConhecimento() );
-        materiaPlanejamentoDTO.setCargaHorariaMateriaPlano( materiaPlanejamentoEntity.getCargaHorariaMateriaPlano() );
 
         return materiaPlanejamentoDTO;
     }
