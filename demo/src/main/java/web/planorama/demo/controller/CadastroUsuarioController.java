@@ -17,9 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import web.planorama.demo.dto.EstudanteDTO;
-import web.planorama.demo.repository.EstudanteRepository;
-import web.planorama.demo.service.EstudanteService;
+
+import web.planorama.demo.dto.UsuarioDTO;
+import web.planorama.demo.repository.UsuarioRepository;
+import web.planorama.demo.service.UsuarioService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,14 +32,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Slf4j
 public class CadastroUsuarioController {
 
-    private final EstudanteRepository estudanteRepository;
-    private final EstudanteService estudanteService;
+    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
 
     private final String UPLOAD_DIR = "uploadsUser";
 
     @GetMapping
     public String pagina(Model model) {
-        model.addAttribute("estudante", new EstudanteDTO(null, "", "", "", null, null));
+        model.addAttribute("estudante", new UsuarioDTO(null, "", "", "", null, null));
 
         return "cadastro";
     }
@@ -49,17 +51,17 @@ public class CadastroUsuarioController {
     
 
     @PostMapping
-    public String create(@Valid @ModelAttribute("estudante") EstudanteDTO estudanteDTO, BindingResult result,
+    public String create(@Valid @ModelAttribute("estudante") UsuarioDTO usuarioDTO, BindingResult result,
             @RequestParam("fotoFile") MultipartFile fotoUsuario, Model model) throws IOException {
-        log.info("Request: {} {}", estudanteDTO, result.hasErrors());
+        log.info("Request: {} {}", usuarioDTO, result.hasErrors());
         if (result.hasErrors()) {
-            model.addAttribute("estudante", estudanteDTO);
+            model.addAttribute("estudante", usuarioDTO);
             log.error("Erros encontrados: {}", result.getAllErrors());
 
             return "cadastro";
         }
 
-        EstudanteDTO estudanteParaSalvar = estudanteDTO;
+        UsuarioDTO estudanteParaSalvar = usuarioDTO;
 
         if(fotoUsuario != null && !fotoUsuario.isEmpty()){
             String fileName = UUID.randomUUID() + "_" + fotoUsuario.getOriginalFilename();
@@ -74,22 +76,22 @@ public class CadastroUsuarioController {
             String UrlFile = "/uploadsUser/" + fileName;
 
             //Como o meu DTO é um record ele é imutável, então preciso dar um new no DTO para salvar a imagem
-            estudanteParaSalvar = new EstudanteDTO(
-                estudanteDTO.id(),
-                estudanteDTO.nome(),
-                estudanteDTO.email(),
-                estudanteDTO.senha(),
+            estudanteParaSalvar = new UsuarioDTO(
+                usuarioDTO.id(),
+                usuarioDTO.nome(),
+                usuarioDTO.email(),
+                usuarioDTO.senha(),
                 UrlFile, // <- Inserindo o nome do arquivo aqui!
-                estudanteDTO.descricaoUsuario()
+                usuarioDTO.descricaoUsuario()
             );
         }
 
-        estudanteService.save(estudanteParaSalvar);
+        usuarioService.save(estudanteParaSalvar);
         return "redirect:/login";
     }
 
     private void loadFormData(Model model) {
-        model.addAttribute("estudantes", estudanteService.findAll());
-        model.addAttribute("estudante", new EstudanteDTO(null, null, null, null, null, null));
+        model.addAttribute("estudantes", usuarioService.findAll());
+        model.addAttribute("estudante", new UsuarioDTO(null, null, null, null, null, null));
     }
 }

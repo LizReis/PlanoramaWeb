@@ -23,13 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
-import web.planorama.demo.service.EstudanteService;
+import web.planorama.demo.service.UsuarioService;
 
 @Controller
 @RequestMapping("/minha-conta")
 @RequiredArgsConstructor
 public class AlterarDadosEstudanteController {
-    private final EstudanteService estudanteService;
+    private final UsuarioService usuarioService;
 
     private final String UPLOAD_DIR = "uploadsUser";
 
@@ -51,7 +51,7 @@ public class AlterarDadosEstudanteController {
 
             String emailUsuarioLogado = userDetails.getUsername();
 
-            estudanteService.alterarFotoUsuario(emailUsuarioLogado, UrlFile);
+            usuarioService.alterarFotoUsuario(emailUsuarioLogado, UrlFile);
 
             redirectAttributes.addFlashAttribute("success", "Foto alterada com sucesso!");
         }catch(IOException e){
@@ -74,7 +74,7 @@ public class AlterarDadosEstudanteController {
             return "redirect:/minha-conta?error";
         } else {
             try {
-                estudanteService.alterarSenha(senhaAtual, novaSenha);
+                usuarioService.alterarSenha(senhaAtual, novaSenha);
                 redirectAttributes.addFlashAttribute("success", "Senha alterada com sucesso!");
             } catch (RuntimeException e) {
                 redirectAttributes.addFlashAttribute("error", e.getMessage());
@@ -95,7 +95,7 @@ public class AlterarDadosEstudanteController {
             return "redirect:/minha-conta?error";
         } else {
             try {
-                estudanteService.alterarEmail(novoEmail, senhaAtual);
+                usuarioService.alterarEmail(novoEmail, senhaAtual);
                 Authentication autenticacaoAtual = SecurityContextHolder.getContext().getAuthentication();
                 if (autenticacaoAtual != null) {
                     // Responsável por fazer o logout do usuário
@@ -123,7 +123,7 @@ public class AlterarDadosEstudanteController {
             return "redirect:/minha-conta?error";
         } else {
             try {
-                estudanteService.alterarNomeUsuario(novoNome, senhaAtual);
+                usuarioService.alterarNomeUsuario(novoNome, senhaAtual);
                 redirectAttributes.addFlashAttribute("success", "Nome alterado com sucesso!");
             } catch (RuntimeException e) {
                 redirectAttributes.addFlashAttribute("error", e.getMessage());
@@ -144,7 +144,7 @@ public class AlterarDadosEstudanteController {
             return "redirect:/minha-conta?error";
         } else {
             try {
-                estudanteService.alterarDescricao(novaDescricao, senhaAtual);
+                usuarioService.alterarDescricao(novaDescricao, senhaAtual);
                 redirectAttributes.addFlashAttribute("success", "Descrição alterada com sucesso!");
             } catch (RuntimeException e) {
                 redirectAttributes.addFlashAttribute("error", e.getMessage());

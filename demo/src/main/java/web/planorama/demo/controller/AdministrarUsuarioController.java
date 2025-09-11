@@ -25,18 +25,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import web.planorama.demo.dto.UsuarioDTO;
 import web.planorama.demo.exceptions.MyNotFoundException;
-import web.planorama.demo.service.AdministradorService;
-import web.planorama.demo.service.EstudanteService;
 import web.planorama.demo.service.UsuarioService;
 
 @Controller
-@RequestMapping("/listar-usuarios")
+@RequestMapping("/admin/listar-usuarios")
 @RequiredArgsConstructor
 @Slf4j
 public class AdministrarUsuarioController {
 
-    private final AdministradorService admService;
-    private final EstudanteService estudanteService;
     private final UsuarioService usuarioService;
 
     @GetMapping
@@ -44,12 +40,11 @@ public class AdministrarUsuarioController {
         List<Object> allUsers = new ArrayList<>();
 
         if ("estudante".equals(tipoUsuario)) {
-            allUsers.addAll(estudanteService.findAll());
+            allUsers.addAll(usuarioService.findAllEstudantes());
         } else if ("admin".equals(tipoUsuario)) {
-            allUsers.addAll(admService.findAll());
+            allUsers.addAll(usuarioService.findAllAdmins());
         } else {
-            allUsers.addAll(estudanteService.findAll());
-            allUsers.addAll(admService.findAll());
+            allUsers.addAll(usuarioService.findAll());
         }
 
         model.addAttribute("listaDeUsuarios", allUsers);
@@ -81,23 +76,23 @@ public class AdministrarUsuarioController {
 
         if (novoNomeUsuario.isBlank() || novoNomeUsuario.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "O campo de Novo Nome do Usuário não pode estar vazio.");
-            return "redirect:/listar-usuarios?error";
+            return "redirect:/admin/listar-usuarios?error";
         } else if (novoEmailUsuario.isBlank() || novoEmailUsuario.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "O campo de Novo E-mail do Usuário não pode estar vazio.");
-            return "redirect:/listar-usuarios?error";
+            return "redirect:/admin/listar-usuarios?error";
         } else if (senhaADM.isBlank() || senhaADM.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Você deve inserir a sua Senha de ADM.");
-            return "redirect:/listar-usuarios?error";
+            return "redirect:/admin/listar-usuarios?error";
         } else if (novoNomeUsuario.isEmpty() && novoEmailUsuario.isEmpty() && senhaADM.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Todos os campos devem ser preenchidos.");
-            return "redirect:/listar-usuarios?error";
+            return "redirect:/admin/listar-usuarios?error";
         } else {
             try {
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
                 String emailAdmLogado = authentication.getName();
                 UsuarioDTO adminLogado = usuarioService.findByEmail(emailAdmLogado);
 
-                admService.alterarDadoUsuario(usuarioParaAlterar, novoNomeUsuario, novoEmailUsuario, senhaADM);
+                usuarioService.alterarDadoUsuario(usuarioParaAlterar, novoNomeUsuario, novoEmailUsuario, senhaADM);
                 redirectAttributes.addFlashAttribute("success", "Usuário alterado com sucesso!");
 
                 if (adminLogado.id().equals(usuarioParaAlterar)) {
@@ -113,7 +108,7 @@ public class AdministrarUsuarioController {
             } catch (RuntimeException e) {
                 redirectAttributes.addFlashAttribute("error", e.getMessage());
             }
-            return "redirect:/listar-usuarios";
+            return "redirect:/admin/listar-usuarios";
         }
     }
 
@@ -136,6 +131,6 @@ public class AdministrarUsuarioController {
         } catch (MyNotFoundException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
-        return "redirect:/listar-usuarios";
+        return "redirect:/admin/listar-usuarios";
     }
 }

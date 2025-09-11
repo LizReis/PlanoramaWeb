@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,9 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "TB_USUARIO")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TIPO_USUARIO", discriminatorType = DiscriminatorType.STRING)
-public abstract class UsuarioEntity {
+public class UsuarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -39,15 +36,14 @@ public abstract class UsuarioEntity {
     @OneToMany(mappedBy = "criador")
     private List<PlanejamentoEntity> planejamentos;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "TB_USUARIO_PAPEL",
+    joinColumns = {
+      @JoinColumn(name = "USUARIO_ID")
+    },
+    inverseJoinColumns = {
+      @JoinColumn(name = "PAPEL_ID")
+    })
+    private List<PapelEntity> papeis;
 
-    public UsuarioEntity(UUID id, String nome, String email, String senha, String fotoUsuario, String descricaoUsuario) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.fotoUsuario = fotoUsuario;
-        this.descricaoUsuario = descricaoUsuario;
-        
-        this.planejamentos = new ArrayList<>();
-    }
 }

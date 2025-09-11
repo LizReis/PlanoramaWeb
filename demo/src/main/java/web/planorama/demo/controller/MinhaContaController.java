@@ -6,9 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import web.planorama.demo.dto.EstudanteDTO;
 import web.planorama.demo.dto.UsuarioDTO;
-import web.planorama.demo.service.EstudanteService;
 import web.planorama.demo.service.UsuarioService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +19,13 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/minha-conta")
 @RequiredArgsConstructor
 public class MinhaContaController {
-    private final EstudanteService estudanteService;
+    private final UsuarioService usuarioService;
 
     @GetMapping
     public String minhaConta(Authentication authentication, Model model) {
         String email = authentication.getName();
 
-        EstudanteDTO usuarioLogado = estudanteService.findByEmail(email);
+        UsuarioDTO usuarioLogado = usuarioService.findByEmail(email);
 
         model.addAttribute("usuarioLogado", usuarioLogado);
 

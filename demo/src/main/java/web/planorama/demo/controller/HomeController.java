@@ -12,7 +12,7 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/homeAdm")
+    @GetMapping("/admin/homeAdm")
     public String homeAdm() {
         return "homeAdm";
     }
