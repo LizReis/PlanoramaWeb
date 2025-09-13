@@ -24,4 +24,7 @@ public interface PlanejamentoService {
     PlanejamentoDTO desArquivarPlanoDeEstudos(UUID id);
     PlanejamentoDTO restaurarPlanoDeEstudos(UUID id);
     void remove(UUID id);
+
+    //Seleciona um plano que já foi pré-cadastrado por um ADMIN
+    PlanejamentoDTO selecionarPlanoPredefinido(UUID idPlanejamento);
 }

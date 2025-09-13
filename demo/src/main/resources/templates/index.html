@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/indexStyle.css">
+    <link rel="stylesheet" th:href="@{/css/indexStyle.css}">
     <title>Planorama</title>
 </head>
 <body>
@@ -26,18 +26,18 @@
         </div>
 
         <div class="divImagem">
-            <img src="../static/img/imagemPrincipal-SWeb.jpg" alt="Imagem ilustrativa do sistema Planorama">
+            <img th:src="@{/img/imagemPrincipal-SWeb.jpg}" alt="Imagem ilustrativa do sistema Planorama">
         </div>
 
         <div id="divBotaoTexto">
-            <a class="botaoAncora" href="login.html">Login</a>
+            <a class="botaoAncora" th:href="@{/login}">Login</a>
             <p>Não possui uma conta?</p>
-            <a class="ancora" href="cadastro.html">Cadastre-se</a>
+            <a class="ancora" th:href="@{/cadastro}">Cadastre-se</a>
         </div>
     </section>
 
     <footer></footer>
 
-    <script src="../static/js/indexScripts.js"></script>
+    <script th:src="@{/js/indexScripts.js}"></script>
 </body>
 </html>

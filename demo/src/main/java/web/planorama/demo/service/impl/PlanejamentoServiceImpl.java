@@ -1,5 +1,6 @@
 package web.planorama.demo.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -42,10 +43,7 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
     @Transactional
     public PlanejamentoDTO save(PlanejamentoDTO planejamentoDTO) {
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String emailUsuarioLogado = ((UserDetails) principal).getUsername();
-        UsuarioEntity criador = usuarioRepository.findByEmail(emailUsuarioLogado)
-                .orElseThrow(() -> new MyNotFoundException("Usuário não encontrado."));
+        UsuarioEntity criador = pegaUsuarioLogado();
 
         PlanejamentoEntity planejamentoEntity = mapper.toPlanejamentoEntity(planejamentoDTO);
         planejamentoEntity.setCriador(criador);
@@ -163,4 +161,50 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         throw new UnsupportedOperationException("Unimplemented method 'gerarCicloDeEstudos'");
     }
 
+    @Override
+    public PlanejamentoDTO selecionarPlanoPredefinido(UUID idPlanejamento) {
+        UsuarioEntity usuarioLogado = pegaUsuarioLogado();
+
+        PlanejamentoEntity planejamentoOriginal = planejamentoRepository.findById(idPlanejamento).orElseThrow(() -> new MyNotFoundException("Planejamento não encontrado para seleção."));
+
+        PlanejamentoEntity planejamentoCopia = new PlanejamentoEntity();
+
+        planejamentoCopia.setNomePlanejamento(planejamentoOriginal.getNomePlanejamento());
+        planejamentoCopia.setDisponibilidade(new ArrayList<>(planejamentoOriginal.getDisponibilidade()));
+        planejamentoCopia.setCargo(planejamentoOriginal.getCargo());
+        planejamentoCopia.setAnoAplicacao(planejamentoOriginal.getAnoAplicacao());
+        planejamentoCopia.setHorasDiarias(planejamentoOriginal.getHorasDiarias());
+        planejamentoCopia.setPlanoArquivado(planejamentoOriginal.isPlanoArquivado());
+
+        planejamentoCopia.setCriador(usuarioLogado);
+        planejamentoCopia.setPlanoArquivado(false);
+        planejamentoCopia.setPreDefinidoAdm(false);
+
+        if(planejamentoOriginal.getMaterias() != null){
+            List<MateriaPlanejamentoEntity> materiasCopiadas = planejamentoOriginal.getMaterias().stream().map(materiaOriginal -> {
+                MateriaPlanejamentoEntity materiaCopia = new MateriaPlanejamentoEntity();
+
+                materiaCopia.setMateriaEntity(materiaOriginal.getMateriaEntity());
+                materiaCopia.setPlanejamentoEntity(planejamentoCopia);
+                materiaCopia.setNivelConhecimento(materiaOriginal.getNivelConhecimento());
+                materiaCopia.setCargaHorariaMateriaPlano(materiaOriginal.getCargaHorariaMateriaPlano());
+
+                return materiaCopia;
+            }).collect(Collectors.toList());
+
+            planejamentoCopia.setMaterias(materiasCopiadas);
+        }
+
+        return mapper.toPlanejamentoDTO(planejamentoRepository.save(planejamentoCopia));
+    }
+
+    public UsuarioEntity pegaUsuarioLogado(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String emailLogado = ((UserDetails) principal).getUsername();
+
+        UsuarioEntity usuarioLogado = usuarioRepository.findByEmail(emailLogado).orElseThrow(() -> new MyNotFoundException("Usuário não encontrado."));
+
+        return usuarioLogado;
+    }
 }

@@ -117,6 +117,10 @@
     padding-left: 10%;
 }
 
+.sectionMenu .ancoraPersonalizada{
+    color: var(--corPrincipalFonte);
+}
+
 .sectionMenu .ancoraPersonalizada:hover{
     font-weight: 600;
     color: var(--corDestaqueVermelho);

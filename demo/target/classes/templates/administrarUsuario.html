@@ -69,14 +69,14 @@
                         <div th:text="${cadastro.email}">carlos.admin@lalala</div>
                         <div><img th:src="@{${cadastro.fotoUsuario}}"></div>
                         <div class="acoes">
-                            <a class="btn-acao abrir-modal" th:href="@{'/admin/listar-usuarios/admin/alterar-usuario/'+ ${cadastro.id}}">
+                            <a class="btn-acao abrir-modal" th:href="@{'/admin/listar-usuarios/alterar-usuario/'+ ${cadastro.id}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <path fill="currentColor"
                                         d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z" />
                                 </svg>
                             </a>
 
-                            <a class="btn-acao" th:href="@{'/admin/listar-usuarios/admin/remover-usuario/'+ ${cadastro.id}}">
+                            <a class="btn-acao" th:href="@{'/admin/listar-usuarios/remover-usuario/'+ ${cadastro.id}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
                                         <path

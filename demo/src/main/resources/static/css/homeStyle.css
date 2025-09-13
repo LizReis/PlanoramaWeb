@@ -175,6 +175,29 @@
     transition: width 0.3s ease-in-out;
 }
 
+.divAcaoCard {
+    width: 11rem;
+    height: 2rem;
+    display: flex;
+    padding: 10px 15px;
+    border-top: 1px solid #eee;
+    text-align: right;
+    justify-self: center;
+}
+
+.botao-selecionar {
+    padding: 8px 16px;
+    background-color: var(--corDestaqueVermelho); /* Cor principal do seu projeto */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.botao-selecionar:hover {
+    background-color: #5a1e1e; /* Um tom mais escuro */
+}
+
 /*DIV ABSOLUT PARA O BOTÃO CRIAR PLANO FICAR SEMPRE APARECENDO*/
 /*-----------------------------------------------------------*/ 
 
