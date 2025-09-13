@@ -103,6 +103,9 @@
     border-bottom: 0.1rem solid var(--corDestaqueVermelho);
 }
 
+.sectionMenu .ancoraPersonalizada{
+    color: var(--corPrincipalFonte);
+}
 
 .sectionMenu .ancoraPersonalizada:hover{
     font-weight: 600;

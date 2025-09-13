@@ -26,6 +26,8 @@ import web.planorama.demo.repository.PlanejamentoRepository;
 import web.planorama.demo.repository.UsuarioRepository;
 import web.planorama.demo.service.PlanejamentoService;
 
+import static web.planorama.demo.enums.PapeisUsuario.*;
+
 @Service
 @RequiredArgsConstructor
 public class PlanejamentoServiceImpl implements PlanejamentoService {
@@ -53,12 +55,10 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         planejamentoEntity.setAnoAplicacao(planejamentoDTO.getAnoAplicacao());
         planejamentoEntity.setHorasDiarias(planejamentoDTO.getHorasDiarias());
         planejamentoEntity.setPlanoArquivado(planejamentoDTO.isPlanoArquivado());
-        planejamentoEntity.setPreDefinidoAdm(planejamentoDTO.isPreDefinidoAdm());
-        //if(criador.){
-        //    planejamentoEntity.setPreDefinidoAdm(false);
-        //}else{
-        //    planejamentoEntity.setPreDefinidoAdm(true);
-        //}
+
+        boolean isAdmin = criador.getPapeis().stream().anyMatch(papel -> papel.getNome().equals(ADMIN.name()));
+        planejamentoEntity.setPreDefinidoAdm(isAdmin);
+        
         
         if(planejamentoEntity.getMaterias() != null){
             List<MateriaPlanejamentoEntity> materiasDoPlanejamento = planejamentoDTO.getMaterias().stream().map(materiaPlano -> {

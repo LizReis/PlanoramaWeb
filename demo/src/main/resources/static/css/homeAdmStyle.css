@@ -127,11 +127,12 @@ header section .divFotoUsuario img{
     z-index: 1000;
 }
 
+
 .botaoAncora{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 9rem;
+    width: 12rem;
     height: 2.2rem;
     background-color: var(--corDestaqueBege);
     color: var(--corFundoPrincipal);
