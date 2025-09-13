@@ -16,6 +16,7 @@ public interface PlanejamentoService {
 
     // Gera a lista de sessões de estudo (o ciclo) para um determinado plano.
     List<SessaoEstudoDTO> gerarCicloDeEstudos(UUID planejamentoId);
+    List<SessaoEstudoDTO> buscarCicloEstudo(UUID planejamentoId);
 
     //DEVE CRIAR DEPOIS UM MÉTODO PARA PEGAR TODAS AS MATERIASPLANO DE UM DETERMINADO PLANO
 

@@ -35,10 +35,10 @@ public class PlanejamentoController {
 
         PlanejamentoDTO planejamento = planejamentoService.findOne(idUUID);
 
-        //List<SessaoEstudoDTO> ciclo = planejamentoService.gerarCicloDeEstudos(idUUID);
-
         model.addAttribute("planejamento", planejamento);
-        //model.addAttribute("ciclo", ciclo);
+
+        List<SessaoEstudoDTO> sessoesPlanejamento = planejamentoService.buscarCicloEstudo(idUUID);
+        model.addAttribute("sessoes", sessoesPlanejamento);
 
         return "telaPlano";
     }

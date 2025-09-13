@@ -42,7 +42,7 @@
 
             <div class="graficoRosca" id="grafico">
                 <div class="centroTexto">
-                    <span id="spanHoraTotalGrafico" th:text="*{horasDiarias}">25h00min</span>
+                    <span id="spanHoraTotalGrafico" th:text="*{horasDiarias*disponibilidade.size}">25h00min<span>H</span></span>
                 </div>
             </div>
         </div>
@@ -82,6 +82,13 @@
             </a>
         </div>
     </section>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        // Thymeleaf vai injetar os dados do Controller nesta variável
+        const cicloData = /*[[${sessoes}]]*/ [];
+        /*]]>*/
+    </script>
 
     <script th:src="@{/js/telaPlanoScripts.js}"></script>
     <script th:src="@{/js/menuScripts.js}"></script>

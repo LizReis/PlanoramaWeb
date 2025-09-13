@@ -44,6 +44,9 @@ public class PlanejamentoEntity {
     @OneToMany(mappedBy = "planejamentoEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MateriaPlanejamentoEntity> materias = new ArrayList<>();
 
+    @OneToMany(mappedBy = "planejamentoEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SessaoEstudoEntity> sessoesEstudo = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "Criador")
     private UsuarioEntity criador;

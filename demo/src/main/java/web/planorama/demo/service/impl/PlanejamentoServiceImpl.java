@@ -1,6 +1,7 @@
 package web.planorama.demo.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -18,12 +19,15 @@ import web.planorama.demo.dto.UsuarioDTO;
 import web.planorama.demo.entity.MateriaEntity;
 import web.planorama.demo.entity.MateriaPlanejamentoEntity;
 import web.planorama.demo.entity.PlanejamentoEntity;
+import web.planorama.demo.entity.SessaoEstudoEntity;
 import web.planorama.demo.entity.UsuarioEntity;
 import web.planorama.demo.exceptions.MyNotFoundException;
 import web.planorama.demo.mapping.MateriaPlanejamentoMapper;
 import web.planorama.demo.mapping.PlanejamentoMapper;
+import web.planorama.demo.mapping.SessaoEstudoMapper;
 import web.planorama.demo.repository.MateriaRepository;
 import web.planorama.demo.repository.PlanejamentoRepository;
+import web.planorama.demo.repository.SessaoEstudoRepository;
 import web.planorama.demo.repository.UsuarioRepository;
 import web.planorama.demo.service.PlanejamentoService;
 
@@ -36,8 +40,10 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
     private final PlanejamentoRepository planejamentoRepository;
     private final UsuarioRepository usuarioRepository;
     private final MateriaRepository materiaRepository;
+    private final SessaoEstudoRepository sessaoEstudoRepository;
     private final PlanejamentoMapper mapper;
     private final MateriaPlanejamentoMapper materiaPlanejamentoMapper;
+    private final SessaoEstudoMapper sessaoEstudoMapper;
 
     @Override
     @Transactional
@@ -56,27 +62,31 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
         boolean isAdmin = criador.getPapeis().stream().anyMatch(papel -> papel.getNome().equals(ADMIN.name()));
         planejamentoEntity.setPreDefinidoAdm(isAdmin);
-        
-        
-        if(planejamentoEntity.getMaterias() != null){
-            List<MateriaPlanejamentoEntity> materiasDoPlanejamento = planejamentoDTO.getMaterias().stream().map(materiaPlano -> {
-                MateriaPlanejamentoEntity materiaPlanejamento =  materiaPlanejamentoMapper.toMateriaPlanejamentoEntity(materiaPlano);
-                materiaPlanejamento.setNivelConhecimento(materiaPlano.getNivelConhecimento());
-                materiaPlanejamento.setCargaHorariaMateriaPlano(materiaPlano.getCargaHorariaMateriaPlano());
-                materiaPlanejamento.setPlanejamentoEntity(planejamentoEntity);
 
-                MateriaEntity materiaEntity = materiaRepository.findById(materiaPlano.getIdMateriaDTO()).orElseThrow(() -> new RuntimeException("Matéria não encontrada."));
+        if (planejamentoEntity.getMaterias() != null) {
+            List<MateriaPlanejamentoEntity> materiasDoPlanejamento = planejamentoDTO.getMaterias().stream()
+                    .map(materiaPlano -> {
+                        MateriaPlanejamentoEntity materiaPlanejamento = materiaPlanejamentoMapper
+                                .toMateriaPlanejamentoEntity(materiaPlano);
+                        materiaPlanejamento.setNivelConhecimento(materiaPlano.getNivelConhecimento());
+                        materiaPlanejamento.setCargaHorariaMateriaPlano(materiaPlano.getCargaHorariaMateriaPlano());
+                        materiaPlanejamento.setPlanejamentoEntity(planejamentoEntity);
 
-                materiaPlanejamento.setMateriaEntity(materiaEntity);
-                materiaPlanejamento.setPlanejamentoEntity(planejamentoEntity);
+                        MateriaEntity materiaEntity = materiaRepository.findById(materiaPlano.getIdMateriaDTO())
+                                .orElseThrow(() -> new RuntimeException("Matéria não encontrada."));
 
-                return materiaPlanejamento;
-            }).collect(Collectors.toList());
+                        materiaPlanejamento.setMateriaEntity(materiaEntity);
+                        materiaPlanejamento.setPlanejamentoEntity(planejamentoEntity);
+
+                        return materiaPlanejamento;
+                    }).collect(Collectors.toList());
 
             planejamentoEntity.setMaterias(materiasDoPlanejamento);
         }
 
         var planoSalvo = planejamentoRepository.save(planejamentoEntity);
+
+        this.gerarCicloDeEstudos(planoSalvo.getId());
 
         return mapper.toPlanejamentoDTO(planoSalvo);
 
@@ -154,18 +164,88 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         throw new UnsupportedOperationException("Unimplemented method 'restaurarPlanoDeEstudos'");
     }
 
-
     @Override
+    @Transactional
     public List<SessaoEstudoDTO> gerarCicloDeEstudos(UUID planejamentoId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'gerarCicloDeEstudos'");
+        PlanejamentoEntity planejamentoEntity = planejamentoRepository.findById(planejamentoId)
+                .orElseThrow(() -> new MyNotFoundException("Planejamento não encontrado."));
+
+        if (planejamentoEntity.getMaterias() == null || planejamentoEntity.getMaterias().isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        int horasSemanais = planejamentoEntity.getHorasDiarias() * planejamentoEntity.getDisponibilidade().size();
+
+        int horaCadaMateria = horasSemanais / planejamentoEntity.getMaterias().size();
+
+        List<MateriaPlanejamentoEntity> materiasDoPlano = planejamentoEntity.getMaterias();
+        
+        int horasAtribuidas = 0;
+        for (MateriaPlanejamentoEntity materiaPlano : materiasDoPlano) {
+            int cargaHorariaCalculada;
+            if (materiaPlano.getNivelConhecimento() == 1 || materiaPlano.getNivelConhecimento() == 2) {
+                cargaHorariaCalculada = horaCadaMateria;
+            } else if (materiaPlano.getNivelConhecimento() == 3) {
+                cargaHorariaCalculada = (int) (horaCadaMateria - (horaCadaMateria * 0.2));
+            } else {
+                cargaHorariaCalculada = (int) (horaCadaMateria - (horaCadaMateria * 0.4));
+            }
+            materiaPlano.setCargaHorariaMateriaPlano(cargaHorariaCalculada);
+            horasAtribuidas += cargaHorariaCalculada;
+        }
+
+        int horasRestantes = horasSemanais - horasAtribuidas;
+        while(horasRestantes > 0){
+            boolean distribuiuHoras = false;
+            for(MateriaPlanejamentoEntity materiaPlano : materiasDoPlano){
+                if(materiaPlano.getNivelConhecimento() <= 2){
+                    materiaPlano.setCargaHorariaMateriaPlano(materiaPlano.getCargaHorariaMateriaPlano() + 1);
+                    horasRestantes--;
+                    distribuiuHoras = true;
+                    if(horasRestantes == 0){
+                        break;
+                    }
+                }
+            }
+            if (!distribuiuHoras) {
+                materiasDoPlano.get(0).setCargaHorariaMateriaPlano(materiasDoPlano.get(0).getCargaHorariaMateriaPlano() + 1);
+                horasRestantes--;
+            }
+        }
+
+        List<SessaoEstudoDTO> sessoesGeradas = new ArrayList<>();
+        final int DURACAO_BLOCO_MINUTOS = 50; // cada sessão terá 50min obrigatoriamente
+
+        for (MateriaPlanejamentoEntity materiaPlano : materiasDoPlano) {
+            int cargaHorariaMateriaMinutos = materiaPlano.getCargaHorariaMateriaPlano() * 60;
+
+            int numeroSessoesMateria = cargaHorariaMateriaMinutos / DURACAO_BLOCO_MINUTOS;
+
+            for (int i = 0; i < numeroSessoesMateria; i++) {
+                SessaoEstudoEntity sessao = new SessaoEstudoEntity();
+                sessao.setMateriaEntity(materiaPlano.getMateriaEntity());
+                sessao.setPlanejamentoEntity(planejamentoEntity);
+                sessao.setDuracaoSessao(DURACAO_BLOCO_MINUTOS);
+            
+                sessaoEstudoRepository.save(sessao);
+                
+                sessoesGeradas.add(sessaoEstudoMapper.toSessaoEstudoDTO(sessao));
+            }
+        }
+
+        Collections.shuffle(sessoesGeradas);
+
+        planejamentoRepository.save(planejamentoEntity);
+
+        return sessoesGeradas;
     }
 
     @Override
     public PlanejamentoDTO selecionarPlanoPredefinido(UUID idPlanejamento) {
         UsuarioEntity usuarioLogado = pegaUsuarioLogado();
 
-        PlanejamentoEntity planejamentoOriginal = planejamentoRepository.findById(idPlanejamento).orElseThrow(() -> new MyNotFoundException("Planejamento não encontrado para seleção."));
+        PlanejamentoEntity planejamentoOriginal = planejamentoRepository.findById(idPlanejamento)
+                .orElseThrow(() -> new MyNotFoundException("Planejamento não encontrado para seleção."));
 
         PlanejamentoEntity planejamentoCopia = new PlanejamentoEntity();
 
@@ -180,17 +260,18 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         planejamentoCopia.setPlanoArquivado(false);
         planejamentoCopia.setPreDefinidoAdm(false);
 
-        if(planejamentoOriginal.getMaterias() != null){
-            List<MateriaPlanejamentoEntity> materiasCopiadas = planejamentoOriginal.getMaterias().stream().map(materiaOriginal -> {
-                MateriaPlanejamentoEntity materiaCopia = new MateriaPlanejamentoEntity();
+        if (planejamentoOriginal.getMaterias() != null) {
+            List<MateriaPlanejamentoEntity> materiasCopiadas = planejamentoOriginal.getMaterias().stream()
+                    .map(materiaOriginal -> {
+                        MateriaPlanejamentoEntity materiaCopia = new MateriaPlanejamentoEntity();
 
-                materiaCopia.setMateriaEntity(materiaOriginal.getMateriaEntity());
-                materiaCopia.setPlanejamentoEntity(planejamentoCopia);
-                materiaCopia.setNivelConhecimento(materiaOriginal.getNivelConhecimento());
-                materiaCopia.setCargaHorariaMateriaPlano(materiaOriginal.getCargaHorariaMateriaPlano());
+                        materiaCopia.setMateriaEntity(materiaOriginal.getMateriaEntity());
+                        materiaCopia.setPlanejamentoEntity(planejamentoCopia);
+                        materiaCopia.setNivelConhecimento(materiaOriginal.getNivelConhecimento());
+                        materiaCopia.setCargaHorariaMateriaPlano(materiaOriginal.getCargaHorariaMateriaPlano());
 
-                return materiaCopia;
-            }).collect(Collectors.toList());
+                        return materiaCopia;
+                    }).collect(Collectors.toList());
 
             planejamentoCopia.setMaterias(materiasCopiadas);
         }
@@ -198,13 +279,25 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         return mapper.toPlanejamentoDTO(planejamentoRepository.save(planejamentoCopia));
     }
 
-    public UsuarioEntity pegaUsuarioLogado(){
+    public UsuarioEntity pegaUsuarioLogado() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         String emailLogado = ((UserDetails) principal).getUsername();
 
-        UsuarioEntity usuarioLogado = usuarioRepository.findByEmail(emailLogado).orElseThrow(() -> new MyNotFoundException("Usuário não encontrado."));
+        UsuarioEntity usuarioLogado = usuarioRepository.findByEmail(emailLogado)
+                .orElseThrow(() -> new MyNotFoundException("Usuário não encontrado."));
 
         return usuarioLogado;
+    }
+
+    @Override
+    public List<SessaoEstudoDTO> buscarCicloEstudo(UUID planejamentoId) {
+        PlanejamentoEntity planejamentoEntity = planejamentoRepository.findById(planejamentoId).orElseThrow(() -> new MyNotFoundException("Planejamento não encontado."));
+
+        return planejamentoEntity.getSessoesEstudo()
+                        .stream()
+                        .map(sessaoEstudoMapper::toSessaoEstudoDTO)
+                        .collect(Collectors.toList());
+                                        
     }
 }

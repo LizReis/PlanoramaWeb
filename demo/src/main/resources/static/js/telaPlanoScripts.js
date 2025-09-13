@@ -1,91 +1,126 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const cicloContainer = document.getElementById('ciclo-visual');
-    const listaMateriasContainer = document.querySelector('#lista-materias ul');
+document.addEventListener('DOMContentLoaded', function () {
 
-    // Mapeia nomes de matérias para cores para consistência visual
+    console.log("Dados recebidos do backend:", cicloData);
+
+    const graficoContainer = document.getElementById('grafico');
+    const containerDisciplinas = document.querySelector('.containerDisciplinas');
+
+    // Verifica se os dados do ciclo e os elementos existem
+    if (typeof cicloData === 'undefined' || cicloData.length === 0) {
+        console.log("Nenhuma sessão de estudo para exibir no gráfico.");
+        graficoContainer.innerHTML += '<p class="aviso-sem-dados">Não há sessões para exibir. Verifique a carga horária das matérias.</p>';
+        return;
+    }
+
+    // 1. Agrupar sessões por matéria para calcular o tempo total de cada uma
+    const materiasAgrupadas = cicloData.reduce((acc, sessao) => {
+        // AJUSTE AQUI: Ler de dentro do materiaDTO
+        const nome = sessao.materiaDTO.nomeMateria;
+        acc[nome] = (acc[nome] || 0) + sessao.duracaoSessao;
+        return acc;
+    }, {});
+
+    const tempoTotalMinutos = cicloData.reduce((total, sessao) => total + sessao.duracaoSessao, 0);
+
+    // 2. Mapear cores consistentes para cada matéria
     const coresMaterias = {};
-    let proximaCor = 0;
-    const paletaDeCores = ['#4CAF50', '#2196F3', '#FFC107', '#F44336', '#9C27B0', '#009688', '#FF5722'];
-
-    // 1. Processar os dados e desenhar o ciclo
-    if (cicloData && cicloData.length > 0) {
-        cicloData.forEach((sessao, index) => {
-            const nomeMateria = sessao.nomeMateria;
-
-            // Define uma cor para cada matéria
-            if (!coresMaterias[nomeMateria]) {
-                coresMaterias[nomeMateria] = paletaDeCores[proximaCor % paletaDeCores.length];
-                proximaCor++;
-            }
-
-            // Cria a "fatia" do ciclo
-            const fatia = document.createElement('div');
-            fatia.className = 'fatia-ciclo';
-            fatia.textContent = nomeMateria;
-            fatia.style.backgroundColor = coresMaterias[nomeMateria];
-            fatia.dataset.materia = nomeMateria; // Guarda o nome da matéria
-            fatia.dataset.duracao = sessao.duracaoSessao; // Guarda a duração em minutos
-
-            // Adiciona o evento de clique para iniciar o cronômetro
-            fatia.addEventListener('click', iniciarSessao);
-
-            cicloContainer.appendChild(fatia);
-        });
-
-        // 2. Preencher a lista de matérias (legenda)
-        Object.keys(coresMaterias).forEach(materia => {
-            const listItem = document.createElement('li');
-            listItem.innerHTML = `<span class="cor-legenda" style="background-color: ${coresMaterias[materia]}"></span> ${materia}`;
-            listaMateriasContainer.appendChild(listItem);
-        });
-
-    } else {
-        cicloContainer.innerHTML = '<p>Nenhuma sessão de estudo para este plano. Verifique as cargas horárias das matérias.</p>';
+    const paletaDeCores = ['#4CAF50', '#2196F3', '#FFC107', '#F44336', '#9C27B0', '#009688', '#FF5722', '#795548'];
+    let corIndex = 0;
+    for (const nomeMateria in materiasAgrupadas) {
+        coresMaterias[nomeMateria] = paletaDeCores[corIndex % paletaDeCores.length];
+        corIndex++;
     }
 
-    // --- LÓGICA DO CRONÔMETRO ---
-    const cronometroContainer = document.getElementById('cronometro-container');
-    const cronometroDisplay = document.getElementById('cronometro-display');
-    const cronometroMateriaTitulo = document.getElementById('cronometro-materia');
-    let tempoRestante;
-    let timer;
+    // 3. Construir a string do CSS conic-gradient
+    let gradientString = 'conic-gradient(';
+    let acumulado = 0;
+    const espacoEntreFatias = 0.4; // Aumentei um pouco para ficar mais visível
+    // Pega a cor de fundo definida no CSS. O padrão é 'white' se não encontrar.
+    const corDeFundo = getComputedStyle(graficoContainer).backgroundColor || 'white';
 
-    function iniciarSessao(event) {
-        const fatiaClicada = event.currentTarget;
-        const materia = fatiaClicada.dataset.materia;
-        const duracaoMinutos = parseInt(fatiaClicada.dataset.duracao);
+    for (const nomeMateria in materiasAgrupadas) {
+        const duracaoMateria = materiasAgrupadas[nomeMateria];
+        const cor = coresMaterias[nomeMateria];
+        let porcentagem = (duracaoMateria / tempoTotalMinutos) * 100;
 
-        // Mostra o cronômetro
-        cronometroMateriaTitulo.textContent = `Estudando: ${materia}`;
-        cronometroContainer.style.display = 'block';
-
-        // Desabilita o clique em outras fatias
-        document.querySelectorAll('.fatia-ciclo').forEach(f => f.style.pointerEvents = 'none');
-
-        // Inicia a contagem regressiva
-        tempoRestante = duracaoMinutos * 60; // Converte para segundos
-        clearInterval(timer); // Limpa qualquer timer anterior
-        timer = setInterval(atualizarCronometro, 1000);
-
-        fatiaClicada.classList.add('estudando');
-    }
-
-    function atualizarCronometro() {
-        const minutos = Math.floor(tempoRestante / 60);
-        let segundos = tempoRestante % 60;
-        segundos = segundos < 10 ? '0' + segundos : segundos;
-
-        cronometroDisplay.textContent = `${minutos}:${segundos}`;
-
-        if (tempoRestante > 0) {
-            tempoRestante--;
+        // Garante que a fatia não seja menor que o espaço
+        if (porcentagem <= espacoEntreFatias) {
+            // Se for muito pequena, desenha sem espaço
+            gradientString += `${cor} ${acumulado}% ${acumulado + porcentagem}%, `;
         } else {
-            clearInterval(timer);
-            alert("Sessão concluída!");
-            // Aqui você pode adicionar a lógica para marcar a fatia como concluída
-            document.querySelector('.fatia-ciclo.estudando').classList.add('concluida');
-            cronometroContainer.style.display = 'none';
-            document.querySelectorAll('.fatia-ciclo').forEach(f => f.style.pointerEvents = 'auto'); // Reabilita o clique
+            // Desenha o espaço com a cor de fundo
+            gradientString += `${corDeFundo} ${acumulado}% ${acumulado + espacoEntreFatias}%, `;
+            // Desenha a fatia colorida no restante do espaço
+            gradientString += `${cor} ${acumulado + espacoEntreFatias}% ${acumulado + porcentagem}%, `;
         }
+
+        // O acumulado avança a porcentagem total para a próxima fatia
+        acumulado += porcentagem;
     }
+    // Remove a última vírgula e espaço e fecha o parêntese
+    gradientString = gradientString.slice(0, -2) + ')';
+
+    // 4. Aplicar o gradiente ao gráfico
+    graficoContainer.style.background = gradientString;
+
+    // 5. Limpar a lista de disciplinas estática e criar a legenda dinâmica
+    const divDisciplinaContainer = containerDisciplinas.querySelector('.divDisciplina');
+    divDisciplinaContainer.innerHTML = ''; // Limpa o conteúdo estático
+
+    const materiasCompletas = cicloData.reduce((acc, sessao) => {
+        // AJUSTE AQUI: Ler de dentro do materiaDTO
+        const nome = sessao.materiaDTO.nomeMateria;
+        if (!acc[nome]) {
+            acc[nome] = {
+                // AJUSTE AQUI: Ler de dentro do materiaDTO
+                idMateria: sessao.materiaDTO.idMateria,
+                duracaoTotal: 0,
+                nomeMateria: nome
+            };
+        }
+        acc[nome].duracaoTotal += sessao.duracaoSessao;
+        return acc;
+    }, {});
+
+    // Agora iteramos sobre os dados agrupados
+    for (const nomeMateria in materiasCompletas) {
+        const materiaInfo = materiasCompletas[nomeMateria];
+        const cor = coresMaterias[nomeMateria];
+
+        const cardHtml = `
+        <div class="cardDisciplina" 
+             style="border-left: 5px solid ${cor}; cursor: pointer;" 
+             data-materia-id="${materiaInfo.idMateria}">
+            <div class="divDisciplinaNome">
+                <span class="nomeDisciplina">${materiaInfo.nomeMateria}</span>
+            </div>
+            <span class="tempoDisciplina">${formatarTempo(materiaInfo.duracaoTotal)}</span>
+        </div>
+    `;
+        divDisciplinaContainer.innerHTML += cardHtml;
+    }
+
+    // 6. Adicionar eventos de clique aos cards de disciplina
+    document.querySelectorAll('.cardDisciplina').forEach(card => {
+        card.addEventListener('click', function () {
+            const materiaId = this.dataset.materiaId;
+            alert(`Clicou na matéria com ID: ${materiaId}. Agora você faria uma chamada para buscar os assuntos dela.`);
+            // Aqui você implementaria a lógica para buscar os assuntos via fetch()
+            // e exibir o card/modal com a lista de assuntos.
+        });
+    });
+
 });
+
+/**
+ * Função auxiliar para formatar minutos em horas e minutos
+ * Ex: 110 minutos -> "1h 50min"
+ */
+function formatarTempo(totalMinutos) {
+    if (totalMinutos < 60) {
+        return `${totalMinutos}min`;
+    }
+    const horas = Math.floor(totalMinutos / 60);
+    const minutos = totalMinutos % 60;
+    return `${horas}h ${minutos > 0 ? minutos + 'min' : ''}`.trim();
+}

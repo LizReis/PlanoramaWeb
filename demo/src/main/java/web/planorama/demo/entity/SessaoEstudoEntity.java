@@ -30,6 +30,10 @@ public class SessaoEstudoEntity {
     @JoinColumn(name = "MATERIA_ID", nullable = false)
     private MateriaEntity materiaEntity;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PLANEJAMENTO_ID", nullable = false)
+    private PlanejamentoEntity planejamentoEntity;
+
     @Column(name = "DURACAO_SESSAO", nullable = false)
     private int duracaoSessao;
 }

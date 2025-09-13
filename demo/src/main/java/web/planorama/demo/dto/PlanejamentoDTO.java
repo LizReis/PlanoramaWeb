@@ -43,6 +43,8 @@ public class PlanejamentoDTO{
     @Valid
     private List<MateriaPlanejamentoDTO> materias;
 
+    private List<SessaoEstudoDTO> sessoesEstudo;
+
     private UsuarioDTO criador;
 
     @NotNull 

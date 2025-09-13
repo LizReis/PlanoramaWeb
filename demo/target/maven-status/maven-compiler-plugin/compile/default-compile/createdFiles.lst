@@ -23,6 +23,7 @@ web\planorama\demo\controller\MateriaController.class
 web\planorama\demo\dto\SessaoEstudoDTO.class
 web\planorama\demo\mapping\MateriaMapperImpl.class
 web\planorama\demo\dto\PlanejamentoDTO.class
+web\planorama\demo\mapping\SessaoEstudoMapperImpl.class
 web\planorama\demo\service\impl\MateriaServiceImpl.class
 web\planorama\demo\mapping\MateriaPlanejamentoMapper.class
 web\planorama\demo\mapping\UsuarioMapper.class
@@ -54,6 +55,7 @@ web\planorama\demo\mapping\PlanejamentoMapper.class
 web\planorama\demo\service\impl\UsuarioServiceImpl.class
 web\planorama\demo\config\DeterminarImagemUploadConfig.class
 web\planorama\demo\mapping\UsuarioMapperImpl.class
+web\planorama\demo\mapping\SessaoEstudoMapper.class
 web\planorama\demo\repository\AssuntoRepository.class
 web\planorama\demo\controller\PlanejamentoController.class
 web\planorama\demo\controller\LoginController.class

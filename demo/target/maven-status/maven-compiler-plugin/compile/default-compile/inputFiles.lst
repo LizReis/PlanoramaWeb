@@ -36,12 +36,14 @@ C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\m
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\mapping\MateriaMapper.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\mapping\MateriaPlanejamentoMapper.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\mapping\PlanejamentoMapper.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\mapping\SessaoEstudoMapper.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\mapping\UsuarioMapper.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\AssuntoRepository.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\MateriaPlanejamentoRepository.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\MateriaRepository.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\PapelRepository.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\PlanejamentoRepository.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\SessaoEstudoRepository.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\repository\UsuarioRepository.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\ArquivosUsuarioService.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\service\AssuntoService.java
