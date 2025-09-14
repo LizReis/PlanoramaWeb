@@ -13,12 +13,14 @@ C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\c
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\MeusPlanejamentosController.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\MinhaContaController.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\PlanejamentoController.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\RegistrarEstudoController.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\SelecionarPlanejamentoController.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\DemoApplication.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\AssuntoDTO.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\MateriaDTO.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\MateriaPlanejamentoDTO.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\PlanejamentoDTO.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\RegistrarEstudoDTO.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\SessaoEstudoDTO.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\UsuarioDTO.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\AssuntoEntity.java
@@ -26,6 +28,7 @@ C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\e
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\MateriaPlanejamentoEntity.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\PapelEntity.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\PlanejamentoEntity.java
+C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\RegistrarEstudoEntity.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\SessaoEstudoEntity.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\entity\UsuarioEntity.java
 C:\Users\LIZANDRA\Documents\PlanoramaWeb\demo\src\main\java\web\planorama\demo\enums\PapeisUsuario.java

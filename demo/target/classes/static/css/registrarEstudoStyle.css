@@ -1,0 +1,142 @@
+:root {
+    --corFundoPrincipal: #FFFFFF;
+    --corPrincipalFonte: #0D0D0D;
+    --corCinzaFonte: #808080;
+    --corDestaqueVerde: #7A7453;
+    --corDestaqueVermelho: #7C2A2A;
+    --corDestaqueBege: #C29A6E;
+
+    --fonteDestaque: "Merriweather", serif;
+    --fonteParaTexto: "Roboto", sans-serif;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+*:focus{
+    outline: none;
+}
+
+.sectionRegistrarEstudo{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    background-color: var(--corFundoPrincipal);
+    margin: 7% 5% 5% 5%;
+}
+
+.titulo{
+    display: flex;
+    gap: 2px;
+    margin: 1rem 0rem 0rem 0rem;
+    padding: 0% 0% 3% 4%;
+    font-family: var(--fonteDestaque);
+    font-weight: 700;
+    color: var(--corDestaqueVerde);
+    font-size: 18px;
+    border-bottom: 0.1rem solid var(--corDestaqueVerde);
+}
+
+.titulo .fecharX{
+    margin-left: 170px;
+    font-weight: 500;
+}
+
+.fecharX:hover{
+    color: var(--corDestaqueVermelho);
+    cursor: pointer;
+}
+
+.sectionRegistrarEstudo div p{
+    font-family: var(--fonteParaTexto);
+    font-size: 13px;
+    margin: 5px 0px 0px 20px;
+}
+
+
+.sectionRegistrarEstudo form{
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionRegistrarEstudo form .seletor-container select{
+    margin: 10px 0px 10px 20px;
+    width: 360px;
+    padding: 0.8rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background-color: #ebe9e9;
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7em top 50%;
+    background-size: 0.65em auto;
+    
+}
+
+.sectionRegistrarEstudo form .divTempoEstudado{
+    display: flex;
+    flex-direction: column;
+    font-family: var(--fonteParaTexto);
+}
+
+.sectionRegistrarEstudo form .spanRegistro{
+    margin: 20px 0px 0px 20px;
+    font-family: var(--fonteParaTexto);
+    font-weight: 500;
+}
+
+.sectionRegistrarEstudo form .divTempoEstudado div{
+    display: flex;
+    margin: 10px 0px 30px 20px;
+}
+
+.sectionRegistrarEstudo form .divTempoEstudado label{
+    margin: 5px 5px 0px 20px;
+}
+
+.sectionRegistrarEstudo form .divTempoEstudado input{
+    width: 80px;
+    height: 30px;
+    padding: 0.8rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background-color: #ebe9e9;
+    font-family: var(--fonteParaTexto);
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+.sectionRegistrarEstudo .divBotoes{
+    align-self: center;
+    margin-bottom: 20px;
+}
+
+#botaoRegistrar{
+    background-color: var(--corDestaqueVerde);
+    margin-top: 10%;
+    width: 100px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    color: var(--corFundoPrincipal);
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+#botaoRegistrar:hover{
+    color: var(--corDestaqueVerde);
+    background-color: var(--corFundoPrincipal);
+    border: 0.1rem solid var(--corDestaqueVerde);
+}

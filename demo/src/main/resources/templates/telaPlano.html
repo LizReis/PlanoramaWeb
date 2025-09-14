@@ -13,6 +13,8 @@
     <link rel="stylesheet" th:href="@{/css/telaPlanoStyle.css}">
     <link rel="stylesheet" th:href="@{/css/barraNavStyle.css}">
     <link rel="stylesheet" th:href="@{/css/menuStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/registrarEstudoStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/modalStyle.css}">
 </head>
 
 <body>
@@ -40,7 +42,7 @@
                 </div>
             </div>
 
-            <div class="graficoRosca" id="grafico">
+            <div class="graficoRosca conteudoPrincipal" id="grafico">
                 <div class="centroTexto">
                     <span id="spanHoraTotalGrafico" th:text="*{horasDiarias*disponibilidade.size}">25h00min<span>H</span></span>
                 </div>
@@ -83,6 +85,8 @@
         </div>
     </section>
 
+    <div id="modal-container"></div>
+
     <script th:inline="javascript">
         /*<![CDATA[*/
         // Thymeleaf vai injetar os dados do Controller nesta variável
@@ -93,6 +97,7 @@
     <script th:src="@{/js/telaPlanoScripts.js}"></script>
     <script th:src="@{/js/menuScripts.js}"></script>
     <script th:src="@{/js/criarPlanoScripts.js}"></script>
+    <script th:src="@{/js/modalScriptsDinamico.js}"></script>
 </body>
 
 </html>

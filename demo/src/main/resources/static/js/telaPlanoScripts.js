@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!acc[nome]) {
             acc[nome] = {
                 // AJUSTE AQUI: Ler de dentro do materiaDTO
-                idMateria: sessao.materiaDTO.idMateria,
+                idMateria: sessao.materiaDTO.id,
                 duracaoTotal: 0,
                 nomeMateria: nome
             };
@@ -87,28 +87,22 @@ document.addEventListener('DOMContentLoaded', function () {
         const materiaInfo = materiasCompletas[nomeMateria];
         const cor = coresMaterias[nomeMateria];
 
+        const url = `/registrar-estudo/${materiaInfo.idMateria}`;
+
         const cardHtml = `
-        <div class="cardDisciplina" 
+        <a class="abrir-modal" href="${url}">
+            <div class="cardDisciplina" 
              style="border-left: 5px solid ${cor}; cursor: pointer;" 
              data-materia-id="${materiaInfo.idMateria}">
             <div class="divDisciplinaNome">
                 <span class="nomeDisciplina">${materiaInfo.nomeMateria}</span>
             </div>
             <span class="tempoDisciplina">${formatarTempo(materiaInfo.duracaoTotal)}</span>
-        </div>
+            </div>
+        </a>
     `;
         divDisciplinaContainer.innerHTML += cardHtml;
     }
-
-    // 6. Adicionar eventos de clique aos cards de disciplina
-    document.querySelectorAll('.cardDisciplina').forEach(card => {
-        card.addEventListener('click', function () {
-            const materiaId = this.dataset.materiaId;
-            alert(`Clicou na matéria com ID: ${materiaId}. Agora você faria uma chamada para buscar os assuntos dela.`);
-            // Aqui você implementaria a lógica para buscar os assuntos via fetch()
-            // e exibir o card/modal com a lista de assuntos.
-        });
-    });
 
 });
 

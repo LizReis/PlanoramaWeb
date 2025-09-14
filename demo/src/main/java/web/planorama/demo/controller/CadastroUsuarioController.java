@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Slf4j
 public class CadastroUsuarioController {
 
-    private final UsuarioRepository usuarioRepository;
     private final UsuarioService usuarioService;
 
     private final String UPLOAD_DIR = "uploadsUser";

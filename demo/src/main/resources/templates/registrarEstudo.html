@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
+
+<body>
+    <main class="sectionRegistrarEstudo cardCriacao corpo" th:fragment="cardCriacao">
+        <div class="titulo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h10.29q.323 0 .628.13q.305.132.522.349l2.465 2.465q.218.218.348.522q.131.305.131.628v10.29q0 .691-.462 1.154T18.384 20zM19 7.85L16.15 5H5.616q-.27 0-.443.173T5 5.616v12.769q0 .269.173.442t.443.173h12.769q.269 0 .442-.173t.173-.443zm-7 8.689q.827 0 1.414-.587T14 14.538t-.587-1.413T12 12.539t-1.413.586T10 14.538t.587 1.414t1.413.586M7.577 9.77h5.808q.348 0 .578-.23t.23-.577V7.577q0-.348-.23-.578t-.578-.23H7.577q-.348 0-.578.23t-.23.578v1.385q0 .348.23.578t.578.23M5 7.85V19V5z" />
+            </svg>
+            <span class="spanForm">Registrar Estudo</span>
+            <span class="fecharX">X</span>
+        </div>
+
+        <div>
+            <p>Registre seu tempo de estudo: selecione o assunto e defina quanto tempo você estudou.</p>
+        </div>
+
+        <form id="formCriarPlanejamento" th:action="@{/registrar-estudo/registrar}" th:object="${registroEstudo}" method="post">
+
+            <span class="spanRegistro">Selecionar Assunto:</span>
+
+            <div class="seletor-container">
+                <select id="select-assunto" class="seletor-filtro">
+                    <option disabled selected>Escolha um Assunto</option>
+                    <option th:each="assunto : ${listaAssuntos}"
+                        th:value="${assunto.id}"
+                        th:text="${assunto.nomeAssunto}">Nome do Assunto</option>
+                </select>
+            </div>
+
+            <div class="divTempoEstudado">
+                <span class="spanRegistro">Tempo Estudado:</span>
+
+                <div>
+                    <label for="horasEstudadas">Horas:</label>
+                    <input type="number" id="horasEstudadas" th:field="*{horasEstudadas}" min="1">
+                    <span class="error" th:if="${#fields.hasErrors('horasEstudadas')}"
+                        th:errors="*{horasEstudadas}"></span>
+
+                    <label for="minutosEstudados">Minutos:</label>
+                    <input type="number" id="minutosEstudados" th:field="*{minutosEstudados}" min="1">
+                    <span class="error" th:if="${#fields.hasErrors('minutosEstudados')}"
+                        th:errors="*{minutosEstudados}"></span>
+                </div>
+            </div>
+
+            <div class="divBotoes">
+                <button id="botaoRegistrar" type="submit">Registrar</button>
+            </div>
+        </form>
+    </main>
+
+    <footer></footer>
+</body>
+
+</html>

@@ -67,7 +67,6 @@
     align-items: center;
     justify-content: center;
     font-family: var(--fonteParaTexto);
-    background: var(--corFundoPrincipal);
 }
 
 .sectionGrafico .graficoRosca::before {
@@ -79,6 +78,7 @@
     z-index: 1;
     background: var(--corFundoPrincipal);
 }
+
 
 .sectionGrafico .graficoRosca .centroTexto {
     position: relative;

@@ -45,7 +45,6 @@ public class CriarPlanejamentoController {
     private final MateriaService materiaService;
 
     private final UsuarioMapper usuarioMapper;
-    private final MateriaMapper materiaMapper;
 
     private final UsuarioRepository usuarioRepository;
 
