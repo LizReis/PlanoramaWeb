@@ -27,6 +27,8 @@
                         th:value="${assunto.id}"
                         th:text="${assunto.nomeAssunto}">Nome do Assunto</option>
                 </select>
+                <span class="error" th:if="${#fields.hasErrors('assuntoId')}"
+                        th:errors="*{assuntoId}"></span>
             </div>
 
             <div class="divTempoEstudado">

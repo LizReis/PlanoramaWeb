@@ -6,6 +6,7 @@ web\planorama\demo\entity\UsuarioEntity.class
 web\planorama\demo\mapping\MateriaPlanejamentoMapperImpl.class
 web\planorama\demo\repository\PlanejamentoRepository.class
 web\planorama\demo\repository\UsuarioRepository.class
+web\planorama\demo\repository\SessaoEstudoRepository.class
 web\planorama\demo\dto\MateriaPlanejamentoDTO.class
 web\planorama\demo\service\PlanejamentoService.class
 web\planorama\demo\controller\MinhaContaController.class
