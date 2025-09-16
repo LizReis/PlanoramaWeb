@@ -27,16 +27,16 @@ public class RegistrarEstudoEntity {
     private UUID id;
 
     @ManyToOne 
-    @JoinColumn(name = "assunto_id", nullable = false)
+    @JoinColumn(name = "ASSUNTO", nullable = false)
     private AssuntoEntity assunto;
 
-    @Column(nullable = false)
+    @Column(name = "DURACAO_MINUTOS" , nullable = false)
     private int duracaoEmMinutos;
 
-    @Column(nullable = false)
+    @Column(name = "DATA_REGISTRO" ,nullable = false)
     private LocalDateTime dataRegistro;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "USUARIO", nullable = false)
     private UsuarioEntity usuario;
 }
