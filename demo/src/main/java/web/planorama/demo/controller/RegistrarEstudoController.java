@@ -5,12 +5,15 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.imageio.spi.RegisterableService;
+
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
@@ -27,10 +30,6 @@ import web.planorama.demo.service.AssuntoService;
 import web.planorama.demo.service.MateriaService;
 import web.planorama.demo.service.RegistrarEstudoService;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @Controller
 @RequiredArgsConstructor
@@ -46,7 +45,7 @@ public class RegistrarEstudoController {
     private final AssuntoMapper assuntoMapper;
 
     @GetMapping("/registrar-estudo/{idMateria}")
-    public String getCardRegistrarEstudo(@PathVariable UUID idMateria, Model model) {
+    public String getCardRegistrarEstudo(@PathVariable UUID idMateria, UUID planejamentoId,  Model model) {
         try{
 
             MateriaDTO materiaSelecionada = materiaService.findById(idMateria);
@@ -55,8 +54,11 @@ public class RegistrarEstudoController {
                 return assuntoDTO;
             }).collect(Collectors.toList());
 
+            RegistrarEstudoDTO registroEstudo = new RegistrarEstudoDTO();
+            registroEstudo.setPlanejamentoId(planejamentoId);
+
             model.addAttribute("listaAssuntos", assuntosMateria);
-            model.addAttribute("registroEstudo", new RegistrarEstudoDTO());
+            model.addAttribute("registroEstudo",registroEstudo);
 
         }catch(MyNotFoundException e){
             model.addAttribute("erroNotFound", e.getMessage());
@@ -67,8 +69,8 @@ public class RegistrarEstudoController {
     
 
     @PostMapping("/registrar-estudo/registrar")
-    public String postRegistrarEstudo(@Valid @ModelAttribute("registroEstudo") RegistrarEstudoDTO registroEstudoDTO, 
-    BindingResult result, RedirectAttributes redirectAttributes){
+    public String postRegistrarEstudo(@Valid @ModelAttribute("registroEstudo") RegistrarEstudoDTO registroEstudoDTO,
+    BindingResult result, RedirectAttributes redirectAttributes, Model model) {
         
         log.info("Request: {} {}", registroEstudoDTO, result.hasErrors());
         if (result.hasErrors()) {
@@ -86,8 +88,8 @@ public class RegistrarEstudoController {
         }catch(MyNotFoundException e){
             redirectAttributes.addFlashAttribute("error", "Ocorreu um erro ao tentar registrar o estudo. Tente novamente");
         }
-
-        return "redirect:/planejamento/" /*TEM QUE VER UMA FORMA DE PEGAR O ID DO PLANEJAMENTO PARA RETORNAR PARA A TELA DO PLANEJAMENTO*/;
+        UUID planejamentoId = registroEstudoDTO.getPlanejamentoId();
+        return "redirect:/planejamento/" + planejamentoId;
     }
 
 }

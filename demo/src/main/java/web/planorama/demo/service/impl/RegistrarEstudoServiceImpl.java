@@ -1,13 +1,10 @@
 package web.planorama.demo.service.impl;
 
 import org.springframework.stereotype.Service;
-
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-
 import web.planorama.demo.dto.RegistrarEstudoDTO;
 import web.planorama.demo.entity.AssuntoEntity;
 import web.planorama.demo.exceptions.MyNotFoundException;
@@ -15,20 +12,20 @@ import web.planorama.demo.repository.AssuntoRepository;
 import web.planorama.demo.repository.RegistrarEstudoRepository;
 import web.planorama.demo.entity.RegistrarEstudoEntity;
 import web.planorama.demo.mapping.RegistrarEstudoMapper;
-import web.planorama.demo.service.RegistrarEstudoService;;
+import web.planorama.demo.service.RegistrarEstudoService;
 
 @Service
 @RequiredArgsConstructor
 
 public class RegistrarEstudoServiceImpl implements RegistrarEstudoService {
 
-    private final RegistrarEstudoRepository RegistrarEstudoRepository;
+    private final RegistrarEstudoRepository registrarEstudoRepository;
     private final AssuntoRepository assuntoRepository;
 
     private final RegistrarEstudoMapper registrarEstudoMapper;
 
     public RegistrarEstudoDTO save(RegistrarEstudoDTO registrarEstudoDTO){
-        AssuntoEntity assuntoEscolhido = assuntoRepository.findById(RegistrarEstudoDTO.getAssuntoId()).orElseThrow(() -> new
+        AssuntoEntity assuntoEscolhido = assuntoRepository.findById(registrarEstudoDTO.getAssuntoId()).orElseThrow(() -> new
                 MyNotFoundException("Assunto não encontrado."));
 
         RegistrarEstudoEntity novoRegistro = new RegistrarEstudoEntity();
@@ -42,18 +39,29 @@ public class RegistrarEstudoServiceImpl implements RegistrarEstudoService {
         novoRegistro.setDuracaoEmMinutos(tempoTotalEstudado);
         novoRegistro.setDataRegistro(LocalDateTime.now());
 
-        RegistrarEstudoRepository.save(registrarEstudoMapper.toRegistrarDTO(novoRegistro));
+
+        var estudoSalvo =  registrarEstudoRepository.save(novoRegistro);
+        return registrarEstudoMapper.toRegistrarEstudoDTO(estudoSalvo);
     }
 
-    public RegistrarEstudoDTO findById(UUID id){
-
+    @Override
+    public List<RegistrarEstudoDTO> findAll() {
+        return registrarEstudoRepository.findAll()
+                .stream()
+                .map(registrarEstudoMapper::toRegistrarEstudoDTO)
+                .toList();
     }
 
-    public List<RegistrarEstudoDTO> findAll(){
-
+    @Override
+    public RegistrarEstudoDTO findById(UUID id) {
+        var entity = registrarEstudoRepository.findById(id).orElseThrow();
+        return registrarEstudoMapper.toRegistrarEstudoDTO(entity);
     }
 
-    public void remove(UUID id){
-
+    @Override
+    public void remove(UUID id) {
+        if(registrarEstudoRepository.existsById(id)){
+            registrarEstudoRepository.deleteById(id);
+        }
     }
 }

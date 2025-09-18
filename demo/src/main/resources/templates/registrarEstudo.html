@@ -46,8 +46,9 @@
                         th:errors="*{minutosEstudados}"></span>
                 </div>
             </div>
-
+            <input type="hidden" th:field="*{planejamentoId}" />
             <div class="divBotoes">
+
                 <button id="botaoRegistrar" type="submit">Registrar</button>
             </div>
         </form>

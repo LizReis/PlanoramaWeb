@@ -9,7 +9,7 @@ import web.planorama.demo.entity.RegistrarEstudoEntity;
 @Mapper(componentModel = "spring")
 public interface RegistrarEstudoMapper {
 
-    public RegistrarEstudoEntity toRegistrarEntity(RegistrarEstudoDTO registrarEstudoDTO);
+    public RegistrarEstudoEntity toRegistrarEstudoEntity(RegistrarEstudoDTO registrarEstudoDTO);
 
-    public RegistrarEstudoDTO toRegistrarDTO(RegistrarEstudoEntity registrarEstudoEntity);
+    public RegistrarEstudoDTO toRegistrarEstudoDTO(RegistrarEstudoEntity registrarEstudoEntity);
 }
