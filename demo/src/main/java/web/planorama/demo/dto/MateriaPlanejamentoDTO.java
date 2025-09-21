@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import web.planorama.demo.entity.PlanejamentoEntity;
 
 @Data
 @NoArgsConstructor

@@ -19,10 +19,12 @@
         <form id="formCriarPlanejamento" th:action="@{/registrar-estudo/registrar}" th:object="${registroEstudo}" method="post">
 
             <span class="spanRegistro">Selecionar Assunto:</span>
+             <input type="hidden" th:field="*{planejamentoId}" th:value="${planejamento.id}" />
+              <input type="hidden" th:field="*{materiaId}" th:value="${materia.id}" />
 
             <div class="seletor-container">
-                <select id="select-assunto" class="seletor-filtro">
-                    <option disabled selected>Escolha um Assunto</option>
+                <select id="select-assunto" class="seletor-filtro" th:field="*{assuntoId}">
+                    <option disabled selected value="">Escolha um Assunto</option>
                     <option th:each="assunto : ${listaAssuntos}"
                         th:value="${assunto.id}"
                         th:text="${assunto.nomeAssunto}">Nome do Assunto</option>
@@ -36,7 +38,7 @@
 
                 <div>
                     <label for="horasEstudadas">Horas:</label>
-                    <input type="number" id="horasEstudadas" th:field="*{horasEstudadas}" min="1">
+                    <input type="number" id="horasEstudadas" th:field="*{horasEstudadas}" min="0">
                     <span class="error" th:if="${#fields.hasErrors('horasEstudadas')}"
                         th:errors="*{horasEstudadas}"></span>
 
@@ -46,9 +48,8 @@
                         th:errors="*{minutosEstudados}"></span>
                 </div>
             </div>
-            <input type="hidden" th:field="*{planejamentoId}" />
-            <div class="divBotoes">
 
+            <div class="divBotoes">
                 <button id="botaoRegistrar" type="submit">Registrar</button>
             </div>
         </form>

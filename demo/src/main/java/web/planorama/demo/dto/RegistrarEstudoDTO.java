@@ -23,6 +23,8 @@ public class RegistrarEstudoDTO{
     private Integer minutosEstudados;
     @NotNull
     private UUID planejamentoId;
+    @NotNull
+    private UUID materiaId;
 
 
 }

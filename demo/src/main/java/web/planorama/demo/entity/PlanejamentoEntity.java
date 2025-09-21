@@ -1,7 +1,6 @@
 package web.planorama.demo.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,6 +45,9 @@ public class PlanejamentoEntity {
 
     @OneToMany(mappedBy = "planejamentoEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SessaoEstudoEntity> sessoesEstudo = new ArrayList<>();
+
+    @OneToMany(mappedBy = "planejamento")
+    private List<RegistrarEstudoEntity> registrosEstudoPlanej = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "Criador")

@@ -82,12 +82,16 @@ document.addEventListener('DOMContentLoaded', function () {
         return acc;
     }, {});
 
+    // Pega o ID do planejamento UMA VEZ antes do loop para ser mais eficiente
+    const idPlanejamento = document.getElementById('planejamentoId').value;
+
     // Agora iteramos sobre os dados agrupados
     for (const nomeMateria in materiasCompletas) {
         const materiaInfo = materiasCompletas[nomeMateria];
         const cor = coresMaterias[nomeMateria];
 
-        const url = `/registrar-estudo/${materiaInfo.idMateria}`;
+        // [CORREÇÃO] Monta a URL com o idMateria E o idPlanejamento
+        const url = `/registrar-estudo/${materiaInfo.idMateria}/${idPlanejamento}`;
 
         const cardHtml = `
         <a class="abrir-modal" href="${url}">

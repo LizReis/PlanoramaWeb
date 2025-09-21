@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,6 +36,9 @@ public class UsuarioEntity {
 
     @OneToMany(mappedBy = "criador")
     private List<PlanejamentoEntity> planejamentos;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<RegistrarEstudoEntity> registrosEstudoUsuario = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "TB_USUARIO_PAPEL",

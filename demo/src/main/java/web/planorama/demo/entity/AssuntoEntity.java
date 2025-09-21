@@ -1,5 +1,7 @@
 package web.planorama.demo.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -10,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,4 +38,7 @@ public class AssuntoEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MATERIA_ID", nullable = false)
     private MateriaEntity materiaEntity;
+
+    @OneToMany(mappedBy = "assunto")
+    private List<RegistrarEstudoEntity> registrosEstudoAssunto = new ArrayList<>();
 }

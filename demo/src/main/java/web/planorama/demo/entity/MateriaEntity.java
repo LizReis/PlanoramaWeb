@@ -49,4 +49,7 @@ public class MateriaEntity {
 
     @OneToMany(mappedBy = "materiaEntity")
     private List<MateriaPlanejamentoEntity> planejamentosComMateria = new ArrayList<>();
+
+    @OneToMany(mappedBy = "materia")
+    private List<RegistrarEstudoEntity> registrosEstudoMateria = new ArrayList<>();
 }

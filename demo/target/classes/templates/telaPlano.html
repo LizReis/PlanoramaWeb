@@ -17,12 +17,13 @@
     <link rel="stylesheet" th:href="@{/css/modalStyle.css}">
 </head>
 
-<body>
+<body th:data-planejamento-id="${planejamento.id}">
     <div th:replace="~{barraNavegacao :: barraNav}"></div>
 
     <div th:replace="~{menu :: menuFragment}"></div>
 
     <section class="sectionGrafico conteudoPrincipal" th:object="${planejamento}">
+        <input type="hidden" id="planejamentoId" th:value="${planejamento.id}" />
         <div class="divTituloGrafico">
             <div class="divTitulo">
                 <div class="titulo">
