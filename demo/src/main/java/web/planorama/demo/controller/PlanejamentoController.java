@@ -70,8 +70,9 @@ public class PlanejamentoController {
         return "redirect:/home";
     }
 
-    @PostMapping("/desarquivar/{id}")
-    public String desarquivarPlanejamento(@PathVariable String id, RedirectAttributes redirectAttributes) {
+
+    @PostMapping("/remover/{id}")
+    public String removerPlanejamento(@PathVariable String id, RedirectAttributes redirectAttributes) {
         UUID idUUID;
 
         try{
@@ -81,17 +82,15 @@ public class PlanejamentoController {
         }
 
         try{
-            PlanejamentoDTO planejamentoParaArquivar = planejamentoService.findOne(idUUID);
+            PlanejamentoDTO planejamentoParaRemover = planejamentoService.findOne(idUUID);
 
-            planejamentoService.desarquivarPlanoDeEstudos(planejamentoParaArquivar);
-            redirectAttributes.addFlashAttribute("success", "Planejamento desarquivado com sucesso!");
+            planejamentoService.remove(planejamentoParaRemover.getId());
+            redirectAttributes.addFlashAttribute("success", "Planejamento removido com sucesso!");
         }catch(Exception e){
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
 
-        
-
-        return "redirect:/arquivo";
+        return "redirect:/home";
     }
 
 }

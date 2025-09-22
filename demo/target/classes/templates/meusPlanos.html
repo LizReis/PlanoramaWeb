@@ -44,67 +44,92 @@
     </section>
 
     <section class="sectionCards conteudoPrincipal">
-        <a class="card-link" th:href="@{/planejamento/{id}(id=${planejamento.id})}"
-            th:each="planejamento : ${allPlanejamentos}">
-            <div class="divCard">
-                <div class="divCardTextoIcone">
-                    <div class="cardContainerTexto">
-                        <h4 class="nomePlano" th:text="${planejamento.nomePlanejamento}">Programação Web</h4>
+        <!--DIVS RESPOSAVEIS POR EXIBIR MSG DE SUCESSO OU ERRO-->
+        <div th:if="${success}" class="alerta sucesso">
+            <p th:text="${success}"></p>
+        </div>
+        <!--DIVS RESPOSAVEIS POR EXIBIR MSG DE SUCESSO OU ERRO-->
+        <div th:if="${error}" class="alerta erro">
+            <p th:text="${error}"></p>
+        </div>
 
-                        <div class="divCardParagrafo">
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                                    <path fill="currentColor"
-                                        d="M8.8 0c.274 0 .537.113.726.312l3.2 3.428c.176.186.274.433.274.689V13a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM12 5H8.5a.5.5 0 0 1-.5-.5V1H2v12h10zm-7.5 6a.5.5 0 1 1 0-1h5a.5.5 0 1 1 0 1zm0-3a.5.5 0 0 1 0-1h5a.5.5 0 1 1 0 1zm1 8a.5.5 0 1 1 0-1H14V6.5a.5.5 0 1 1 1 0V15a1 1 0 0 1-1 1z" />
-                                </svg>
-                                <span>Cargo:</span>
-                                <p class="paragrafoCard" th:text="${planejamento.cargo}">Dev. Sistemas</p>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
-                                    <path fill="currentColor"
-                                        d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m.5-13H11v6l5.2 3.2l.8-1.3l-4.5-2.7z" />
-                                </svg>
-                                <span>Carga Horária:</span>
-                                <p class="paragrafoCard" th:text="${planejamento.horasDiarias} + 'h'">20h</p>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
-                                    <path fill="currentColor"
-                                        d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z" />
-                                    <path fill="currentColor"
-                                        d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2M19 8l.001 12H5V8z" />
-                                </svg>
-                                <span>Ano de atuação:</span>
-                                <p class="paragrafoCard" th:text="${planejamento.anoAplicacao}">2025</p>
-                            </div>
+        <div class="divCard" th:each="planejamento : ${planejamentosUsuarioLogado}">
+            <div class="divCardTextoIcone">
+                <div class="cardContainerTexto">
+                    <a class="card-link" th:href="@{/planejamento/{id}(id=${planejamento.id})}">
+                        <h4 class="nomePlano" th:text="${planejamento.nomePlanejamento}">Programação Web</h4>
+                    </a>
+                    <div class="divCardParagrafo">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                <path fill="currentColor"
+                                    d="M8.8 0c.274 0 .537.113.726.312l3.2 3.428c.176.186.274.433.274.689V13a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM12 5H8.5a.5.5 0 0 1-.5-.5V1H2v12h10zm-7.5 6a.5.5 0 1 1 0-1h5a.5.5 0 1 1 0 1zm0-3a.5.5 0 0 1 0-1h5a.5.5 0 1 1 0 1zm1 8a.5.5 0 1 1 0-1H14V6.5a.5.5 0 1 1 1 0V15a1 1 0 0 1-1 1z" />
+                            </svg>
+                            <span>Cargo:</span>
+                            <p class="paragrafoCard" th:text="${planejamento.cargo}">Dev. Sistemas</p>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m.5-13H11v6l5.2 3.2l.8-1.3l-4.5-2.7z" />
+                            </svg>
+                            <span>Carga Horária:</span>
+                            <p class="paragrafoCard" th:text="${planejamento.horasDiarias} + 'h'">20h</p>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z" />
+                                <path fill="currentColor"
+                                    d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2M19 8l.001 12H5V8z" />
+                            </svg>
+                            <span>Ano de atuação:</span>
+                            <p class="paragrafoCard" th:text="${planejamento.anoAplicacao}">2025</p>
                         </div>
                     </div>
-
-                    <div class="cardContainerIcone">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                            <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
-                                <path d="M5.25 6.91A.75.75 0 0 1 6 6.16h12a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75" />
-                                <path
-                                    d="M11.333 4.75c-.69 0-1.25.56-1.25 1.25v.91h-1.5V6a2.75 2.75 0 0 1 2.75-2.75h1.334A2.75 2.75 0 0 1 15.417 6v.91h-1.5V6c0-.69-.56-1.25-1.25-1.25zM6 6.91L8 20h8l2-13.09zm6.5 3.636a.5.5 0 1 0-1 0v5.818a.5.5 0 1 0 1 0zm-3.224-.5a.476.476 0 0 1 .55.423l.666 5.818a.525.525 0 0 1-.435.576a.477.477 0 0 1-.549-.423l-.667-5.818a.525.525 0 0 1 .435-.575m5.883.576a.525.525 0 0 0-.435-.575a.476.476 0 0 0-.55.422l-.666 5.818a.525.525 0 0 0 .435.576a.476.476 0 0 0 .549-.423z" />
-                            </g>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                            <path fill="currentColor"
-                                d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z" />
-                        </svg>
-                    </div>
                 </div>
 
-                <div class="divCardProgresso">
-                    <span>Progresso:</span>
-
-                    <div class="divProgressoPai">
-                        <div class="divProgressoFilho"></div>
-                    </div>
+                <div class="cardContainerIcone">
+                    <form th:action="@{/planejamento/arquivar/{id}(id=${planejamento.id})}" method="post">
+                        <button type="submit" class="button-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
+                                <path fill="currentColor"
+                                    d="M20 21h-8a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2m-8-4v2h8v-2Z" />
+                                <path fill="currentColor"
+                                    d="M28 4H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2v16a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m-2 24H6V12h20Zm2-18H4V6h24z" />
+                            </svg>
+                        </button>
+                    </form>
+                    <form th:action="@{/planejamento/remover/{id}(id=${planejamento.id})}" method="post">
+                         <button type="submit" class="button-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
+                                    <path
+                                        d="M5.25 6.91A.75.75 0 0 1 6 6.16h12a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75" />
+                                    <path
+                                        d="M11.333 4.75c-.69 0-1.25.56-1.25 1.25v.91h-1.5V6a2.75 2.75 0 0 1 2.75-2.75h1.334A2.75 2.75 0 0 1 15.417 6v.91h-1.5V6c0-.69-.56-1.25-1.25-1.25zM6 6.91L8 20h8l2-13.09zm6.5 3.636a.5.5 0 1 0-1 0v5.818a.5.5 0 1 0 1 0zm-3.224-.5a.476.476 0 0 1 .55.423l.666 5.818a.525.525 0 0 1-.435.576a.477.477 0 0 1-.549-.423l-.667-5.818a.525.525 0 0 1 .435-.575m5.883.576a.525.525 0 0 0-.435-.575a.476.476 0 0 0-.55.422l-.666 5.818a.525.525 0 0 0 .435.576a.476.476 0 0 0 .549-.423z" />
+                                </g>
+                            </svg>
+                        </button>
+                    </form>
+                    <form>
+                         <button type="submit" class="button-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z" />
+                            </svg>
+                        </button>
+                    </form>
                 </div>
             </div>
-        </a>
+
+            <div class="divCardProgresso">
+                <span>Progresso:</span>
+                <div class="divProgressoPai">
+                    <div class="divProgressoFilho"></div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <footer></footer>

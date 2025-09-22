@@ -24,7 +24,6 @@ public interface PlanejamentoService {
     PlanejamentoDTO atualizarPlanoDeEstudos(UUID id, PlanejamentoDTO planejamentoDTO);
     PlanejamentoDTO arquivarPlanoDeEstudos(PlanejamentoDTO planejamentoParaArquivar);
     PlanejamentoDTO desarquivarPlanoDeEstudos(PlanejamentoDTO planejamentoParaArquivar);
-    PlanejamentoDTO restaurarPlanoDeEstudos(UUID id);
     void remove(UUID id);
 
     //Seleciona um plano que já foi pré-cadastrado por um ADMIN

@@ -128,6 +128,8 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
     public void remove(UUID id) {
         if (planejamentoRepository.existsById(id)) {
             planejamentoRepository.deleteById(id);
+        }else{
+            throw new MyNotFoundException("Planejamento não encontrado.");
         }
     }
 
@@ -157,12 +159,6 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         return mapper.toPlanejamentoDTO(updatedEntity);
     }
 
-    @Override
-    @Transactional
-    public PlanejamentoDTO restaurarPlanoDeEstudos(UUID id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'restaurarPlanoDeEstudos'");
-    }
 
     @Override
     public List<PlanejamentoDTO> findAllPlanejamentoIsArquivado() {
