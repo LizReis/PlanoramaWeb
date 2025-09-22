@@ -5,7 +5,9 @@ import java.util.UUID;
 
 import web.planorama.demo.dto.SessaoEstudoDTO;
 import web.planorama.demo.dto.UsuarioDTO;
+import web.planorama.demo.entity.UsuarioEntity;
 import web.planorama.demo.dto.PlanejamentoDTO;
+import web.planorama.demo.dto.PlanejamentoProgressDTO;
 
 public interface PlanejamentoService {
     PlanejamentoDTO save(PlanejamentoDTO planejamentoDTO);
@@ -14,6 +16,7 @@ public interface PlanejamentoService {
     List<PlanejamentoDTO> findAllOfAdm(); //Aqui encontra todos os planejamento criados por Administadores
     List<PlanejamentoDTO> findAllOfEstudante(UsuarioDTO usuarioDTO); //Aqui encontra todos os planejamentos de um determinado Estudante
     List<PlanejamentoDTO> findAllPlanejamentoIsArquivado(); //Pega todos os planos que foram arquvivados pelo usuário logado
+    List<PlanejamentoProgressDTO> findAllComProgressoByUsuario(UsuarioEntity usuarioEntity);
 
     // Gera a lista de sessões de estudo (o ciclo) para um determinado plano.
     List<SessaoEstudoDTO> gerarCicloDeEstudos(UUID planejamentoId);

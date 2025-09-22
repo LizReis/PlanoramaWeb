@@ -62,6 +62,7 @@ web\planorama\demo\mapping\AssuntoMapper.class
 web\planorama\demo\entity\PlanejamentoEntity.class
 web\planorama\demo\mapping\PlanejamentoMapper.class
 web\planorama\demo\service\impl\UsuarioServiceImpl.class
+web\planorama\demo\dto\PlanejamentoProgressDTO.class
 web\planorama\demo\entity\RegistrarEstudoEntity.class
 web\planorama\demo\config\DeterminarImagemUploadConfig.class
 web\planorama\demo\mapping\UsuarioMapperImpl.class

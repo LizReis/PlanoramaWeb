@@ -14,6 +14,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import web.planorama.demo.dto.PlanejamentoDTO;
+import web.planorama.demo.dto.PlanejamentoProgressDTO;
 import web.planorama.demo.dto.SessaoEstudoDTO;
 import web.planorama.demo.dto.UsuarioDTO;
 import web.planorama.demo.entity.MateriaEntity;
@@ -310,6 +311,46 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
                     .stream()
                     .map(sessaoEstudoMapper::toSessaoEstudoDTO)
                     .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PlanejamentoProgressDTO> findAllComProgressoByUsuario(UsuarioEntity usuarioEntity) {
+        List<PlanejamentoEntity> planejamentosNaoArquivados = planejamentoRepository.findAllByCriador(usuarioEntity)
+                .stream()
+                .filter(p -> !p.isPlanoArquivado())
+                .collect(Collectors.toList());
+        
+        List<PlanejamentoProgressDTO> planejamentosComProgresso = new ArrayList<>();
+
+        for(PlanejamentoEntity plano : planejamentosNaoArquivados){
+            double cargaHorariaTotal = plano.getHorasDiarias() * plano.getDisponibilidade().size();
+
+            double cargaHorariaRestante = 0.0;
+            if(plano.getMaterias() != null){
+                cargaHorariaRestante = plano.getMaterias()
+                        .stream()
+                        .mapToDouble(MateriaPlanejamentoEntity::getCargaHorariaMateriaPlano)
+                        .sum();
+            }
+
+            int progressoPorcentagem = 0;
+            if(cargaHorariaTotal > 0){
+                double cargaHorariaConcluida = cargaHorariaTotal - cargaHorariaRestante;
+
+                cargaHorariaConcluida = Math.max(0, Math.min(cargaHorariaConcluida, cargaHorariaTotal));
+                progressoPorcentagem = (int) ((cargaHorariaConcluida / cargaHorariaTotal) * 100);
+            }
+
+            if(cargaHorariaRestante <= 0 && cargaHorariaTotal > 0){
+                progressoPorcentagem = 100;
+            }
+
+            planejamentosComProgresso.add(
+                    new PlanejamentoProgressDTO(mapper.toPlanejamentoDTO(plano),
+                    progressoPorcentagem));
+        }
+
+        return planejamentosComProgresso;
     }
 
     
