@@ -18,8 +18,6 @@
     text-decoration: none;
 }
 
-
-
 .sectionBarraProgresso{
     margin-top: 7%;
     display: flex;
@@ -106,7 +104,7 @@
     background-color: var(--corFundoPrincipal);
     box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
     border-radius: 10px;
-    cursor: pointer;
+    /* cursor: pointer;  <-- REMOVIDO DAQUI */
     color: var(--corSecundariaCinzaFonte);
 }
 
@@ -131,10 +129,17 @@
     flex-wrap: wrap; /* Permite que o texto quebre a linha se necessário */
 }
 
+/* Adicionando cursor ao link do título */
+.sectionCards .divCard .divCardTextoIcone .cardContainerTexto .card-link{
+    cursor: pointer;
+}
+
 .sectionCards .divCard .divCardTextoIcone .cardContainerTexto h4{
     font-family: var(--fonteDestaque);
     padding-bottom: 0.3rem;
     border-bottom: 0.1rem solid var(--corDestaqueVermelho);
+    color: var(--corDestaqueVermelho);
+    display: inline-block; /* Garante que o link não ocupe a largura toda */
 }
 .sectionCards .divCard .divCardTextoIcone .cardContainerTexto span{
     font-weight: 600;
@@ -146,10 +151,20 @@
     flex-direction: column;
 }
 
+/* Estilo para os botões dos ícones */
+.sectionCards .divCard .divCardTextoIcone .cardContainerIcone .button-icon {
+    background: none;
+    border: none;
+    padding: 2px; /* Pequeno padding para facilitar o clique */
+    margin: 0;
+    cursor: pointer;
+    color: var(--corSecundariaCinzaFonte);
+}
 
-.sectionCards .divCard .divCardTextoIcone .cardContainerIcone svg:hover{
+.sectionCards .divCard .divCardTextoIcone .cardContainerIcone .button-icon:hover svg {
     color: var(--corDestaqueVermelho);
 }
+
 
 .sectionCards .divCard .divCardProgresso{
     margin-top: 3%;
@@ -207,9 +222,9 @@
 /*-----------------------------------------------------------*/ 
 
 .divAbsolutBotao{
-    position: absolute;
-    bottom: 0.5rem;
-    right: 1rem;
+    position: fixed; /* Mudei para fixed para melhor posicionamento na rolagem */
+    bottom: 1.5rem; /* Aumentei um pouco a distância de baixo */
+    right: 1.5rem;  /* Aumentei um pouco a distância da direita */
     z-index: 1000; /* Garante que o botão fique sobre outros elementos */
 }
 
@@ -245,6 +260,28 @@
 
 .botaoAncora svg{
     margin-right: 5%;
+}
+
+
+.alerta {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    text-align: center;
+}
+
+.alerta.sucesso {
+    color: #155724; /* Verde escuro para o texto */
+    background-color: #d4edda; /* Fundo verde claro */
+    border: 1px solid #c3e6cb; /* Borda verde */
+}
+
+.alerta.erro {
+    color: #721c24; /* Vermelho escuro para o texto */
+    background-color: #f8d7da; /* Fundo rosa/vermelho claro */
+    border: 1px solid #f5c6cb; /* Borda vermelha */
 }
 
 

@@ -7,7 +7,7 @@ import web.planorama.demo.entity.AssuntoEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-22T10:36:41-0300",
+    date = "2025-09-22T13:34:16-0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.4 (Oracle Corporation)"
 )
 @Component

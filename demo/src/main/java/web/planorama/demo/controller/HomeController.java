@@ -34,14 +34,11 @@ public class HomeController {
         if(usuarioOptional.isPresent()){
             UsuarioEntity usuarioLogado = usuarioOptional.get();
 
-            List<PlanejamentoDTO> planejamentosUsuario = planejamentoRepository.findAllByCriador(usuarioLogado).stream().map(planejamento -> {
-                PlanejamentoDTO planejamentoDTO = new PlanejamentoDTO();
-                if(!planejamento.isPlanoArquivado()){
-                   planejamentoDTO = planejamentoMapper.toPlanejamentoDTO(planejamento);
-                }
-
-                return planejamentoDTO;
-            }).collect(Collectors.toList());
+            List<PlanejamentoDTO> planejamentosUsuario = planejamentoRepository.findAllByCriador(usuarioLogado)
+                .stream()
+                .filter(planejamento -> !planejamento.isPlanoArquivado())
+                .map(planejamentoMapper::toPlanejamentoDTO)
+                .collect(Collectors.toList());
 
             model.addAttribute("planejamentosUsuarioLogado", planejamentosUsuario);
         }

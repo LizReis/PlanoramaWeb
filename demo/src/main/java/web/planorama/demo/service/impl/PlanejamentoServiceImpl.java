@@ -149,9 +149,9 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
     @Override
     @Transactional
-    public PlanejamentoDTO desArquivarPlanoDeEstudos(UUID id) {
-        PlanejamentoEntity entity = planejamentoRepository.findById(id)
-                .orElseThrow(() -> new MyNotFoundException("Planejamento com ID " + id + " não encontrado."));
+    public PlanejamentoDTO desarquivarPlanoDeEstudos(PlanejamentoDTO planejamentoParaArquivar) {
+        PlanejamentoEntity entity = planejamentoRepository.findById(planejamentoParaArquivar.getId())
+                .orElseThrow(() -> new MyNotFoundException("Planejamento com ID " + planejamentoParaArquivar.getId() + " não encontrado."));
         entity.setPlanoArquivado(false);
         PlanejamentoEntity updatedEntity = planejamentoRepository.save(entity);
         return mapper.toPlanejamentoDTO(updatedEntity);

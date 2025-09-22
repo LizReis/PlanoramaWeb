@@ -23,7 +23,7 @@ public interface PlanejamentoService {
 
     PlanejamentoDTO atualizarPlanoDeEstudos(UUID id, PlanejamentoDTO planejamentoDTO);
     PlanejamentoDTO arquivarPlanoDeEstudos(PlanejamentoDTO planejamentoParaArquivar);
-    PlanejamentoDTO desArquivarPlanoDeEstudos(UUID id);
+    PlanejamentoDTO desarquivarPlanoDeEstudos(PlanejamentoDTO planejamentoParaArquivar);
     PlanejamentoDTO restaurarPlanoDeEstudos(UUID id);
     void remove(UUID id);
 
