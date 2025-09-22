@@ -53,6 +53,7 @@ web\planorama\demo\entity\MateriaEntity.class
 web\planorama\demo\entity\AssuntoEntity.class
 web\planorama\demo\controller\GlobalControllerAdvice.class
 web\planorama\demo\service\ArquivosUsuarioService.class
+web\planorama\demo\controller\ArquivoPlanoController.class
 web\planorama\demo\exceptions\RecursoDuplicadoException.class
 web\planorama\demo\service\MateriaService.class
 web\planorama\demo\service\impl\UserDetailsServiceImpl.class

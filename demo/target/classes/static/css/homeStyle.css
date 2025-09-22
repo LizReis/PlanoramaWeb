@@ -146,6 +146,11 @@
     flex-direction: column;
 }
 
+
+.sectionCards .divCard .divCardTextoIcone .cardContainerIcone svg:hover{
+    color: var(--corDestaqueVermelho);
+}
+
 .sectionCards .divCard .divCardProgresso{
     margin-top: 3%;
     display: flex;

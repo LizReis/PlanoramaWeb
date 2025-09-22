@@ -139,9 +139,9 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
     @Override
     @Transactional
-    public PlanejamentoDTO arquivarPlanoDeEstudos(UUID id) {
-        PlanejamentoEntity entity = planejamentoRepository.findById(id)
-                .orElseThrow(() -> new MyNotFoundException("Planejamento com ID " + id + " não encontrado."));
+    public PlanejamentoDTO arquivarPlanoDeEstudos(PlanejamentoDTO planejamentoParaArquivar) {
+        PlanejamentoEntity entity = planejamentoRepository.findById(planejamentoParaArquivar.getId())
+                .orElseThrow(() -> new MyNotFoundException("Planejamento com ID " + planejamentoParaArquivar.getId() + " não encontrado."));
         entity.setPlanoArquivado(true);
         PlanejamentoEntity updatedEntity = planejamentoRepository.save(entity);
         return mapper.toPlanejamentoDTO(updatedEntity);
@@ -162,6 +162,18 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
     public PlanejamentoDTO restaurarPlanoDeEstudos(UUID id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'restaurarPlanoDeEstudos'");
+    }
+
+    @Override
+    public List<PlanejamentoDTO> findAllPlanejamentoIsArquivado() {
+
+        UsuarioEntity criador = pegaUsuarioLogado();
+        
+        return planejamentoRepository.findAllByPlanoArquivado(true)
+                .stream()
+                .filter(plano -> plano.getCriador() != null && plano.getCriador().getId().equals(criador.getId()))
+                .map(mapper::toPlanejamentoDTO)
+                .toList();
     }
 
     @Override
@@ -303,4 +315,6 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
                     .map(sessaoEstudoMapper::toSessaoEstudoDTO)
                     .collect(Collectors.toList());
     }
+
+    
 }

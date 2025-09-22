@@ -3,6 +3,7 @@ D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\AdministrarPlanejamentosController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\AdministrarUsuarioController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\AlterarDadosEstudanteController.java
+D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\ArquivoPlanoController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\CadastroUsuarioController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\CriarPlanejamentoController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\GlobalControllerAdvice.java

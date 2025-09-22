@@ -14,6 +14,9 @@ import web.planorama.demo.service.PlanejamentoService;
 
 import java.util.List;
 import java.util.UUID;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping("/planejamento")
@@ -42,4 +45,22 @@ public class PlanejamentoController {
 
         return "telaPlano";
     }
+
+    @PostMapping("/arquivar/{id}")
+    public String postMethodName(@PathVariable String id) {
+        UUID idUUID;
+
+        try{
+            idUUID = UUID.fromString(id);
+        }catch(IllegalArgumentException e){
+            return "paginaErro";
+        }
+
+        PlanejamentoDTO planejamentoParaArquivar = planejamentoService.findOne(idUUID);
+
+        planejamentoService.arquivarPlanoDeEstudos(planejamentoParaArquivar);
+
+        return "arquivoPlano";
+    }
+ 
 }

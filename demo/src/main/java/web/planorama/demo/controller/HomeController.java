@@ -35,7 +35,10 @@ public class HomeController {
             UsuarioEntity usuarioLogado = usuarioOptional.get();
 
             List<PlanejamentoDTO> planejamentosUsuario = planejamentoRepository.findAllByCriador(usuarioLogado).stream().map(planejamento -> {
-                PlanejamentoDTO planejamentoDTO = planejamentoMapper.toPlanejamentoDTO(planejamento);
+                PlanejamentoDTO planejamentoDTO = new PlanejamentoDTO();
+                if(!planejamento.isPlanoArquivado()){
+                   planejamentoDTO = planejamentoMapper.toPlanejamentoDTO(planejamento);
+                }
 
                 return planejamentoDTO;
             }).collect(Collectors.toList());
