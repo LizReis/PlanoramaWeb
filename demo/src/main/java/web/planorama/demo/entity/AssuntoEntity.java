@@ -35,7 +35,7 @@ public class AssuntoEntity {
 
     //Aqui temos muitas assuntos para uma matéria
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "MATERIA_ID", nullable = false)
     private MateriaEntity materiaEntity;
 

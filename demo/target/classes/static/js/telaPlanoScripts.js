@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return acc;
     }, {});
 
-    // Pega o ID do planejamento UMA VEZ antes do loop para ser mais eficiente
+    // Pega o ID do planejamento UMA VEZ antes do loop
     const idPlanejamento = document.getElementById('planejamentoId').value;
 
     // Agora iteramos sobre os dados agrupados
@@ -90,8 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const materiaInfo = materiasCompletas[nomeMateria];
         const cor = coresMaterias[nomeMateria];
 
-        // [CORREÇÃO] Monta a URL com o idMateria E o idPlanejamento
-        const url = `/registrar-estudo/${materiaInfo.idMateria}/${idPlanejamento}`;
+       
+        const sessaoCorrespondente = cicloData.find(s => s.materiaDTO.nomeMateria === nomeMateria);
+        const idMateriaPlanejamento = sessaoCorrespondente.idMateriaPlanejamento; 
+
+        // Monta a URL com o idMateriaPlanejamento e passa o idPlanejamento como parâmetro para o redirect
+        const url = `/registrar-estudo/${idMateriaPlanejamento}/${idPlanejamento}`;
 
         const cardHtml = `
         <a class="abrir-modal" href="${url}">

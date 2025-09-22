@@ -19,8 +19,8 @@
         <form id="formCriarPlanejamento" th:action="@{/registrar-estudo/registrar}" th:object="${registroEstudo}" method="post">
 
             <span class="spanRegistro">Selecionar Assunto:</span>
-             <input type="hidden" th:field="*{planejamentoId}" th:value="${planejamento.id}" />
-              <input type="hidden" th:field="*{materiaId}" th:value="${materia.id}" />
+             <input type="hidden" th:field="*{planejamentoId}"/>
+              <input type="hidden" th:field="*{idMateriaPlanejamento}" />
 
             <div class="seletor-container">
                 <select id="select-assunto" class="seletor-filtro" th:field="*{assuntoId}">

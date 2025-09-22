@@ -9,7 +9,6 @@ import org.mapstruct.MappingTarget;
 
 import web.planorama.demo.dto.RegistrarEstudoDTO;
 import web.planorama.demo.entity.AssuntoEntity;
-import web.planorama.demo.entity.MateriaEntity;
 import web.planorama.demo.entity.PlanejamentoEntity;
 import web.planorama.demo.entity.RegistrarEstudoEntity;
 
@@ -22,15 +21,12 @@ public interface RegistrarEstudoMapper {
 
     @Mapping(target = "assunto", source = "assuntoId") // Mapeia o ID para a entidade
     @Mapping(target = "duracaoEmMinutos", expression = "java(registrarEstudoDTO.getHorasEstudadas() * 60 + registrarEstudoDTO.getMinutosEstudados())")
-    @Mapping(target = "materia", source = "materiaId")
-    @Mapping(target = "planejamento", source = "planejamentoId")
     @Mapping(target = "id", ignore = true) // Ignora o ID para não sobrescrever o gerado pelo banco
     @Mapping(target = "dataRegistro", ignore = true) // Será definido no service
     @Mapping(target = "usuario", ignore = true) // Será definido no service
     public RegistrarEstudoEntity toRegistrarEstudoEntity(RegistrarEstudoDTO registrarEstudoDTO);
 
     @Mapping(target = "assuntoId", source = "assunto.id")
-    @Mapping(target = "materiaId", source = "materia.id")
     @Mapping(target = "horasEstudadas", ignore = true) // Ignoramos para calcular manualmente
     @Mapping(target = "minutosEstudados", ignore = true) // Ignoramos para calcular manualmente
     @Mapping(target = "planejamentoId", ignore = true) // A entidade não tem essa informação
@@ -44,15 +40,6 @@ public interface RegistrarEstudoMapper {
         AssuntoEntity assunto = new AssuntoEntity();
         assunto.setId(assuntoId);
         return assunto;
-    }
-
-    default MateriaEntity mapMateriaIdToMateriaEntity(UUID materiaId) {
-        if (materiaId == null) {
-            return null;
-        }
-        MateriaEntity materia = new MateriaEntity();
-        materia.setId(materiaId);
-        return materia;
     }
 
     default PlanejamentoEntity mapPlanejamentoIdToPlanejamentoEntity(UUID planejamentoId) {

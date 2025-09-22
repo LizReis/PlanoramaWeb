@@ -27,11 +27,11 @@ public class SessaoEstudoEntity {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MATERIA_ID", nullable = false)
-    private MateriaEntity materiaEntity;
+    @JoinColumn(name = "MATERIA_PLANEJAMENTO_ID", nullable = false)
+    private MateriaPlanejamentoEntity materiaPlanejamento;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PLANEJAMENTO_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PLANEJAMENTO", nullable = false)
     private PlanejamentoEntity planejamentoEntity;
 
     @Column(name = "DURACAO_SESSAO", nullable = false)

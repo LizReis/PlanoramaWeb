@@ -7,13 +7,13 @@ import org.mapstruct.Mapping;
 import web.planorama.demo.dto.SessaoEstudoDTO;
 import web.planorama.demo.entity.SessaoEstudoEntity;
 
-@Mapper(componentModel = "spring", uses = { MateriaMapper.class, PlanejamentoMapper.class })
+@Mapper(componentModel = "spring", uses = { MateriaPlanejamentoMapper.class, MateriaMapper.class })
 public interface SessaoEstudoMapper {
-    @Mapping(source = "materiaEntity", target = "materiaDTO")
-    @Mapping(source = "planejamentoEntity", target = "planejamentoDTO")
+    @Mapping(source = "materiaPlanejamento.id", target = "idMateriaPlanejamento")
+    @Mapping(source = "materiaPlanejamento.materiaEntity", target = "materiaDTO")
     public SessaoEstudoDTO toSessaoEstudoDTO(SessaoEstudoEntity sessaoEstudoEntity);
 
-    @Mapping(source = "materiaDTO", target = "materiaEntity")
-    @Mapping(source = "planejamentoDTO", target = "planejamentoEntity")
+    @Mapping(source = "idMateriaPlanejamento", target = "materiaPlanejamento.id")
+    @Mapping(target = "materiaPlanejamento.materiaEntity", source = "materiaDTO")
     public SessaoEstudoEntity toSessaoEstudoEntity(SessaoEstudoDTO sessaoEstudoDTO);
 }

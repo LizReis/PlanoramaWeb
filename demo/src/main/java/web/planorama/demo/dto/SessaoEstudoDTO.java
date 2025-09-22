@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class SessaoEstudoDTO {
     private UUID id;
     private MateriaDTO materiaDTO;
-    private PlanejamentoDTO planejamentoDTO;
+    private UUID idMateriaPlanejamento;
     private int duracaoSessao; // Em minutos
 }

@@ -41,10 +41,6 @@ public class RegistrarEstudoEntity {
     private UsuarioEntity usuario;
 
     @ManyToOne
-    @JoinColumn(name = "MATERIA_ID")
-    private MateriaEntity materia;
-
-    @ManyToOne
-    @JoinColumn(name = "PLANEJAMENTO_ID")
-    private PlanejamentoEntity planejamento;
+    @JoinColumn(name = "MATERIA_PLANEJAMENTO_ID")
+    private MateriaPlanejamentoEntity materiaPlanejamento;
 }

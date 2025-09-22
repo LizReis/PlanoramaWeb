@@ -1,7 +1,10 @@
 package web.planorama.demo.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,4 +43,10 @@ public class MateriaPlanejamentoEntity {
 
     @Column(name = "CARGA_HORARIA_MATERIA_PLANO", nullable = false)
     private int cargaHorariaMateriaPlano;
+
+    @OneToMany(mappedBy = "materiaPlanejamento", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RegistrarEstudoEntity> registrosDeEstudo = new ArrayList<>();
+
+    @OneToMany(mappedBy = "materiaPlanejamento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<SessaoEstudoEntity> listaSessao = new ArrayList<>();
 }

@@ -223,13 +223,16 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
             for (int i = 0; i < numeroSessoesMateria; i++) {
                 SessaoEstudoEntity sessao = new SessaoEstudoEntity();
-                sessao.setMateriaEntity(materiaPlano.getMateriaEntity());
+                
+                sessao.setMateriaPlanejamento(materiaPlano);
+
                 sessao.setPlanejamentoEntity(planejamentoEntity);
+                
                 sessao.setDuracaoSessao(DURACAO_BLOCO_MINUTOS);
             
-                sessaoEstudoRepository.save(sessao);
+                SessaoEstudoEntity sessaoSalva = sessaoEstudoRepository.save(sessao);
                 
-                sessoesGeradas.add(sessaoEstudoMapper.toSessaoEstudoDTO(sessao));
+                sessoesGeradas.add(sessaoEstudoMapper.toSessaoEstudoDTO(sessaoSalva));
             }
         }
 
@@ -292,12 +295,12 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
     @Override
     public List<SessaoEstudoDTO> buscarCicloEstudo(UUID planejamentoId) {
-        PlanejamentoEntity planejamentoEntity = planejamentoRepository.findById(planejamentoId).orElseThrow(() -> new MyNotFoundException("Planejamento não encontado."));
+        PlanejamentoEntity planejamentoEntity = planejamentoRepository.findById(planejamentoId)
+            .orElseThrow(() -> new MyNotFoundException("Planejamento não encontrado."));
 
-        return planejamentoEntity.getSessoesEstudo()
-                        .stream()
-                        .map(sessaoEstudoMapper::toSessaoEstudoDTO)
-                        .collect(Collectors.toList());
-                                        
+        return sessaoEstudoRepository.findByPlanejamentoEntity(planejamentoEntity)
+                    .stream()
+                    .map(sessaoEstudoMapper::toSessaoEstudoDTO)
+                    .collect(Collectors.toList());
     }
 }

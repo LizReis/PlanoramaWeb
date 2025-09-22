@@ -40,16 +40,9 @@ public class MateriaEntity {
 
     //Uma matéria tem muitos assuntos, exclua todos os assuntos caso a matéria seja excluída
     //carregue todos os assuntos junto com essa matéria (é o que o eager faz)
-    @ToString.Exclude
     @OneToMany(mappedBy = "materiaEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<AssuntoEntity> listaAssuntos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "materiaEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<SessaoEstudoEntity> listaSessao = new ArrayList<>();
-
     @OneToMany(mappedBy = "materiaEntity")
     private List<MateriaPlanejamentoEntity> planejamentosComMateria = new ArrayList<>();
-
-    @OneToMany(mappedBy = "materia")
-    private List<RegistrarEstudoEntity> registrosEstudoMateria = new ArrayList<>();
 }

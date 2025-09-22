@@ -24,7 +24,7 @@ public class RegistrarEstudoDTO{
     @NotNull
     private UUID planejamentoId;
     @NotNull
-    private UUID materiaId;
+    private UUID idMateriaPlanejamento;
 
 
 }

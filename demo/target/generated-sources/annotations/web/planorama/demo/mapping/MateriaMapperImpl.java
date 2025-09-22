@@ -8,17 +8,15 @@ import org.springframework.stereotype.Component;
 import web.planorama.demo.dto.AssuntoDTO;
 import web.planorama.demo.dto.MateriaDTO;
 import web.planorama.demo.dto.MateriaPlanejamentoDTO;
-import web.planorama.demo.dto.SessaoEstudoDTO;
 import web.planorama.demo.dto.UsuarioDTO;
 import web.planorama.demo.entity.AssuntoEntity;
 import web.planorama.demo.entity.MateriaEntity;
 import web.planorama.demo.entity.MateriaPlanejamentoEntity;
-import web.planorama.demo.entity.SessaoEstudoEntity;
 import web.planorama.demo.entity.UsuarioEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-21T02:11:53-0300",
+    date = "2025-09-21T19:24:21-0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.4 (Oracle Corporation)"
 )
 @Component
@@ -39,7 +37,6 @@ public class MateriaMapperImpl implements MateriaMapper {
         materiaEntity.setNomeMateria( materiaDTO.getNomeMateria() );
         materiaEntity.setCriadoPor( usuarioDTOToUsuarioEntity( materiaDTO.getCriadoPor() ) );
         materiaEntity.setListaAssuntos( assuntoDTOListToAssuntoEntityList( materiaDTO.getListaAssuntos() ) );
-        materiaEntity.setListaSessao( sessaoEstudoDTOListToSessaoEstudoEntityList( materiaDTO.getListaSessao() ) );
         materiaEntity.setPlanejamentosComMateria( materiaPlanejamentoDTOListToMateriaPlanejamentoEntityList( materiaDTO.getPlanejamentosComMateria() ) );
 
         return materiaEntity;
@@ -57,7 +54,6 @@ public class MateriaMapperImpl implements MateriaMapper {
         materiaDTO.setNomeMateria( materiaEntity.getNomeMateria() );
         materiaDTO.setCriadoPor( usuarioMapper.toUsuarioDTO( materiaEntity.getCriadoPor() ) );
         materiaDTO.setListaAssuntos( assuntoEntityListToAssuntoDTOList( materiaEntity.getListaAssuntos() ) );
-        materiaDTO.setListaSessao( sessaoEstudoEntityListToSessaoEstudoDTOList( materiaEntity.getListaSessao() ) );
         materiaDTO.setPlanejamentosComMateria( materiaPlanejamentoEntityListToMateriaPlanejamentoDTOList( materiaEntity.getPlanejamentosComMateria() ) );
 
         return materiaDTO;
@@ -101,32 +97,6 @@ public class MateriaMapperImpl implements MateriaMapper {
         List<AssuntoEntity> list1 = new ArrayList<AssuntoEntity>( list.size() );
         for ( AssuntoDTO assuntoDTO : list ) {
             list1.add( assuntoDTOToAssuntoEntity( assuntoDTO ) );
-        }
-
-        return list1;
-    }
-
-    protected SessaoEstudoEntity sessaoEstudoDTOToSessaoEstudoEntity(SessaoEstudoDTO sessaoEstudoDTO) {
-        if ( sessaoEstudoDTO == null ) {
-            return null;
-        }
-
-        SessaoEstudoEntity sessaoEstudoEntity = new SessaoEstudoEntity();
-
-        sessaoEstudoEntity.setId( sessaoEstudoDTO.getId() );
-        sessaoEstudoEntity.setDuracaoSessao( sessaoEstudoDTO.getDuracaoSessao() );
-
-        return sessaoEstudoEntity;
-    }
-
-    protected List<SessaoEstudoEntity> sessaoEstudoDTOListToSessaoEstudoEntityList(List<SessaoEstudoDTO> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<SessaoEstudoEntity> list1 = new ArrayList<SessaoEstudoEntity>( list.size() );
-        for ( SessaoEstudoDTO sessaoEstudoDTO : list ) {
-            list1.add( sessaoEstudoDTOToSessaoEstudoEntity( sessaoEstudoDTO ) );
         }
 
         return list1;
@@ -184,32 +154,6 @@ public class MateriaMapperImpl implements MateriaMapper {
         List<AssuntoDTO> list1 = new ArrayList<AssuntoDTO>( list.size() );
         for ( AssuntoEntity assuntoEntity : list ) {
             list1.add( assuntoEntityToAssuntoDTO( assuntoEntity ) );
-        }
-
-        return list1;
-    }
-
-    protected SessaoEstudoDTO sessaoEstudoEntityToSessaoEstudoDTO(SessaoEstudoEntity sessaoEstudoEntity) {
-        if ( sessaoEstudoEntity == null ) {
-            return null;
-        }
-
-        SessaoEstudoDTO sessaoEstudoDTO = new SessaoEstudoDTO();
-
-        sessaoEstudoDTO.setId( sessaoEstudoEntity.getId() );
-        sessaoEstudoDTO.setDuracaoSessao( sessaoEstudoEntity.getDuracaoSessao() );
-
-        return sessaoEstudoDTO;
-    }
-
-    protected List<SessaoEstudoDTO> sessaoEstudoEntityListToSessaoEstudoDTOList(List<SessaoEstudoEntity> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<SessaoEstudoDTO> list1 = new ArrayList<SessaoEstudoDTO>( list.size() );
-        for ( SessaoEstudoEntity sessaoEstudoEntity : list ) {
-            list1.add( sessaoEstudoEntityToSessaoEstudoDTO( sessaoEstudoEntity ) );
         }
 
         return list1;
