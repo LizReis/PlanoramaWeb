@@ -20,6 +20,7 @@ web\planorama\demo\service\MateriaPlanejamentoService.class
 web\planorama\demo\controller\RegistrarEstudoController.class
 web\planorama\demo\repository\MateriaPlanejamentoRepository.class
 web\planorama\demo\mapping\RegistrarEstudoMapperImpl.class
+web\planorama\demo\service\impl\PlanejamentoServiceImpl$1.class
 web\planorama\demo\service\PlanejamentoService.class
 web\planorama\demo\controller\MinhaContaController.class
 web\planorama\demo\dto\UsuarioDTO.class

@@ -3,7 +3,7 @@
 
 <body>
     <main class="cardAlteracao corpo" th:fragment="cardAlteracao">
-        <form id="formAlterarUsuario" th:action="@{/admin/listar-usuarios/alterar-usuario}" th:object="${usuario}" method="post">
+        <form id="formAlterarUsuario" th:action="@{/admin/listar-usuarios/alterar-usuario}" th:object="${usuario}" method="post" class="formAlterar">
 
             <div class="nomeCard">
                 <span class="tituloCard">Alterar Informações de: <span style="color: #7C2A2A;" th:text="${usuario.nome}"></span></span>

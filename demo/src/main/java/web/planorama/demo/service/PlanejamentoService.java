@@ -22,9 +22,6 @@ public interface PlanejamentoService {
     List<SessaoEstudoDTO> gerarCicloDeEstudos(UUID planejamentoId);
     List<SessaoEstudoDTO> buscarCicloEstudo(UUID planejamentoId);
 
-    //DEVE CRIAR DEPOIS UM MÉTODO PARA PEGAR TODAS AS MATERIASPLANO DE UM DETERMINADO PLANO
-
-    PlanejamentoDTO atualizarPlanoDeEstudos(UUID id, PlanejamentoDTO planejamentoDTO);
     PlanejamentoDTO arquivarPlanoDeEstudos(PlanejamentoDTO planejamentoParaArquivar);
     PlanejamentoDTO desarquivarPlanoDeEstudos(PlanejamentoDTO planejamentoParaArquivar);
     void remove(UUID id);

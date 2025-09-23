@@ -8,7 +8,7 @@ import web.planorama.demo.entity.PlanejamentoEntity;
 @Mapper(componentModel = "spring", uses = { UsuarioMapper.class })
 public interface PlanejamentoMapper {
 
-    public PlanejamentoEntity toPlanejamentoEntity(PlanejamentoDTO planejamentoDTO);
+    public PlanejamentoEntity toPlanejamentoEntity(PlanejamentoEntity planejamentoDTO);
 
     public PlanejamentoDTO toPlanejamentoDTO(PlanejamentoEntity planejamentoEntity);
 }

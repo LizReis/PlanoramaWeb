@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.thymeleaf.org">
+
+<body>
+    <main class="cardAlteracao corpo" th:fragment="cardAlteracao">
+        <form id="formAlterarPlanejamento" th:action="@{/planejamento/editar/{id}}" method="post" class="formAlterar">
+            <div class="nomeCard">
+                <span class="tituloCard">Alterar Dados do Planejamento</span>
+                <span class="fecharX">X</span>
+            </div>
+
+            <div class="paragrafoCard">
+                <p class="paragrafoInfo">Altere algumas informações do seu planejamento.</p>
+            </div>
+
+            <div class="labelCard">
+                <label for="novoNome">Novo nome:</label>
+                <input type="text" id="novoNome" name="novoNome" placeholder="Novo nome do Planejamento" />
+            </div>
+            <br/>
+
+            <div class="labelCard">
+                <label for="novoCargo">Novo Cargo:</label>
+                <input type="text" id="novoCargo" name="novoCargo" placeholder="Novo cargo do Planejamento" />
+            </div>
+            <br/>
+
+            <div class="labelCard">
+                <label for="novaCargaHoraria">Novo Carga Horária:</label>
+                <input type="number" id="novaCargaHoraria" name="novaCargaHoraria" min="1" placeholder="Nova carga Horária do Planejamento" />
+            </div>
+            <br/>
+
+            <div class="labelCard">
+                <label for="novoAnoAplicacao">Novo Ano de Aplicação:</label>
+                <input type="number" id="novoAnoAplicacao" name="novoAnoAplicacao" min="2025" placeholder="Novo ano de aplicação"/>
+            </div>
+            <br/>
+
+            <button type="submit">Salvar</button>
+        </form>
+    </main>
+</body>
+
+</html>
