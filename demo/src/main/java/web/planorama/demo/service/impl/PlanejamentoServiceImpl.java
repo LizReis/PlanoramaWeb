@@ -61,22 +61,31 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         UsuarioEntity criador = pegaUsuarioLogado();
         PlanejamentoEntity planejamentoEntity;
 
+        boolean deveRegenerarCiclo = false;
+
         if (planejamentoDTO.getId() != null) {
-            planejamentoEntity = mapper.toPlanejamentoEntity(planejamentoRepository.findById(planejamentoDTO.getId())
-                    .orElseThrow(() -> new MyNotFoundException("Planejamento com ID " + planejamentoDTO.getId() + " não encontrado.")));
+            planejamentoEntity = planejamentoRepository.findById(planejamentoDTO.getId())
+                    .orElseThrow(() -> new MyNotFoundException(
+                            "Planejamento com ID " + planejamentoDTO.getId() + " não encontrado."));
+
+            // VERIFICA se a carga horária foi alterada.
+            if (planejamentoEntity.getHorasDiarias() != planejamentoDTO.getHorasDiarias()) {
+                deveRegenerarCiclo = true;
+            }
+
         } else {
             planejamentoEntity = new PlanejamentoEntity();
             planejamentoEntity.setCriador(criador);
             planejamentoEntity.setPlanoArquivado(false);
             boolean isAdmin = criador.getPapeis().stream().anyMatch(papel -> papel.getNome().equals(ADMIN.name()));
             planejamentoEntity.setPreDefinidoAdm(isAdmin);
+            deveRegenerarCiclo = true; // Sempre gera o ciclo para um plano novo.
         }
+
         planejamentoEntity.setNomePlanejamento(planejamentoDTO.getNomePlanejamento());
         planejamentoEntity.setCargo(planejamentoDTO.getCargo());
         planejamentoEntity.setAnoAplicacao(planejamentoDTO.getAnoAplicacao());
         planejamentoEntity.setHorasDiarias(planejamentoDTO.getHorasDiarias());
-        planejamentoEntity.setPlanoArquivado(planejamentoDTO.isPlanoArquivado());
-
 
         if (planejamentoDTO.getId() == null) {
             planejamentoEntity.setDisponibilidade(planejamentoDTO.getDisponibilidade());
@@ -104,12 +113,16 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
         var planoSalvo = planejamentoRepository.save(planejamentoEntity);
 
-        if (planejamentoDTO.getId() == null) {
+        if (deveRegenerarCiclo) {
+            List<SessaoEstudoEntity> sessoesAntigas = sessaoEstudoRepository.findByPlanejamentoEntity(planoSalvo);
+            if (sessoesAntigas != null && !sessoesAntigas.isEmpty()) {
+                sessaoEstudoRepository.deleteAllInBatch(sessoesAntigas); // Mais eficiente para listas grandes
+            }
+
             this.gerarCicloDeEstudos(planoSalvo.getId());
         }
 
         return mapper.toPlanejamentoDTO(planoSalvo);
-
     }
 
     @Override
@@ -137,11 +150,14 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
     @Override
     public List<PlanejamentoDTO> findAllOfEstudante(UsuarioDTO usuarioDTO) {
-        return planejamentoRepository.findAll()
+        UsuarioEntity criador = new UsuarioEntity();
+        criador.setId(usuarioDTO.id());
+
+        return planejamentoRepository.findAllByCriador(criador)
                 .stream()
-                .filter(plano -> plano.getCriador() != null && plano.getCriador().getId().equals(usuarioDTO.id()))
+                .filter(plano -> !plano.isPlanoArquivado())
                 .map(mapper::toPlanejamentoDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -339,7 +355,7 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
         for (PlanejamentoEntity plano : planejamentosNaoArquivados) {
 
-            //Tive que converter o dia da semana do Java (em inglês) para português
+            // Tive que converter o dia da semana do Java (em inglês) para português
             DayOfWeek diaDaSemanaJava = LocalDate.now().getDayOfWeek();
             String diaDaSemanaFormatado = "";
             switch (diaDaSemanaJava) {

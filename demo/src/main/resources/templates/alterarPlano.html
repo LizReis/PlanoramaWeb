@@ -3,7 +3,7 @@
 
 <body>
     <main class="cardAlteracao corpo" th:fragment="cardAlteracao">
-        <form id="formAlterarPlanejamento" th:action="@{/planejamento/editar/{id}}" method="post" class="formAlterar">
+        <form id="formAlterarPlanejamento" th:action="@{/planejamento/editar/{id}(id=*{id})}" method="post" class="formAlterar">
             <div class="nomeCard">
                 <span class="tituloCard">Alterar Dados do Planejamento</span>
                 <span class="fecharX">X</span>

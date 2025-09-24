@@ -57,17 +57,17 @@
 
             <div class="tabela-usuarios">
                 <div class="tabela-cabecalho linha-grid">
+                    <div class="coluna-cabecalho">Foto</div>
                     <div class="coluna-cabecalho">Nome</div>
                     <div class="coluna-cabecalho">e-mail</div>
-                    <div class="coluna-cabecalho">Q. Planos</div>
                     <div class="coluna-cabecalho">Ações</div>
                 </div>
 
                 <div class="tabela-corpo">
                     <div class="linha-grid item-usuario" th:each="cadastro: ${listaDeUsuarios}">
+                        <div><img th:src="@{${cadastro.fotoUsuario}}"></div>
                         <div th:text="${cadastro.nome}">Carlos (Admin)</div>
                         <div th:text="${cadastro.email}">carlos.admin@lalala</div>
-                        <div><img th:src="@{${cadastro.fotoUsuario}}"></div>
                         <div class="acoes">
                             <a class="btn-acao abrir-modal" th:href="@{'/admin/listar-usuarios/alterar-usuario/'+ ${cadastro.id}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

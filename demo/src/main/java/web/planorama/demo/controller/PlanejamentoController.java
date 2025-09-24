@@ -53,6 +53,13 @@ public class PlanejamentoController {
 
     @GetMapping("/editar/{id}")
     public String cardEditarPlanejamento(@PathVariable String id, Model model) {
+        try {
+            UUID idUUID = UUID.fromString(id);
+            PlanejamentoDTO planejamento = planejamentoService.findOne(idUUID);
+            model.addAttribute("planejamentoParaAlterar", planejamento);
+        } catch (Exception e) {
+            return "redirect:/home";
+        }
         return "alterarPlano :: cardAlteracao";
     }
 
@@ -109,43 +116,39 @@ public class PlanejamentoController {
 
         if (novoNomePlano.isBlank() || novoNomePlano.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "O campo de Novo Nome do Planejamento não pode estar vazio.");
-            return "alterarPlano :: cardAlteracao";
+            return "redirect:/home";
         } else if (novoCargo.isBlank() || novoCargo.isEmpty()) {
             redirectAttributes.addFlashAttribute("error",
                     "O campo de Novo Cargo do Planejamento não pode estar vazio.");
-            return "alterarPlano :: cardAlteracao";
+            return "redirect:/home";
         } else if (novaCargaHoraria.isBlank() || novaCargaHoraria.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Adicione corretamente a Carga Horária");
-            return "alterarPlano :: cardAlteracao";
+            return "redirect:/home";
         } else if (novoAnoAplicacao.isBlank() || novoAnoAplicacao.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Adicione um ano de aplicação válido");
-            return "alterarPlano :: cardAlteracao";
+            return "redirect:/home";
         } else if (novoNomePlano.isEmpty() && novoCargo.isEmpty() && novaCargaHoraria.isEmpty()
                 && novoAnoAplicacao.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Todos os campos devem ser preenchidos.");
-            return "alterarPlano :: cardAlteracao";
+            return "redirect:/home";
         } else {
             try {
-                UUID idUUID;
+                UUID idUUID = UUID.fromString(idPlanejamento);
+                PlanejamentoDTO planejamentoAlterar = planejamentoService.findOne(idUUID);
 
-                try {
-                    idUUID = UUID.fromString(idPlanejamento);
-                } catch (IllegalArgumentException e) {
-                    return "paginaErro";
-                }
+                planejamentoAlterar.setNomePlanejamento(novoNomePlano);
+                planejamentoAlterar.setCargo(novoCargo);
+                planejamentoAlterar.setHorasDiarias(Integer.parseInt(novaCargaHoraria));
+                planejamentoAlterar.setAnoAplicacao(Integer.parseInt(novoAnoAplicacao));
 
-                try {
-                    PlanejamentoDTO planejamentoAlterar = planejamentoService.findOne(idUUID);
+                planejamentoService.save(planejamentoAlterar);
+                redirectAttributes.addFlashAttribute("success", "Planejamento atualizado com sucesso!");
 
-                    planejamentoService.atualizarPlanoDeEstudos(planejamentoAlterar);
-                    redirectAttributes.addFlashAttribute("success", "Planejamento removido com sucesso!");
-                } catch (Exception e) {
-                    redirectAttributes.addFlashAttribute("error", e.getMessage());
-                }
-            } catch (RuntimeException e) {
-                redirectAttributes.addFlashAttribute("error", e.getMessage());
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("error", "Erro ao atualizar o planejamento.");
             }
-            return "redirect:/admin/listar-usuarios";
+
+            return "redirect:/home";
         }
     }
 

@@ -15,6 +15,7 @@
     <link rel="stylesheet" th:href="@{/css/administrarUsuarioStyle.css}">
     <link rel="stylesheet" th:href="@{/css/criarPlanoStyle.css}">
     <link rel="stylesheet" th:href="@{/css/modalStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/alterarCardStyle.css}">
     <title>Planorama - Meus Planejamentos</title>
 </head>
 
@@ -26,20 +27,18 @@
     <section class="sectionAdmUsuario conteudoPrincipal">
         <div class="divInformativa">
             <h3>
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 21 21"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"><path d="M17.5 14.5v-10a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2"/><path d="m5.305 4.935l-2.004.73a2 2 0 0 0-1.195 2.563l3.42 9.397A2 2 0 0 0 8.09 18.82l5.568-2.198M8.5 7.5h5m-5 2h6m-6 2h3"/></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 21 21">
+                    <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1">
+                        <path d="M17.5 14.5v-10a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2" />
+                        <path
+                            d="m5.305 4.935l-2.004.73a2 2 0 0 0-1.195 2.563l3.42 9.397A2 2 0 0 0 8.09 18.82l5.568-2.198M8.5 7.5h5m-5 2h6m-6 2h3" />
+                    </g>
+                </svg>
                 Meus Planejamentos
             </h3>
 
             <p>Aqui você visualiza todos os Planejamentos associados a sua conta.</p>
-        </div>
-
-        <!--DIVS RESPOSAVEIS POR EXIBIR MSG DE SUCESSO OU ERRO-->
-        <div th:if="${success}" class="alerta sucesso">
-            <p th:text="${success}"></p>
-        </div>
-        <!--DIVS RESPOSAVEIS POR EXIBIR MSG DE SUCESSO OU ERRO-->
-        <div th:if="${error}" class="alerta erro">
-            <p th:text="${error}"></p>
         </div>
     </section>
 
@@ -53,11 +52,12 @@
             <p th:text="${error}"></p>
         </div>
 
-        <div class="divCard" th:each="planejamento : ${planejamentosUsuarioLogado}">
+        <div class="divCard" th:each="planoProgress : ${planejamentosUsuarioLogado}">
             <div class="divCardTextoIcone">
                 <div class="cardContainerTexto">
-                    <a class="card-link" th:href="@{/planejamento/{id}(id=${planejamento.id})}">
-                        <h4 class="nomePlano" th:text="${planejamento.nomePlanejamento}">Programação Web</h4>
+                    <a class="card-link" th:href="@{/planejamento/{id}(id=${planoProgress.planejamento.id})}">
+                        <h4 class="nomePlano" th:text="${planoProgress.planejamento.nomePlanejamento}">Programação Web
+                        </h4>
                     </a>
                     <div class="divCardParagrafo">
                         <div>
@@ -66,7 +66,7 @@
                                     d="M8.8 0c.274 0 .537.113.726.312l3.2 3.428c.176.186.274.433.274.689V13a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM12 5H8.5a.5.5 0 0 1-.5-.5V1H2v12h10zm-7.5 6a.5.5 0 1 1 0-1h5a.5.5 0 1 1 0 1zm0-3a.5.5 0 0 1 0-1h5a.5.5 0 1 1 0 1zm1 8a.5.5 0 1 1 0-1H14V6.5a.5.5 0 1 1 1 0V15a1 1 0 0 1-1 1z" />
                             </svg>
                             <span>Cargo:</span>
-                            <p class="paragrafoCard" th:text="${planejamento.cargo}">Dev. Sistemas</p>
+                            <p class="paragrafoCard" th:text="${planoProgress.planejamento.cargo}">Dev. Sistemas</p>
                         </div>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
@@ -74,7 +74,7 @@
                                     d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m.5-13H11v6l5.2 3.2l.8-1.3l-4.5-2.7z" />
                             </svg>
                             <span>Carga Horária:</span>
-                            <p class="paragrafoCard" th:text="${planejamento.horasDiarias} + 'h'">20h</p>
+                            <p class="paragrafoCard" th:text="${planoProgress.planejamento.horasDiarias} + 'h'">20h</p>
                         </div>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
@@ -84,13 +84,13 @@
                                     d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2M19 8l.001 12H5V8z" />
                             </svg>
                             <span>Ano de atuação:</span>
-                            <p class="paragrafoCard" th:text="${planejamento.anoAplicacao}">2025</p>
+                            <p class="paragrafoCard" th:text="${planoProgress.planejamento.anoAplicacao}">2025</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="cardContainerIcone">
-                    <form th:action="@{/planejamento/arquivar/{id}(id=${planejamento.id})}" method="post">
+                    <form th:action="@{/planejamento/arquivar/{id}(id=${planoProgress.planejamento.id})}" method="post">
                         <button type="submit" class="button-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
                                 <path fill="currentColor"
@@ -100,8 +100,8 @@
                             </svg>
                         </button>
                     </form>
-                    <form th:action="@{/planejamento/remover/{id}(id=${planejamento.id})}" method="post">
-                         <button type="submit" class="button-icon">
+                    <form th:action="@{/planejamento/remover/{id}(id=${planoProgress.planejamento.id})}" method="post">
+                        <button type="submit" class="button-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
                                     <path
@@ -112,25 +112,31 @@
                             </svg>
                         </button>
                     </form>
-                    <form>
-                         <button type="submit" class="button-icon">
+                    <a th:href="@{/planejamento/editar/{id}(id=${planoProgress.planejamento.id})}" class="abrir-modal">
+                        <button type="submit" class="button-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                                 <path fill="currentColor"
                                     d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z" />
                             </svg>
                         </button>
-                    </form>
+                    </a>
                 </div>
             </div>
 
             <div class="divCardProgresso">
-                <span>Progresso:</span>
+                <span>Progresso Diário:</span>
                 <div class="divProgressoPai">
-                    <div class="divProgressoFilho"></div>
+                    <div class="divProgressoFilho" th:style="'width: ' + ${planoProgress.progressPercentage} + '%;'">
+                        <span th:if="${planoProgress.progressPercentage > 5}"
+                            th:text="${planoProgress.progressPercentage} + '%'"
+                            style="padding-left: 5px; color: white; font-size: 10px;"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div id="modal-container"></div>
 
     <footer></footer>
 
