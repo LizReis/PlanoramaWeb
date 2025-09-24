@@ -134,7 +134,7 @@ header section .divFotoUsuario img{
     align-items: center;
     width: 12rem;
     height: 2.2rem;
-    background-color: var(--corDestaqueBege);
+    background-color: var(--corDestaqueVerde);
     color: var(--corFundoPrincipal);
     font-family: var(--fonteParaTexto);
     font-size: 15px;
@@ -146,8 +146,8 @@ header section .divFotoUsuario img{
 }
 .botaoAncora:hover{
     background-color: var(--corFundoPrincipal);
-    color: var(--corDestaqueBege);
-    border: 0.1rem solid var(--corDestaqueBege);
+    color: var(--corDestaqueVerde);
+    border: 0.1rem solid var(--corDestaqueVerde);
 }
 .botaoAncora:hover path{
     stroke:var(--corDestaqueBege);

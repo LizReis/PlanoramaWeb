@@ -73,11 +73,15 @@
     background-size: 0.65em auto;
 }
 
+.tabela-cabecalho{
+    background-color: #ebebeb;
+}
+
 /* Estilo da Tabela com Grid */
 .linha-grid {
     display: grid;
     /* Define 4 colunas: a primeira e a última menores, as duas do meio flexíveis */
-    grid-template-columns: 2fr 3fr 1fr 1.5fr;
+    grid-template-columns: 1fr 2fr 3fr 1.5fr;
     gap: 0.5rem; /* Espaçamento entre as colunas */
     padding: 0.8rem 0.5rem;
     border-bottom: 1px solid var(--corDestaqueVerde);
@@ -93,6 +97,20 @@
     font-family: var(--fonteParaTexto);
     font-size: 0.75rem;
     padding-top: 0;
+}
+
+.linha-fotoUsuario{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+}
+
+.linha-fotoUsuario img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .tabela-corpo .linha-grid:last-child {

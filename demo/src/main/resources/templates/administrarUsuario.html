@@ -65,7 +65,7 @@
 
                 <div class="tabela-corpo">
                     <div class="linha-grid item-usuario" th:each="cadastro: ${listaDeUsuarios}">
-                        <div><img th:src="@{${cadastro.fotoUsuario}}"></div>
+                        <div class="linha-fotoUsuario"><img th:src="@{${cadastro.fotoUsuario != null ? cadastro.fotoUsuario : '/img/gatinho.jpg'}}" alt="Foto do Perfil"></div>
                         <div th:text="${cadastro.nome}">Carlos (Admin)</div>
                         <div th:text="${cadastro.email}">carlos.admin@lalala</div>
                         <div class="acoes">
