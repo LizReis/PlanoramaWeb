@@ -27,7 +27,7 @@ public class SecurityConfig {
 
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/cadastro", "/", "/img/**", "/js/**", "/css/**", "/error", "/h2-console/**").permitAll()
+                        .requestMatchers("/cadastro", "/", "/img/**", "/js/**", "/css/**", "/error", "/h2-console/**", "/painelDesempenho", "/api/desempenho").permitAll()
                         .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )

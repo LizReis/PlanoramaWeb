@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+
+import web.planorama.demo.dto.DesempenhoDTO;
 import web.planorama.demo.dto.RegistrarEstudoDTO;
 import web.planorama.demo.dto.SessaoEstudoDTO;
 import web.planorama.demo.entity.AssuntoEntity;
@@ -117,4 +119,11 @@ public class RegistrarEstudoServiceImpl implements RegistrarEstudoService {
             registrarEstudoRepository.deleteById(id);
         }
     }
+
+
+    @Override
+    public List<DesempenhoDTO> getDesempenhoPorMateria(UUID usuarioId) {
+        return registrarEstudoRepository.getDesempenhoPorMateria(usuarioId);
+    }
 }
+

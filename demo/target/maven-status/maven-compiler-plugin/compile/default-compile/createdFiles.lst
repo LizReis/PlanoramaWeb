@@ -22,7 +22,9 @@ web\planorama\demo\repository\MateriaPlanejamentoRepository.class
 web\planorama\demo\mapping\RegistrarEstudoMapperImpl.class
 web\planorama\demo\service\impl\PlanejamentoServiceImpl$1.class
 web\planorama\demo\service\PlanejamentoService.class
+web\planorama\demo\dto\DesempenhoDTO.class
 web\planorama\demo\controller\MinhaContaController.class
+web\planorama\demo\controller\PainelDesempenhoController.class
 web\planorama\demo\dto\UsuarioDTO.class
 web\planorama\demo\mapping\RegistrarEstudoMapper.class
 web\planorama\demo\controller\CriarPlanejamentoController.class

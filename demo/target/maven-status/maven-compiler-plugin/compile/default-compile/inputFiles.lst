@@ -13,11 +13,13 @@ D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\MateriaController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\MeusPlanejamentosController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\MinhaContaController.java
+D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\PainelDesempenhoController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\PlanejamentoController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\RegistrarEstudoController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\SelecionarPlanejamentoController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\DemoApplication.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\AssuntoDTO.java
+D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\DesempenhoDTO.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\MateriaDTO.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\MateriaPlanejamentoDTO.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\dto\PlanejamentoDTO.java
