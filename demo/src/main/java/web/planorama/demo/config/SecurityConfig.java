@@ -1,11 +1,13 @@
 package web.planorama.demo.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,10 +18,14 @@ import web.planorama.demo.repository.PapelRepository;
 
 @Configuration
 @RequiredArgsConstructor
+@EnableWebSecurity
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
     private final PapelRepository papelRepository;
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -31,8 +37,9 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .formLogin(login -> login.loginPage("/login").permitAll())
+                .formLogin(login -> login.loginPage("/login").successHandler(customAuthenticationSuccessHandler).permitAll())
                 .logout(logout -> logout.logoutSuccessUrl("/login?logout").permitAll())
+                .exceptionHandling(exception -> exception.accessDeniedPage("/error"))
                 .userDetailsService(userDetailsService)
                 .csrf(csrf -> csrf.disable())// É PARA ESTAR HABILITADO, MAS FOI DESABILIDADE POR FINS DIDATICOS
                 .headers(headers -> headers.frameOptions().disable())

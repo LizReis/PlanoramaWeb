@@ -42,3 +42,46 @@
     max-width: 800px;
     margin: auto;
 }
+
+/* Media Queries para Responsividade */
+
+/* Telas Médias (Tablets) */
+@media (max-width: 992px) {
+    .conteudoPrincipal {
+        padding-left: 100px;
+    }
+
+    .conteudoPrincipal.active {
+        padding-left: 100px;
+    }
+}
+
+
+/* Telas Pequenas (Mobiles) */
+@media (max-width: 768px) {
+    .conteudoPrincipal {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .conteudoPrincipal.active {
+        padding-left: 20px;
+    }
+
+    .container {
+        width: 100%;
+        padding-top: 20px;
+    }
+
+    .divInformativa h3 {
+        font-size: 20px;
+    }
+
+    .divInformativa p {
+        font-size: 14px;
+    }
+
+    .chart-container {
+        padding: 10px;
+    }
+}

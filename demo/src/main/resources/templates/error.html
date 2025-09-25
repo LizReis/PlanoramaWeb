@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" th:href="@{/css/errorStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/barraNavStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/menuStyle.css}">
+</head>
+<body>
+
+    <div th:replace="~{barraNavegacao :: barraNav}"></div>
+
+    <div th:replace="~{menu :: menuFragment}"></div>
+
+    <section class="sectionError conteudoPrincipal">
+
+        <div class="divError">
+            <img th:src="@{/img/imagemPaginaErro.png}">
+        </div>
+
+        <div class="divInformacao">
+            <h2>OPS! NÃO FOI POSSÍVEL ACESSAR ESTA PÁGINA</h2>
+            <p>Você não tem autorização para acessar ou ocorreu um erro.</p>
+        </div>
+    </section>
+
+
+    <script th:src="@{/js/menuScripts.js}"></script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\config\CustomAuthenticationSuccessHandler.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\config\DeterminarImagemUploadConfig.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\config\SecurityConfig.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\AdministrarPlanejamentosController.java
@@ -6,6 +7,7 @@ D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\ArquivoPlanoController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\CadastroUsuarioController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\CriarPlanejamentoController.java
+D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\ErrorController.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\GlobalControllerAdvice.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\GlobalExceptionHandler.java
 D:\Users\LIZANDRA\Documents\GitHub\PlanoramaWeb\demo\src\main\java\web\planorama\demo\controller\HomeController.java

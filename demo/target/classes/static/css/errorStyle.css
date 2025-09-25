@@ -1,0 +1,64 @@
+:root{
+    --corFundoPrincipal: #FFFFFF;
+    --corPrincipalFonte: #0D0D0D;
+    --corCinzaFonte: #808080;
+    --corDestaqueVerde: #7A7453;
+    --corDestaqueVermelho: #7C2A2A;
+    --corDestaqueBege: #C29A6E;
+
+    --fonteDestaque: "Merriweather", serif;
+    --fonteParaTexto: "Roboto", sans-serif;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.sectionError{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.divError{
+    justify-self: center;
+    align-self: center;
+    margin-top: 50px;
+    width: 23rem;
+    height: 23rem;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+}
+
+.divError img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.divInformacao{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+}
+
+.divInformacao h2{
+    align-self: center;
+    font-size: 35px;
+    margin: 20px 0px 0px 40px;
+    font-family: var(--fonteDestaque);
+    color: var(--corDestaqueVermelho);
+}
+
+.divInformacao p{
+    align-self: center;
+    margin-top: 15px;
+    font-family: var(--fonteParaTexto);
+    color: var(--corCinzaFonte);
+}

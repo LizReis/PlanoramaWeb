@@ -49,6 +49,8 @@ web\planorama\demo\service\UsuarioService.class
 web\planorama\demo\controller\AlterarDadosEstudanteController.class
 web\planorama\demo\service\AssuntoService.class
 web\planorama\demo\DemoApplication.class
+web\planorama\demo\config\CustomAuthenticationSuccessHandler.class
+web\planorama\demo\controller\ErrorController.class
 web\planorama\demo\service\impl\AssuntoServiceImpl.class
 web\planorama\demo\controller\AdministrarPlanejamentosController.class
 web\planorama\demo\dto\MateriaDTO.class
