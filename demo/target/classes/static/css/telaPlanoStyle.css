@@ -172,6 +172,143 @@
     margin-right: 2%;
 }
 
+.alerta {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-family: var(--fonteParaTexto);
+    font-size: 15px;
+    text-align: center;
+}
+
+.alerta.sucesso {
+    color: #155724; /* Verde escuro para o texto */
+    background-color: #d4edda; /* Fundo verde claro */
+    border: 1px solid #c3e6cb; /* Borda verde */
+}
+
+.alerta.erro {
+    color: #721c24; /* Vermelho escuro para o texto */
+    background-color: #f8d7da; /* Fundo rosa/vermelho claro */
+    border: 1px solid #f5c6cb; /* Borda vermelha */
+}
+
+/*===========================*/
+/*STYLE DE PLANO CONCLUIDO*/
+
+.plano-concluido-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.plano-concluido-container img {
+    max-width: 200px;
+    margin-bottom: 1.5rem;
+}
+
+.plano-concluido-container h3 {
+    font-family: var(--fonteDestaque);
+    color: var(--corDestaqueVerde);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.plano-concluido-container p {
+    font-family: var(--fonteParaTexto);
+    color: var(--corPrincipalFonte);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.botao-refazer {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--corDestaqueVermelho);
+    color: var(--corFundoPrincipal);
+    font-family: var(--fonteParaTexto);
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.botao-refazer:hover {
+    background-color: var(--corFundoPrincipal);
+    color: var(--corDestaqueVermelho);
+    border: 1px solid var(--corDestaqueVermelho);
+}
+
+/*ESTILO DO CARD DE SUCESSO*/
+
+.plano-concluido-modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espaçamento entre os elementos */
+}
+
+.plano-concluido-modal-content img {
+    max-width: 200px; /* Ajusta o tamanho da imagem */
+    margin-bottom: 10px;
+}
+
+.plano-concluido-modal-content h3 {
+    color: #2c5c3d; /* Cor verde para o título */
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.plano-concluido-modal-content p {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 0;
+}
+
+.plano-concluido-modal-content .botoes-modal {
+    display: flex;
+    gap: 15px; /* Espaçamento entre os botões */
+    margin-top: 20px;
+}
+
+.plano-concluido-modal-content .botao-refazer,
+.plano-concluido-modal-content .botao-apagar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.plano-concluido-modal-content .botao-refazer {
+    background-color: #007bff;
+}
+
+.plano-concluido-modal-content .botao-refazer:hover {
+    background-color: #0056b3;
+}
+
+.plano-concluido-modal-content .botao-apagar {
+    background-color: #dc3545;
+}
+
+.plano-concluido-modal-content .botao-apagar:hover {
+    background-color: #c82333;
+}
+
 
 /* ===================================== */
 /* ESTILOS PARA TELAS MÉDIAS (Tablets) */

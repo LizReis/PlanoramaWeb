@@ -1,6 +1,7 @@
 package web.planorama.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 import web.planorama.demo.dto.DesempenhoDTO;
+import web.planorama.demo.entity.MateriaPlanejamentoEntity;
 import web.planorama.demo.entity.RegistrarEstudoEntity;
 
 public interface RegistrarEstudoRepository extends JpaRepository<RegistrarEstudoEntity, UUID>{
@@ -24,4 +26,10 @@ public interface RegistrarEstudoRepository extends JpaRepository<RegistrarEstudo
            "WHERE re.usuario.id = :usuarioId " +
            "GROUP BY m.nomeMateria")
     List<DesempenhoDTO> getDesempenhoPorMateria(@Param("usuarioId") UUID usuarioId);
+
+    @Modifying
+    @Query("DELETE FROM RegistrarEstudoEntity re WHERE re.materiaPlanejamento.planejamentoEntity.id = :planejamentoId")
+    void deleteByPlanejamentoId(@Param("planejamentoId") UUID planejamentoId);
+
+    void deleteByMateriaPlanejamento(MateriaPlanejamentoEntity materiaPlanejamento);
 }

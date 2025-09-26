@@ -413,4 +413,54 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
         return planejamentosComProgresso;
     }
+
+    @Override
+    public boolean verificarSePlanoEstaConcluido(UUID planejamentoId) {
+        PlanejamentoEntity planejamento = planejamentoRepository.findById(planejamentoId)
+                .orElseThrow(() -> new MyNotFoundException("Planejamento não encontrado."));
+
+        List<MateriaPlanejamentoEntity> materiasDoPlano = planejamento.getMaterias();
+
+        if (materiasDoPlano.isEmpty()) {
+            return false;
+        }
+
+        // Itera sobre cada matéria do plano
+        for (MateriaPlanejamentoEntity materiaPlano : materiasDoPlano) {
+
+            int totalMinutosEstudados = materiaPlano.getRegistrosDeEstudo().stream()
+                    .mapToInt(RegistrarEstudoEntity::getDuracaoEmMinutos)
+                    .sum();
+            int cargaHorariaPlanejadaEmMinutos = materiaPlano.getCargaHorariaMateriaPlano() * 60;
+
+            // Se a carga horária planejada for 0, ignore esta matéria na verificação.
+            if (cargaHorariaPlanejadaEmMinutos <= 0) {
+                continue;
+            }
+
+            int minutosRestantes = cargaHorariaPlanejadaEmMinutos - totalMinutosEstudados;
+
+            if (minutosRestantes > 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public PlanejamentoDTO refazerPlanejamento(UUID idPlanejamento) {
+        PlanejamentoEntity planejamento = planejamentoRepository.findById(idPlanejamento)
+                .orElseThrow(() -> new MyNotFoundException("Planejamento não encontrado."));
+
+        List<SessaoEstudoEntity> sessoesAntigas = sessaoEstudoRepository.findByPlanejamentoEntity(planejamento);
+        if (sessoesAntigas != null && !sessoesAntigas.isEmpty()) {
+            sessaoEstudoRepository.deleteAllInBatch(sessoesAntigas); // deleteAllInBatch é mais eficiente
+        }
+
+        this.gerarCicloDeEstudos(planejamento.getId());
+
+        return mapper.toPlanejamentoDTO(planejamento);
+
+    }
 }

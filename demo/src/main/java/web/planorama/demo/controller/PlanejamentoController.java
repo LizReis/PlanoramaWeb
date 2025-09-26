@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import web.planorama.demo.dto.PlanejamentoDTO;
 import web.planorama.demo.dto.SessaoEstudoDTO;
 import web.planorama.demo.dto.UsuarioDTO;
 import web.planorama.demo.service.PlanejamentoService;
+import web.planorama.demo.service.RegistrarEstudoService;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,9 +28,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/planejamento")
 @RequiredArgsConstructor
+@Slf4j
 public class PlanejamentoController {
 
     private final PlanejamentoService planejamentoService;
+    private final RegistrarEstudoService registrarEstudoService;
 
     @GetMapping("/{id}")
     public String exibirPlano(@PathVariable String id, Model model) {
@@ -43,12 +47,29 @@ public class PlanejamentoController {
 
         PlanejamentoDTO planejamento = planejamentoService.findOne(idUUID);
 
+        boolean planoConcluido = planejamentoService.verificarSePlanoEstaConcluido(planejamento.getId());
+
+
         model.addAttribute("planejamento", planejamento);
 
         List<SessaoEstudoDTO> sessoesPlanejamento = planejamentoService.buscarCicloEstudo(idUUID);
         model.addAttribute("sessoes", sessoesPlanejamento);
+        model.addAttribute("planoConcluido", planoConcluido);
 
         return "telaPlano";
+    }
+
+    @PostMapping("/{id}/refazer")
+    public String refazerEstudo(@PathVariable UUID id, RedirectAttributes redirectAttributes) {
+        try {
+            // Adicione a lógica para resetar o progresso do estudo no seu service
+            registrarEstudoService.resetarEstudosDoPlano(id);
+            redirectAttributes.addFlashAttribute("success", "O progresso do estudo foi resetado. Comece de novo!");
+        } catch (Exception e) {
+            log.error("Erro ao tentar refazer o estudo.", e);
+            redirectAttributes.addFlashAttribute("error", "Não foi possível resetar o estudo.");
+        }
+        return "redirect:/planejamento/" + id;
     }
 
     @GetMapping("/editar/{id}")
@@ -151,5 +172,4 @@ public class PlanejamentoController {
             return "redirect:/home";
         }
     }
-
 }

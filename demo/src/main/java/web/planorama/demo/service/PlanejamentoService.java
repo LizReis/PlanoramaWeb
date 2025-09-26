@@ -28,4 +28,9 @@ public interface PlanejamentoService {
 
     //Seleciona um plano que já foi pré-cadastrado por um ADMIN
     PlanejamentoDTO selecionarPlanoPredefinido(UUID idPlanejamento);
+
+    //Método para verificar se o plano já foi concluído
+    boolean verificarSePlanoEstaConcluido(UUID idPlanejamento);
+
+    PlanejamentoDTO refazerPlanejamento(UUID idPlanejamento);
 }

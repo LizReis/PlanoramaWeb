@@ -76,11 +76,6 @@ public class RegistrarEstudoServiceImpl implements RegistrarEstudoService {
         
         var estudoSalvo = registrarEstudoRepository.save(novoRegistro);
 
-        int cargaHorariaAtual = materiaPlanejamento.getCargaHorariaMateriaPlano();
-        int novaCargaHoraria = cargaHorariaAtual - tempoTotalEstudado;
-        materiaPlanejamento.setCargaHorariaMateriaPlano(Math.max(0, novaCargaHoraria));
-        materiaPlanejamentoRepository.save(materiaPlanejamento);
-
         final int DURACAO_BLOCO_MINUTOS = 50;
         int sessoesParaRemover = tempoTotalEstudado / DURACAO_BLOCO_MINUTOS;
 
@@ -124,6 +119,14 @@ public class RegistrarEstudoServiceImpl implements RegistrarEstudoService {
     @Override
     public List<DesempenhoDTO> getDesempenhoPorMateria(UUID usuarioId) {
         return registrarEstudoRepository.getDesempenhoPorMateria(usuarioId);
+    }
+
+    @Override
+    @Transactional
+    public void resetarEstudosDoPlano(UUID planejamentoId) {
+        registrarEstudoRepository.deleteByPlanejamentoId(planejamentoId);
+
+        planejamentoService.refazerPlanejamento(planejamentoId);
     }
 }
 

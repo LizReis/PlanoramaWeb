@@ -103,7 +103,6 @@ public class RegistrarEstudoController {
         } catch(MyNotFoundException e){
             redirectAttributes.addFlashAttribute("error", "Ocorreu um erro ao tentar registrar o estudo. Tente novamente");
         }
-        
         UUID planejamentoId = registroEstudoDTO.getPlanejamentoId();
         return "redirect:/planejamento/" + planejamentoId;
     }

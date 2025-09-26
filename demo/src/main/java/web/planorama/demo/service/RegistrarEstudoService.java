@@ -13,4 +13,6 @@ public interface RegistrarEstudoService{
     void remove(UUID id);
 
     List<DesempenhoDTO> getDesempenhoPorMateria(UUID usuarioId);
+
+    void resetarEstudosDoPlano(UUID idPlanejamento);
 }
