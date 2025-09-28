@@ -66,15 +66,18 @@ public class RegistrarEstudoServiceImpl implements RegistrarEstudoService {
         UsuarioEntity usuarioLogado = usuarioRepository.findByEmail(emailLogado)
                 .orElseThrow(() -> new MyNotFoundException("Usuário não encontrado."));
 
-        int tempoTotalEstudado = registrarEstudoDTO.getMinutosEstudados() + registrarEstudoDTO.getHorasEstudadas() * 60;
+        int tempoTotalEstudado = registrarEstudoDTO.getMinutosEstudados() + (registrarEstudoDTO.getHorasEstudadas() * 60);
         RegistrarEstudoEntity novoRegistro = new RegistrarEstudoEntity();
         novoRegistro.setAssunto(assuntoEscolhido);
         novoRegistro.setMateriaPlanejamento(materiaPlanejamento);
         novoRegistro.setDuracaoEmMinutos(tempoTotalEstudado);
         novoRegistro.setDataRegistro(LocalDateTime.now());
         novoRegistro.setUsuario(usuarioLogado);
+
+        materiaPlanejamento.getRegistrosDeEstudo().add(novoRegistro);
         
         var estudoSalvo = registrarEstudoRepository.save(novoRegistro);
+        materiaPlanejamentoRepository.save(materiaPlanejamento);
 
         final int DURACAO_BLOCO_MINUTOS = 50;
         int sessoesParaRemover = tempoTotalEstudado / DURACAO_BLOCO_MINUTOS;

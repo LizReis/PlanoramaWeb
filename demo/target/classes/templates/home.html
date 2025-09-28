@@ -117,8 +117,9 @@
                 </div>
             </div>
         </div>
-        <div th:if="${#lists.isEmpty(planejamentosUsuarioLogado)}">
-            <p>Você ainda não criou nenhum planejamento. Comece agora!</p>
+        <div class="divSemPlanejamento" th:if="${#lists.isEmpty(planejamentosUsuarioLogado)}">
+            <p>Você ainda não possui nenhum planejamento. Comece agora!</p>
+            <img th:src="@{/img/imagemSemPlanejamento.png}"/>
         </div>
     </section>
 
@@ -132,7 +133,6 @@
 
     <div id="modal-container"></div>
 
-    <div id="modal-container"></div>
 
     <footer></footer>
 

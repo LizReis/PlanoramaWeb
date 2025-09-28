@@ -25,6 +25,10 @@
                 <div th:if="${success}" class="alerta sucesso">
                     <p th:text="${success}"></p>
                 </div>
+
+                <div th:if="${cadastroSucesso}">
+                    <h3>Cadastro realizado com sucesso! Faça o Login.</h3>
+                </div>
             </div>
 
 

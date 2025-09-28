@@ -134,6 +134,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="divSemPlanejamento" th:if="${#lists.isEmpty(planejamentosUsuarioLogado)}">
+            <p>Você ainda não possui nenhum planejamento.</p>
+            <img th:src="@{/img/imagemPensando.png}"/>
+        </div>
     </section>
 
     <div id="modal-container"></div>

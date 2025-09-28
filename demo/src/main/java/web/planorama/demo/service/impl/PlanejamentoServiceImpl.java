@@ -405,10 +405,13 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
                 progressoPorcentagem = (int) ((horasParaCalcular / metaDiariaHoras) * 100);
             }
 
+            boolean isConcluido = verificarSePlanoEstaConcluido(plano.getId());
+
             planejamentosComProgresso.add(
                     new PlanejamentoProgressDTO(
                             mapper.toPlanejamentoDTO(plano),
-                            progressoPorcentagem));
+                            progressoPorcentagem,
+                            isConcluido));
         }
 
         return planejamentosComProgresso;
@@ -428,8 +431,11 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
         // Itera sobre cada matéria do plano
         for (MateriaPlanejamentoEntity materiaPlano : materiasDoPlano) {
 
-            int totalMinutosEstudados = materiaPlano.getRegistrosDeEstudo().stream()
-                    .mapToInt(RegistrarEstudoEntity::getDuracaoEmMinutos)
+            int totalMinutosEstudados = registrarEstudoRepository
+                    .findAllByMateriaPlanejamento_Id(materiaPlano.getId())
+                    .stream()
+                    .mapToInt(r -> ((RegistrarEstudoEntity) r).getDuracaoEmMinutos()) // faz cast, se o tipo for mais
+                                                                                      // genérico
                     .sum();
             int cargaHorariaPlanejadaEmMinutos = materiaPlano.getCargaHorariaMateriaPlano() * 60;
 
@@ -440,7 +446,7 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
 
             int minutosRestantes = cargaHorariaPlanejadaEmMinutos - totalMinutosEstudados;
 
-            if (minutosRestantes > 0) {
+            if (minutosRestantes >= 50) {
                 return false;
             }
         }

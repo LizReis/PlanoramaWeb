@@ -44,7 +44,7 @@ public class MateriaPlanejamentoEntity {
     @Column(name = "CARGA_HORARIA_MATERIA_PLANO", nullable = false)
     private int cargaHorariaMateriaPlano;
 
-    @OneToMany(mappedBy = "materiaPlanejamento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "materiaPlanejamento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<RegistrarEstudoEntity> registrosDeEstudo = new ArrayList<>();
 
     @OneToMany(mappedBy = "materiaPlanejamento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

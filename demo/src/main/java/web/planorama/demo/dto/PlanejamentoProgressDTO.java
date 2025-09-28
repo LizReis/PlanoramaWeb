@@ -11,4 +11,5 @@ public class PlanejamentoProgressDTO {
 
     private PlanejamentoDTO planejamento;
     private int progressPercentage;
+    private boolean concluido;
 }

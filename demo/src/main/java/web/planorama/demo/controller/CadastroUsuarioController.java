@@ -86,7 +86,7 @@ public class CadastroUsuarioController {
         }
 
         usuarioService.save(estudanteParaSalvar);
-        return "redirect:/login";
+        return "redirect:/login?cadastroSucesso=true";
     }
 
     private void loadFormData(Model model) {

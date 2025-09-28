@@ -8,10 +8,12 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import web.planorama.demo.dto.DesempenhoDTO;
 import web.planorama.demo.entity.MateriaPlanejamentoEntity;
+import web.planorama.demo.entity.PlanejamentoEntity;
 import web.planorama.demo.entity.RegistrarEstudoEntity;
 
 public interface RegistrarEstudoRepository extends JpaRepository<RegistrarEstudoEntity, UUID>{
@@ -32,4 +34,6 @@ public interface RegistrarEstudoRepository extends JpaRepository<RegistrarEstudo
     void deleteByPlanejamentoId(@Param("planejamentoId") UUID planejamentoId);
 
     void deleteByMateriaPlanejamento(MateriaPlanejamentoEntity materiaPlanejamento);
+
+    List<RegistrarEstudoEntity> findAllByMateriaPlanejamento_Id(UUID id);
 }

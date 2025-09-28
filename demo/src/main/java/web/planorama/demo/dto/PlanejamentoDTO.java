@@ -3,6 +3,7 @@ package web.planorama.demo.dto;
 import java.util.UUID;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,6 +39,7 @@ public class PlanejamentoDTO{
 
     @NotNull 
     @Min(value = 1, message = "Deve ser no mínimo 1 hora por dia.")
+    @Max(value = 24, message = "O dia não tem mais que 24h.")
     private int horasDiarias;
 
     @Valid

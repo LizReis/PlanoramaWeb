@@ -22,7 +22,7 @@
 }
 
 .corpo{
-    width: 350px;
+    min-width: 350px;
     background-color: var(--corFundoPrincipal);
     display: flex;
     flex-direction: column;

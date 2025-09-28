@@ -286,6 +286,28 @@
 }
 
 
+.divSemPlanejamento{
+    width: 800px;
+    display: flex;
+    margin-left: 120px;
+    text-align: left;
+    justify-items: center;
+    align-items: center;
+}
+
+.divSemPlanejamento p{
+    font-family: var(--fonteDestaque); 
+    color: #7C2A2A; 
+    font-weight: 700; 
+    font-size: 30px;
+    margin-right: 50px;
+}
+
+.divSemPlanejamento img{
+    width: 400px;
+}
+
+
 /* ===================================== */
 /* ESTILOS PARA TELAS MÉDIAS (Tablets) */
 /* ===================================== */
