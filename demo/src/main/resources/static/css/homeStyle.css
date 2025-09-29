@@ -1,4 +1,4 @@
-:root{
+:root {
     --corFundoPrincipal: #FFFFFF;
     --corPrincipalFonte: #0D0D0D;
     --corCinzaFonte: #808080;
@@ -11,39 +11,39 @@
     --fonteParaTexto: "Roboto", sans-serif;
 }
 
-*{
+* {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
     text-decoration: none;
 }
 
-.sectionBarraProgresso{
+.sectionBarraProgresso {
     margin-top: 7%;
     display: flex;
     flex-direction: column;
     padding: 0rem 1rem;
 }
 
-.sectionBarraProgresso .cardProgresso .tituloProgresso{
+.sectionBarraProgresso .cardProgresso .tituloProgresso {
     display: flex;
     gap: 10px;
     margin: 0.5rem 0.5rem;
 }
 
-.sectionBarraProgresso .cardProgresso h3{
+.sectionBarraProgresso .cardProgresso h3 {
     color: var(--corDestaqueVermelho);
     font-family: var(--fonteDestaque);
     font-weight: 600;
     font-size: 15px;
 }
 
-.sectionBarraProgresso .cardProgresso{
+.sectionBarraProgresso .cardProgresso {
     width: 100%;
     height: auto;
     background-color: var(--corFundoPrincipal);
     position: relative;
-    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
 
     display: flex;
@@ -51,7 +51,7 @@
     padding: 0rem 0.5rem 1.5rem 0.5rem;
 }
 
-.sectionBarraProgresso .cardProgresso .paragrafoAtualizar{
+.sectionBarraProgresso .cardProgresso .paragrafoAtualizar {
     margin-top: 5%;
     display: flex;
     justify-content: space-between;
@@ -62,7 +62,7 @@
 }
 
 
-.sectionBarraProgresso .cardProgresso .progressoPai{
+.sectionBarraProgresso .cardProgresso .progressoPai {
     margin-top: 2%;
     width: 100%;
     height: 1rem;
@@ -71,7 +71,7 @@
     border-radius: 40px;
 }
 
-.sectionBarraProgresso .cardProgresso #progresso{
+.sectionBarraProgresso .cardProgresso #progresso {
     height: 1rem;
     width: 30%;
     border-radius: 40px;
@@ -83,7 +83,7 @@
     display: flex;
 }
 
-.sectionBarraProgresso .cardProgresso #progresso span{
+.sectionBarraProgresso .cardProgresso #progresso span {
     font-size: 13px;
     color: var(--corFundoPrincipal);
     padding-left: 15px;
@@ -92,61 +92,65 @@
 /* AQUI COMEÇA O ESTILO DOS CARDS, TODO CARD*/
 /*TODO CARD TERÁ ESSE MESMO ESTILO APLICADO*/
 
-.sectionCards{
+.sectionCards {
     width: 100%;
-    padding: 0rem 1rem 5rem 1rem; /* Adicionado padding-bottom para não ser coberto pelo botão */
+    padding: 0rem 1rem 5rem 1rem;
+    /* Adicionado padding-bottom para não ser coberto pelo botão */
 }
 
-.sectionCards .divCard{
+.sectionCards .divCard {
     margin-top: 5%;
     width: 100%;
     padding: 1rem 2rem 1rem 2rem;
     background-color: var(--corFundoPrincipal);
-    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     /* cursor: pointer;  <-- REMOVIDO DAQUI */
     color: var(--corSecundariaCinzaFonte);
 }
 
-.sectionCards .divCard .divCardTextoIcone{
+.sectionCards .divCard .divCardTextoIcone {
     display: flex;
     justify-content: space-between;
 }
 
-.sectionCards .divCard .divCardTextoIcone .cardContainerTexto .divCardParagrafo{
+.sectionCards .divCard .divCardTextoIcone .cardContainerTexto .divCardParagrafo {
     margin-top: 5%;
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.sectionCards .divCard .divCardTextoIcone .cardContainerTexto .divCardParagrafo div{
+.sectionCards .divCard .divCardTextoIcone .cardContainerTexto .divCardParagrafo div {
     display: flex;
     gap: 7px;
     font-family: var(--fonteParaTexto);
     font-size: 14px;
     margin-bottom: 1%;
-    flex-wrap: wrap; /* Permite que o texto quebre a linha se necessário */
+    flex-wrap: wrap;
+    /* Permite que o texto quebre a linha se necessário */
 }
 
 /* Adicionando cursor ao link do título */
-.sectionCards .divCard .divCardTextoIcone .cardContainerTexto .card-link{
+.sectionCards .divCard .divCardTextoIcone .cardContainerTexto .card-link {
     cursor: pointer;
 }
 
-.sectionCards .divCard .divCardTextoIcone .cardContainerTexto h4{
+.sectionCards .divCard .divCardTextoIcone .cardContainerTexto h4 {
     font-family: var(--fonteDestaque);
     padding-bottom: 0.3rem;
     border-bottom: 0.1rem solid var(--corDestaqueVermelho);
     color: var(--corDestaqueVermelho);
-    display: inline-block; /* Garante que o link não ocupe a largura toda */
+    display: inline-block;
+    /* Garante que o link não ocupe a largura toda */
 }
-.sectionCards .divCard .divCardTextoIcone .cardContainerTexto span{
+
+.sectionCards .divCard .divCardTextoIcone .cardContainerTexto span {
     font-weight: 600;
 }
 
 
-.sectionCards .divCard .divCardTextoIcone .cardContainerIcone{
+.sectionCards .divCard .divCardTextoIcone .cardContainerIcone {
     display: flex;
     flex-direction: column;
 }
@@ -155,7 +159,8 @@
 .sectionCards .divCard .divCardTextoIcone .cardContainerIcone .button-icon {
     background: none;
     border: none;
-    padding: 2px; /* Pequeno padding para facilitar o clique */
+    padding: 2px;
+    /* Pequeno padding para facilitar o clique */
     margin: 0;
     cursor: pointer;
     color: var(--corSecundariaCinzaFonte);
@@ -166,19 +171,19 @@
 }
 
 
-.sectionCards .divCard .divCardProgresso{
+.sectionCards .divCard .divCardProgresso {
     margin-top: 3%;
     display: flex;
     flex-direction: column;
 }
 
-.sectionCards .divCard .divCardProgresso span{
+.sectionCards .divCard .divCardProgresso span {
     font-family: var(--fonteParaTexto);
     font-size: 13px;
     font-weight: 500;
 }
 
-.sectionCards .divCard .divCardProgresso .divProgressoPai{
+.sectionCards .divCard .divCardProgresso .divProgressoPai {
     margin-top: 1%;
     width: 100%;
     height: 1rem;
@@ -186,7 +191,8 @@
     background-color: #e0e0e0;
     border-radius: 40px;
 }
-.sectionCards .divCard .divCardProgresso .divProgressoPai .divProgressoFilho{
+
+.sectionCards .divCard .divCardProgresso .divProgressoPai .divProgressoFilho {
     height: 0.5rem;
     width: 20%;
     height: 1rem;
@@ -208,58 +214,68 @@
 
 .botao-selecionar {
     padding: 8px 16px;
-    background-color: var(--corDestaqueVermelho); /* Cor principal do seu projeto */
+    background-color: var(--corDestaqueVermelho);
+    /* Cor principal do seu projeto */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
 }
+
 .botao-selecionar:hover {
-    background-color: #5a1e1e; /* Um tom mais escuro */
+    background-color: #5a1e1e;
+    /* Um tom mais escuro */
 }
 
 /*DIV ABSOLUT PARA O BOTÃO CRIAR PLANO FICAR SEMPRE APARECENDO*/
-/*-----------------------------------------------------------*/ 
+/*-----------------------------------------------------------*/
 
-.divAbsolutBotao{
-    position: fixed; /* Mudei para fixed para melhor posicionamento na rolagem */
-    bottom: 1.5rem; /* Aumentei um pouco a distância de baixo */
-    right: 1.5rem;  /* Aumentei um pouco a distância da direita */
-    z-index: 1000; /* Garante que o botão fique sobre outros elementos */
+.divAbsolutBotao {
+    position: fixed;
+    /* Mudei para fixed para melhor posicionamento na rolagem */
+    bottom: 1.5rem;
+    /* Aumentei um pouco a distância de baixo */
+    right: 1.5rem;
+    /* Aumentei um pouco a distância da direita */
+    z-index: 1000;
+    /* Garante que o botão fique sobre outros elementos */
 }
 
-#botaoCriarPlanoHome{
+#botaoCriarPlanoHome {
     width: 250px;
 }
 
-.botaoAncora{
+.botaoAncora {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 9rem;
-    height: 2.2rem; /* Aumentei um pouco a altura para melhor clique */
+    height: 2.2rem;
+    /* Aumentei um pouco a altura para melhor clique */
     background-color: var(--corDestaqueVerde);
     color: var(--corFundoPrincipal);
     font-family: var(--fonteParaTexto);
     font-size: 15px;
     border: none;
     border-radius: 50px;
-    box-shadow: 1px 1.4px 3px 0px rgba(0,0,0,0.3);
+    box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: 0.2s linear;
 }
-.botaoAncora:hover{
+
+.botaoAncora:hover {
     background-color: var(--corFundoPrincipal);
     color: var(--corDestaqueVerde);
     border: 0.1rem solid var(--corDestaqueVerde);
 }
-.botaoAncora:hover path{
-    stroke:var(--corDestaqueVerde);
+
+.botaoAncora:hover path {
+    stroke: var(--corDestaqueVerde);
     fill: var(--corDestaqueVerde);
 }
 
-.botaoAncora svg{
+.botaoAncora svg {
     margin-right: 5%;
 }
 
@@ -274,37 +290,43 @@
 }
 
 .alerta.sucesso {
-    color: #155724; /* Verde escuro para o texto */
-    background-color: #d4edda; /* Fundo verde claro */
-    border: 1px solid #c3e6cb; /* Borda verde */
+    color: #155724;
+    /* Verde escuro para o texto */
+    background-color: #d4edda;
+    /* Fundo verde claro */
+    border: 1px solid #c3e6cb;
+    /* Borda verde */
 }
 
 .alerta.erro {
-    color: #721c24; /* Vermelho escuro para o texto */
-    background-color: #f8d7da; /* Fundo rosa/vermelho claro */
-    border: 1px solid #f5c6cb; /* Borda vermelha */
+    color: #721c24;
+    /* Vermelho escuro para o texto */
+    background-color: #f8d7da;
+    /* Fundo rosa/vermelho claro */
+    border: 1px solid #f5c6cb;
+    /* Borda vermelha */
 }
 
 
-.divSemPlanejamento{
-    width: 800px;
+.divSemPlanejamento {
+    margin-top: 50px;
     display: flex;
-    margin-left: 120px;
+    flex-direction: column;
     text-align: left;
     justify-items: center;
     align-items: center;
 }
 
-.divSemPlanejamento p{
-    font-family: var(--fonteDestaque); 
-    color: #7C2A2A; 
-    font-weight: 700; 
-    font-size: 30px;
-    margin-right: 50px;
+.divSemPlanejamento p {
+    font-family: var(--fonteDestaque);
+    color: #7C2A2A;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 20px;
 }
 
-.divSemPlanejamento img{
-    width: 400px;
+.divSemPlanejamento img {
+    width: 300px;
 }
 
 
@@ -312,8 +334,10 @@
 /* ESTILOS PARA TELAS MÉDIAS (Tablets) */
 /* ===================================== */
 @media screen and (min-width: 768px) {
+
     /* Centraliza e limita a largura APENAS do conteúdo, não do header */
-    .sectionBarraProgresso, .sectionCards {
+    .sectionBarraProgresso,
+    .sectionCards {
         max-width: 720px;
         margin-left: auto;
         margin-right: auto;
@@ -330,7 +354,23 @@
     .sectionCards .divCard {
         margin-top: 0;
         width: 100%;
-        height: 100%; /* Garante que os cards na mesma linha tenham a mesma altura */
+        height: 100%;
+        /* Garante que os cards na mesma linha tenham a mesma altura */
+    }
+
+    .divSemPlanejamento {
+        flex-direction: row;
+        margin-left: 80px;
+    }
+
+
+    .divSemPlanejamento p {
+        font-size: 25px;
+    }
+
+    .divSemPlanejamento img {
+        width: 300px;
+        margin-left: 20px;
     }
 }
 
@@ -339,18 +379,21 @@
 /* ESTILOS PARA TELAS GRANDES (Desktops) */
 /* ======================================= */
 @media screen and (min-width: 1200px) {
+
     /* Aumenta a largura máxima do conteúdo para desktops */
-    .sectionBarraProgresso, .sectionCards {
+    .sectionBarraProgresso,
+    .sectionCards {
         max-width: 1100px;
     }
-    
+
     .sectionBarraProgresso .cardProgresso .tituloProgresso h3 {
         font-size: 18px;
     }
+
     .sectionBarraProgresso .cardProgresso .paragrafoAtualizar p {
         font-size: 16px;
     }
-    
+
     /* Transforma a seção de cards em um grid de 3 colunas */
     .sectionCards {
         grid-template-columns: repeat(3, 1fr);
@@ -361,5 +404,21 @@
         width: 10rem;
         height: 2.5rem;
         font-size: 16px;
+    }
+
+    .divSemPlanejamento {
+        flex-direction: row;
+        margin-top: 20px;
+        margin-left: 220px;
+    }
+
+
+    .divSemPlanejamento p {
+        font-size: 30px;
+    }
+
+    .divSemPlanejamento img {
+        width: 350px;
+        margin-left: 20px;
     }
 }
