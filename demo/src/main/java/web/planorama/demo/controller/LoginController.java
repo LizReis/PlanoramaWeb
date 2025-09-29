@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     @GetMapping
-    public String login(@RequestParam(defaultValue = "false", required = false)
-    Boolean cadastroSucesso, Model model) {
-
-        model.addAttribute("cadastroSucesso", cadastroSucesso);
+    public String login(){
         return "login";
     }
 

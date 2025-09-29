@@ -22,6 +22,14 @@
 
     <div th:replace="~{menu :: menuFragment}"></div>
 
+    <div class="divDiasSemana conteudoPrincipal" th:object="${planejamento}">
+        <h3>Sua disponibilidade para esse planejamento é:</h3><br />
+
+        <div class="diasSemana" th:each="dias : ${planejamento.disponibilidade}">
+            <span th:text="${dias}"></span>
+        </div>  
+    </div>
+
     <section class="sectionGrafico conteudoPrincipal" th:object="${planejamento}">
 
         <!--DIVS RESPOSAVEIS POR EXIBIR MSG DE SUCESSO OU ERRO-->

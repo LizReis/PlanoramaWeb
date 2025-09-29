@@ -10,6 +10,7 @@
         href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/loginStyle.css">
+    <link rel="stylesheet" href="css/homeStyle.css">
     <title>Planorama - Login</title>
 </head>
 
@@ -24,10 +25,6 @@
 
                 <div th:if="${success}" class="alerta sucesso">
                     <p th:text="${success}"></p>
-                </div>
-
-                <div th:if="${cadastroSucesso}">
-                    <h3>Cadastro realizado com sucesso! Faça o Login.</h3>
                 </div>
             </div>
 

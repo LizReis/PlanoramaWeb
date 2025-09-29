@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     // Se não houver dados, exibe uma mensagem
                     console.log('Dados vazios, exibindo mensagem de "sem dados".');
-                    chartContainer.innerHTML = '<p style="text-align: center;">Nenhum dado de estudo registrado ainda. Comece a registrar seus estudos para ver seu desempenho!</p>';
+                    chartContainer.innerHTML = '<p style="text-align: center; color: #7C2A2A; font-size: 20px;">Nenhum dado de estudo registrado ainda. Comece a registrar seus estudos para ver seu desempenho!</p>';
                 }
             } catch (chartError) {
                 // Este bloco captura erros que acontecem DENTRO da lógica de criação do gráfico

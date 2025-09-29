@@ -13,12 +13,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import web.planorama.demo.dto.UsuarioDTO;
+import web.planorama.demo.exceptions.RecursoDuplicadoException;
 import web.planorama.demo.repository.UsuarioRepository;
 import web.planorama.demo.service.UsuarioService;
 
@@ -51,7 +53,7 @@ public class CadastroUsuarioController {
 
     @PostMapping
     public String create(@Valid @ModelAttribute("estudante") UsuarioDTO usuarioDTO, BindingResult result,
-            @RequestParam("fotoFile") MultipartFile fotoUsuario, Model model) throws IOException {
+            @RequestParam("fotoFile") MultipartFile fotoUsuario, Model model, RedirectAttributes redirectAttributes) throws IOException {
         log.info("Request: {} {}", usuarioDTO, result.hasErrors());
         if (result.hasErrors()) {
             model.addAttribute("estudante", usuarioDTO);
@@ -85,8 +87,15 @@ public class CadastroUsuarioController {
             );
         }
 
-        usuarioService.save(estudanteParaSalvar);
-        return "redirect:/login?cadastroSucesso=true";
+        try {
+            usuarioService.save(estudanteParaSalvar);
+        } catch (RecursoDuplicadoException e) {
+            model.addAttribute("estudante", usuarioDTO); 
+            model.addAttribute("email_error", "Este e-mail já está em uso. Tente outro."); 
+            return "cadastro"; 
+        }
+        redirectAttributes.addFlashAttribute("success", "Cadastrado realizado com sucesso. Faça o login!");
+        return "redirect:/login";
     }
 
     private void loadFormData(Model model) {

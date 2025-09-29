@@ -319,7 +319,10 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
             planejamentoCopia.setMaterias(materiasCopiadas);
         }
 
-        return mapper.toPlanejamentoDTO(planejamentoRepository.save(planejamentoCopia));
+        PlanejamentoEntity planoSalvo = planejamentoRepository.save(planejamentoCopia);
+        gerarCicloDeEstudos(planoSalvo.getId());
+
+        return mapper.toPlanejamentoDTO(planoSalvo);
     }
 
     public UsuarioEntity pegaUsuarioLogado() {
@@ -405,13 +408,12 @@ public class PlanejamentoServiceImpl implements PlanejamentoService {
                 progressoPorcentagem = (int) ((horasParaCalcular / metaDiariaHoras) * 100);
             }
 
-            boolean isConcluido = verificarSePlanoEstaConcluido(plano.getId());
+            // boolean isConcluido = verificarSePlanoEstaConcluido(plano.getId());
 
             planejamentosComProgresso.add(
                     new PlanejamentoProgressDTO(
                             mapper.toPlanejamentoDTO(plano),
-                            progressoPorcentagem,
-                            isConcluido));
+                            progressoPorcentagem));
         }
 
         return planejamentosComProgresso;

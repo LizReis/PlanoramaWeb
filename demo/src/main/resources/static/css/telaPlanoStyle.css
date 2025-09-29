@@ -17,6 +17,34 @@
     text-decoration: none;
 }
 
+.divDiasSemana{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px 10px 10px;
+    margin: 1rem 1rem;
+    box-shadow: 1px 1.4px 3px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.divDiasSemana h3{
+    font-family: var(--fonteDestaque);
+    color: var(--corDestaqueVermelho);
+    align-self: center;
+    border-bottom: 1px solid var(--corDestaqueVermelho);
+}
+
+.divDiasSemana .diasSemana{
+    display: flex;
+    justify-content: center;
+}
+
+.divDiasSemana .diasSemana span{
+    margin-bottom: 10px;
+    font-family: var(--fonteParaTexto);
+    color: var(--corCinzaFonte);
+    font-weight: 600;
+}
+
 
 .sectionGrafico {
     width: 100%;
@@ -314,6 +342,12 @@
 /* ESTILOS PARA TELAS MÉDIAS (Tablets) */
 /* ===================================== */
 @media screen and (min-width: 768px) {
+
+    .divDiasSemana{
+        max-width: 720px;
+        margin: 2rem auto;
+    }
+
     .sectionGrafico {
         max-width: 720px;
         margin: 2rem auto;
@@ -354,6 +388,11 @@
 /* ESTILOS PARA TELAS GRANDES (Desktops) */
 /* ======================================= */
 @media screen and (min-width: 1200px) {
+
+    .divDiasSemana{
+        max-width: 1024px;
+    }
+
     .sectionGrafico {
         display: grid;
         grid-template-columns: 400px 1fr;
