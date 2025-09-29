@@ -35,6 +35,7 @@ public class AdministrarUsuarioController {
 
     private final UsuarioService usuarioService;
 
+    //LISTA OS USUÁRIOS NA TELA DE ADM USUÁRIOS
     @GetMapping
     public String listAll(Model model, @RequestParam(name = "tipo", defaultValue = "todos") String tipoUsuario) {
         List<Object> allUsers = new ArrayList<>();
@@ -56,6 +57,7 @@ public class AdministrarUsuarioController {
         return "administrarUsuario";
     }
 
+    //CHAMA O CARD PARA ALTERAR USUÁRIO
     @GetMapping("/alterar-usuario/{id}")
     public String getAlterarDadosUsuarioFragment(@PathVariable("id") UUID usuarioId, Model model) {
         try {
@@ -68,6 +70,7 @@ public class AdministrarUsuarioController {
         return "alterarUsuarioADM :: cardAlteracao";
     }
 
+    //POST PARA FAZER A ALTERAÇÃO DAS INFORMAÇÕES DO USUÁRIO
     @PostMapping("/alterar-usuario")
     public String postAlterarDadosUsuario(@RequestParam("id") UUID usuarioParaAlterar,
             @RequestParam("novoNome") String novoNomeUsuario,
@@ -112,6 +115,7 @@ public class AdministrarUsuarioController {
         }
     }
 
+    //GET PARA REMOÇÃO DE USUÁRIO POR ID
     @GetMapping("/remover-usuario/{id}")
     public String getRemoverUsuario(@PathVariable("id") UUID usuarioParaRemover, RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal UserDetails userDetails) {// AuthenticationPrincipal UserDetails é quem pega o

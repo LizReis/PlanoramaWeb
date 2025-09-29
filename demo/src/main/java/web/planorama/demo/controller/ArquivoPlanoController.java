@@ -28,6 +28,7 @@ public class ArquivoPlanoController {
 
     private final PlanejamentoService planejamentoService;
 
+    //GET PARA MOSTRAR TODOS OS PLANEJAMENTOS QUE ESTÃO MARCADOS COMO ARQUIVADO DO USUÁRIO
     @GetMapping()
     public String getMethodName(Model model) {
         List<Object> allPlanejamentosArquivados = new ArrayList<>();
@@ -39,6 +40,7 @@ public class ArquivoPlanoController {
         return "arquivoPlano";
     }
 
+    //POST PARA DESARQUIVAR
     @PostMapping("/desarquivar/{id}")
     public String desarquivarPlanejamento(@PathVariable String id, RedirectAttributes redirectAttributes) {
         UUID idUUID;
@@ -63,7 +65,7 @@ public class ArquivoPlanoController {
         return "redirect:/arquivo";
     }
     
-
+    //POST PARA REMOVER UM PLANEJAMENTO 
     @PostMapping("/remover/{id}")
     public String removerPlanejamento(@PathVariable String id, RedirectAttributes redirectAttributes) {
         UUID idUUID;

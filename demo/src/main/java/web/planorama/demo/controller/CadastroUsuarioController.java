@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+
+//CONTROLLER PARA O CADASTRO DO USUÁRIO NO SISTEMA
 @Controller
 @RequestMapping("/cadastro")
 @RequiredArgsConstructor

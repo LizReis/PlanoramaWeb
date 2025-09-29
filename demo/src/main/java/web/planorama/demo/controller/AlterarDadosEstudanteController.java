@@ -25,6 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import lombok.RequiredArgsConstructor;
 import web.planorama.demo.service.UsuarioService;
 
+
+//OS MÉTODOS DE ALTERAÇÃO SÃO SEPARADOS PORQUE DÁ A LIBERDADE AO USUÁRIO DE MODIFICAR ALGO EM ESPECIFICO
 @Controller
 @RequestMapping("/minha-conta")
 @RequiredArgsConstructor
@@ -33,6 +35,7 @@ public class AlterarDadosEstudanteController {
 
     private final String UPLOAD_DIR = "uploadsUser";
 
+    //POST PARA ALTERAÇÃO DA FOTO DO PERFIL
     @PostMapping("/alterar-foto-perfil")
     public String alterarFotoPerfil(@RequestParam("novaFoto") MultipartFile novaFoto,
             RedirectAttributes redirectAttributes, @AuthenticationPrincipal UserDetails userDetails) {
@@ -63,6 +66,7 @@ public class AlterarDadosEstudanteController {
         return "redirect:/minha-conta";
     }
 
+    //POST PARA ALTERAÇÃO DA SENHA
     @PostMapping("/alterar-senha")
     public String alterarSenha(@RequestParam("senhaAtual") String senhaAtual,
             @RequestParam("novaSenha") String novaSenha, RedirectAttributes redirectAttributes) {
@@ -83,6 +87,7 @@ public class AlterarDadosEstudanteController {
         }
     }
 
+    //POST PARA ALTERAÇÃO DO EMAIL
     @PostMapping("/alterar-email")
     public String alterarEmail(@RequestParam("novoEmail") String novoEmail,
             @RequestParam("senhaAtual") String senhaAtual, RedirectAttributes redirectAttributes,
@@ -112,6 +117,7 @@ public class AlterarDadosEstudanteController {
         }
     }
 
+    //POST PARA ALTERÇÃO DO NOME DE USUÁRIO
     @PostMapping("/alterar-nome-usuario")
     public String alterarNomeUsuario(@RequestParam("novoNome") String novoNome,
             @RequestParam("senhaAtual") String senhaAtual, RedirectAttributes redirectAttributes) {
@@ -133,6 +139,7 @@ public class AlterarDadosEstudanteController {
 
     }
 
+    //POST PARA ALTERAÇÃO DA DESCRIÇÃO DO USUÁRIO
     @PostMapping("/alterar-descricao")
     public String alterarDescricao(@RequestParam("novaDescricao") String novaDescricao,
             @RequestParam("senhaAtual") String senhaAtual, RedirectAttributes redirectAttributes) {

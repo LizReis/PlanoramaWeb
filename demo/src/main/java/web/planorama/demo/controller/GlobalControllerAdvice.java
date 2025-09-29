@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import web.planorama.demo.dto.UsuarioDTO;
 import web.planorama.demo.service.UsuarioService;
 
+//CONTROLLER RESPPONSÁVEL POR PEGAR USUÁRIO LOGADO OU EXCESSÕES NÃO GERENCIVEIS
 @ControllerAdvice
 @RequiredArgsConstructor
 public class GlobalControllerAdvice {
